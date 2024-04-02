@@ -1,15 +1,19 @@
-import Header from "./component/Header";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Register from "./component/Register";
-import Footer from "./component/Footer";
+import Root from "./routes/Root";
+import Login from "./component/Login";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Register />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Root />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

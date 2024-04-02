@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -53,7 +54,8 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-            }}>
+            }}
+          >
             LOGO
           </Typography>
 
@@ -64,7 +66,8 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit">
+              color="inherit"
+            >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -83,7 +86,8 @@ function Header() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-              }}>
+              }}
+            >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -106,7 +110,8 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-            }}>
+            }}
+          >
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
@@ -114,23 +119,29 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
                 {page}
               </Button>
             ))}
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
-            <Button variant="contained">Register</Button>
+            <Link to="/register">
+              <Button variant="contained">Register</Button>
+            </Link>
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
-            <Button variant="contained">Log in</Button>
+            <Link to="/login">
+              <Button variant="contained">Log in</Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0, display: { xs: "flex", md: "none" } }}>
+                sx={{ p: 0, display: { xs: "flex", md: "none" } }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -148,7 +159,8 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
+              onClose={handleCloseUserMenu}
+            >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
