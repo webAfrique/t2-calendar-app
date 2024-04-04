@@ -4,6 +4,8 @@ import Register from "./routes/Register";
 import Root from "./routes/Root";
 import Login from "./routes/Login";
 import Home from "./routes/Home";
+import User from "./routes/User";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="user" element={<User />} />
         </Route>
       </Routes>
     </Router>
