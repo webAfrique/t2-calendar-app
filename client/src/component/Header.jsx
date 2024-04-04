@@ -13,6 +13,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import Logo from "../assets/WIME-logo.png";
 
 const pages = ["Instruction", "Pricing"];
 const settings = ["Register", "Log in"];
@@ -37,10 +38,20 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#fff", boxShadow: 'none', }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+        <Avatar
+  src={Logo}
+  alt="Logo"
+  sx={{
+    mr: 1,
+    width: 60, 
+    height: 60, 
+    backgroundColor: "transparent", 
+    borderRadius: "50%", 
+  }}
+/>
           <Typography
             variant="h6"
             noWrap
@@ -52,11 +63,11 @@ function Header() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#00a8cd",
               textDecoration: "none",
             }}
           >
-            LOGO
+            WIME
           </Typography>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -66,7 +77,7 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="#00a8cd"
             >
               <MenuIcon />
             </IconButton>
@@ -108,33 +119,53 @@ function Header() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#00a8cd",
               textDecoration: "none",
             }}
           >
-            LOGO
+            WIME
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "#00a8cd", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
-            <Link to="/register">
-              <Button variant="contained">Register</Button>
-            </Link>
-          </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             <Link to="/login">
-              <Button variant="contained">Log in</Button>
+              <Button variant="outlined" sx= {{width: '100px', borderRadius: '30px', textTransform: 'capitalize', color: '#476C92', borderColor: '#476C92',
+             '&:hover': {
+              backgroundColor: '#476C92', 
+              color: 'white',
+              borderColor: 'transparent',
+            },
+            }}>Log in</Button>
             </Link>
           </Box>
+
+          <Box sx={{  p: 0,
+    display: { xs: "none", md: "flex" },
+    mx: 2,
+   }}>
+            <Link to="/register">
+              <Button variant="contained" sx={{ width: '100px',backgroundColor: '#476C92', color: 'white', borderRadius: '30px', textTransform: 'capitalize', 
+              '&:hover': {
+                backgroundColor: 'white', 
+                color: '#476C92',
+                borderColor: '#476C92',
+                boxShadow: 'none',
+                border: '1px solid',
+              },
+        }}>Register</Button>
+       
+            </Link>
+          </Box>
+          
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
