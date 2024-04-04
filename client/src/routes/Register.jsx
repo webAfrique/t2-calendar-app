@@ -26,7 +26,10 @@ export default function Register2() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "80%" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
         <CssBaseline />
         <Grid
           item
@@ -53,20 +56,18 @@ export default function Register2() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            }}>
+            <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Register
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+              sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -115,9 +116,17 @@ export default function Register2() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#476C92",
+                  color: "#FFFFFF",
+                  "&:hover": {
+                    backgroundColor: "#9AC8E8",
+                    color: "#476C92",
+                  },
+                }}>
+                Register
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
