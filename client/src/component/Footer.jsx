@@ -47,25 +47,36 @@ function Footer() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Container>
-          <Typography variant="body1" sx={{textAlignLast: 'auto',fontFamily: 'inder', fontWeight: '400', fontSize: '20px', lineHeight: '25px'}}>
-           Copyright &copy; {" "}
-            {new Date().getFullYear()}
-            
+          <Typography
+            variant="body1"
+            sx={{
+              textAlignLast: "auto",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "25px",
+              color: "#333333",
+            }}>
+            Copyright &copy; {new Date().getFullYear()}
           </Typography>
         </Container>
-        <Container >
+        <Container>
           <SocialIcons />
         </Container>
         <Container>
-          <Typography variant="body1" sx={{textAlignLast: 'center',fontFamily: 'inder', fontWeight: '400', fontSize: '20px', lineHeight: '25px'}}>
+          <Typography
+            variant="body1"
+            sx={{
+              textAlignLast: "center",
+              fontWeight: "400",
+              fontSize: "14px",
+              lineHeight: "25px",
+              color: "#333333",
+            }}>
             Contact us: +358 12 345 6789
           </Typography>
         </Container>
-        
-        
       </Box>
     </ThemeProvider>
   );

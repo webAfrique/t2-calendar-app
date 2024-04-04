@@ -26,7 +26,10 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "80%" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
         <CssBaseline />
         <Grid
           item
@@ -53,20 +56,18 @@ export default function Login() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            }}>
+            <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Log In
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+              sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -91,9 +92,17 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  backgroundColor: "#9AC8E8",
+                  color: "#476C92",
+                  "&:hover": {
+                    backgroundColor: "#476C92",
+                    color: "#FFFFFF",
+                  },
+                }}>
+                Log In
               </Button>
               <Grid container>
                 <Grid item>
