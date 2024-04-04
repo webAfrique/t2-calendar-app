@@ -49,17 +49,21 @@ const Home = () => {
             fontWeight: "bold",
             color: "#00A8CD",
             textAlign: "center",
-            marginBottom: "20px",
+            marginBottom: "30px",
           }}>
           Use our platform to customise your digital advent calendar
         </Typography>
         <Button
-          variant="contained"
+          variant="outlined"
           color="primary"
           sx={{
             backgroundColor: "#476C92",
             color: "#FFFFFF",
             textAlign: "center",
+            "&:hover": {
+              backgroundColor: "#FFFFFF",
+              color: "#476C92",
+            },
           }}>
           Create now
         </Button>
