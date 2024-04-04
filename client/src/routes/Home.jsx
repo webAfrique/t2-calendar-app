@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
@@ -53,25 +54,29 @@ const Home = () => {
           }}>
           Use our platform to customise your digital advent calendar
         </Typography>
-        <Button
-          variant="contained"
-          sx={{
-            width: "150px",
-            height: "45px",
-            backgroundColor: "#476C92",
-            color: "white",
-            borderRadius: "30px",
-            textTransform: "capitalize",
-            "&:hover": {
-              backgroundColor: "white",
-              color: "#476C92",
-              borderColor: "#476C92",
-              boxShadow: "none",
-              border: "1px solid",
-            },
-          }}>
-          Create Now
-        </Button>
+        <Box>
+          <Link to="/login">
+            <Button
+              variant="contained"
+              sx={{
+                width: "150px",
+                height: "45px",
+                backgroundColor: "#476C92",
+                color: "white",
+                borderRadius: "30px",
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#476C92",
+                  borderColor: "#476C92",
+                  boxShadow: "none",
+                  border: "1px solid",
+                },
+              }}>
+              Create Now
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </ThemeProvider>
   );
