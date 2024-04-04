@@ -38,20 +38,22 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#fff", boxShadow: 'none', }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#fff", boxShadow: "none" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Avatar
-  src={Logo}
-  alt="Logo"
-  sx={{
-    mr: 1,
-    width: 60, 
-    height: 60, 
-    backgroundColor: "transparent", 
-    borderRadius: "50%", 
-  }}
-/>
+          <Avatar
+            src={Logo}
+            alt="Logo"
+            sx={{
+              mr: 1,
+              width: 60,
+              height: 60,
+              backgroundColor: "transparent",
+              borderRadius: "50%",
+            }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -65,8 +67,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "#00a8cd",
               textDecoration: "none",
-            }}
-          >
+            }}>
             WIME
           </Typography>
 
@@ -77,8 +78,7 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="#00a8cd"
-            >
+              color="#00a8cd">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -97,8 +97,7 @@ function Header() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-              }}
-            >
+              }}>
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -121,8 +120,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "#00a8cd",
               textDecoration: "none",
-            }}
-          >
+            }}>
             WIME
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
@@ -130,49 +128,60 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#00a8cd", display: "block" }}
-              >
+                sx={{ my: 2, color: "#00a8cd", display: "block" }}>
                 {page}
               </Button>
             ))}
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             <Link to="/login">
-              <Button variant="outlined" sx= {{width: '100px', borderRadius: '30px', textTransform: 'capitalize', color: '#476C92', borderColor: '#476C92',
-             '&:hover': {
-              backgroundColor: '#476C92', 
-              color: 'white',
-              borderColor: 'transparent',
-            },
-            }}>Log in</Button>
+              <Button
+                variant="outlined"
+                sx={{
+                  width: "100px",
+                  borderRadius: "30px",
+                  textTransform: "capitalize",
+                  color: "#476C92",
+                  borderColor: "#476C92",
+                  "&:hover": {
+                    backgroundColor: "#476C92",
+                    color: "white",
+                    borderColor: "transparent",
+                  },
+                }}>
+                Log in
+              </Button>
             </Link>
           </Box>
 
-          <Box sx={{  p: 0,
-    display: { xs: "none", md: "flex" },
-    mx: 2,
-   }}>
+          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
             <Link to="/register">
-              <Button variant="contained" sx={{ width: '100px',backgroundColor: '#476C92', color: 'white', borderRadius: '30px', textTransform: 'capitalize', 
-              '&:hover': {
-                backgroundColor: 'white', 
-                color: '#476C92',
-                borderColor: '#476C92',
-                boxShadow: 'none',
-                border: '1px solid',
-              },
-        }}>Register</Button>
-       
+              <Button
+                variant="contained"
+                sx={{
+                  width: "100px",
+                  backgroundColor: "#476C92",
+                  color: "white",
+                  borderRadius: "30px",
+                  textTransform: "capitalize",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "#476C92",
+                    borderColor: "#476C92",
+                    boxShadow: "none",
+                    border: "1px solid",
+                  },
+                }}>
+                Register
+              </Button>
             </Link>
           </Box>
-          
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0, display: { xs: "flex", md: "none" } }}
-              >
+                sx={{ p: 0, display: { xs: "flex", md: "none" } }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -190,8 +199,7 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

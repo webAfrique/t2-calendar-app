@@ -11,7 +11,7 @@ const Home = () => {
         sx={{
           margin: 0,
           height: "calc(100vh - 68.5px - 76.2px)",
-          backgroundImage: "url(../../public/hero_image.jpg)",
+          backgroundImage: "url(/hero_image.jpg)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
