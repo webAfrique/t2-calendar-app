@@ -54,18 +54,23 @@ const Home = () => {
           Use our platform to customise your digital advent calendar
         </Typography>
         <Button
-          variant="outlined"
-          color="primary"
+          variant="contained"
           sx={{
+            width: "150px",
+            height: "45px",
             backgroundColor: "#476C92",
-            color: "#FFFFFF",
-            textAlign: "center",
+            color: "white",
+            borderRadius: "30px",
+            textTransform: "capitalize",
             "&:hover": {
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "white",
               color: "#476C92",
+              borderColor: "#476C92",
+              boxShadow: "none",
+              border: "1px solid",
             },
           }}>
-          Create now
+          Create Now
         </Button>
       </Box>
     </ThemeProvider>
