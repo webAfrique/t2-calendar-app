@@ -1,3 +1,8 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, registerWithEmailAndPassword } from "../../../server/firebase";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,23 +18,32 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 export default function Register2() {
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const name = data.get("firstName");
+    //const lastName = data.get("lastName");
+    const email = data.get("email");
+    const password = data.get("password");
+
+    if (!name) alert("Please enter your first name");
+    registerWithEmailAndPassword(name, email, password);
   };
+
+  useEffect(() => {
+    if (user) navigate("/user");
+  }, [user]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid
         container
         component="main"
-        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
+        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}
+      >
         <CssBaseline />
         <Grid
           item
@@ -56,7 +70,8 @@ export default function Register2() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}>
+            }}
+          >
             <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -67,7 +82,8 @@ export default function Register2() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}>
+              sx={{ mt: 3 }}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -125,7 +141,8 @@ export default function Register2() {
                     backgroundColor: "#9AC8E8",
                     color: "#476C92",
                   },
-                }}>
+                }}
+              >
                 Register
               </Button>
               <Grid container justifyContent="flex-end">

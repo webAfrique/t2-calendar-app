@@ -1,5 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../server/firebase";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,6 +24,7 @@ const settings = ["Register", "Log in"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [user, loading, error] = useAuthState(auth);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -143,25 +147,52 @@ function Header() {
             ))}
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
-            <Link to="/login">
-              <Button
-                variant="outlined"
-                sx={{
-                  width: "100px",
-                  borderRadius: "30px",
-                  textTransform: "capitalize",
-                  color: "#476C92",
-                  borderColor: "#476C92",
-                  "&:hover": {
+            {user ? (
+              <Link to="/">
+                <Button
+                  onClick={() => auth.signOut()}
+                  variant="contained"
+                  sx={{
+                    width: "100px",
                     backgroundColor: "#476C92",
                     color: "white",
-                    borderColor: "transparent",
-                  },
-                }}
-              >
-                Log in
-              </Button>
-            </Link>
+                    borderRadius: "30px",
+                    textTransform: "capitalize",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#476C92",
+                      borderColor: "#476C92",
+                      boxShadow: "none",
+                      border: "1px solid",
+                    },
+                  }}
+                >
+                  Log out
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "100px",
+                    backgroundColor: "#476C92",
+                    color: "white",
+                    borderRadius: "30px",
+                    textTransform: "capitalize",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#476C92",
+                      borderColor: "#476C92",
+                      boxShadow: "none",
+                      border: "1px solid",
+                    },
+                  }}
+                >
+                  Log in
+                </Button>
+              </Link>
+            )}
           </Box>
 
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>

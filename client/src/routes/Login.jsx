@@ -1,3 +1,8 @@
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { auth, loginWithEmailAndPassword } from "../../../server/firebase";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,21 +20,28 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 export default function Login() {
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const password = data.get("password");
+    loginWithEmailAndPassword(email, password);
   };
+
+  useEffect(() => {
+    if (user) navigate("/user");
+  }, [user]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid
         container
         component="main"
-        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
+        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}
+      >
         <CssBaseline />
         <Grid
           item
@@ -56,7 +68,8 @@ export default function Login() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}>
+            }}
+          >
             <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -67,7 +80,8 @@ export default function Login() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}>
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -101,7 +115,8 @@ export default function Login() {
                     backgroundColor: "#476C92",
                     color: "#FFFFFF",
                   },
-                }}>
+                }}
+              >
                 Log In
               </Button>
               <Grid container>
