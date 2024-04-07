@@ -1,22 +1,26 @@
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../server/firebase";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const cals = [
-  { id: 1, name: "chokolokobangoshe" },
-  { id: 2, name: "na wetin dey haffen" },
-  { id: 3, name: "Senibo Dagogo Jack" },
-  { id: 4, name: "honourable nkagbara" },
-];
+// const cals = [
+//   { id: 1, name: "chokolokobangoshe" },
+//   { id: 2, name: "na wetin dey haffen" },
+//   { id: 3, name: "Senibo Dagogo Jack" },
+//   { id: 4, name: "honourable nkagbara" },
+// ];
 
 function User() {
-  const [calendars, setCalendars] = useState([...cals]);
+  const [user, loading, error] = useAuthState(auth);
+  const [calendars, setCalendars] = useState([]);
   return (
     <div className="user-dashboard">
       <AccountCircleIcon
         color="disabled"
         style={{ width: "100px", height: "100px" }}
       />
-      <p>Username</p>
+      <p>{user.email}</p>
       {calendars.length > 0 ? (
         <div>
           <h2 style={{ textAlign: "center" }}>Your calendars</h2>
