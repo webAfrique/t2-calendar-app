@@ -42,8 +42,7 @@ export default function Register2() {
       <Grid
         container
         component="main"
-        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}
-      >
+        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
         <CssBaseline />
         <Grid
           item
@@ -70,8 +69,7 @@ export default function Register2() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}
-          >
+            }}>
             <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -82,8 +80,7 @@ export default function Register2() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+              sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -141,8 +138,7 @@ export default function Register2() {
                     backgroundColor: "#9AC8E8",
                     color: "#476C92",
                   },
-                }}
-              >
+                }}>
                 Register
               </Button>
               <Grid container justifyContent="flex-end">
@@ -159,3 +155,16 @@ export default function Register2() {
     </ThemeProvider>
   );
 }
+// import React from "react";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import Title from "../component/Title";
+
+// const defaultTheme = createTheme();
+
+// export default function Register2() {
+//   return (
+//     <ThemeProvider theme={defaultTheme}>
+//       <Title />
+//     </ThemeProvider>
+//   );
+// }
