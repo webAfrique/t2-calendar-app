@@ -1,3 +1,5 @@
+import React from "react";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
@@ -5,7 +7,19 @@ import Title from "../component/editor/Title";
 
 const drawerWidth = 260;
 
+// const cssStyles = {
+//   textAlign: "",
+//   fontFamily: "Roboto",
+//   color: "red",
+//   fontSize: 24,
+//   textDecoration: "underline",
+//   fontWeight: "bold",
+//   fontStyle: "italic",
+// };
+
 function Editor() {
+  //const [title, setTitle] = React.useState("");
+  const [titleStyles, setTitleStyles] = React.useState({});
   return (
     <Box sx={{ display: "flex" }}>
       <Box
@@ -24,7 +38,7 @@ function Editor() {
           }}
           open
         >
-          <Title />
+          <Title setTitleStyles={setTitleStyles} />
         </Drawer>
       </Box>
       <Box
@@ -35,7 +49,9 @@ function Editor() {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <Typography paragraph>Test</Typography>
+        <Typography paragraph style={titleStyles}>
+          Test
+        </Typography>
       </Box>
     </Box>
   );
