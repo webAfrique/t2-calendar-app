@@ -5,6 +5,7 @@ import Root from "./routes/Root";
 import Login from "./routes/Login";
 import Home from "./routes/Home";
 import User from "./routes/User";
+import Editor from "./routes/Editor";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="user" element={<User />} />
+          <Route path="editor" element={<Editor />} />
         </Route>
       </Routes>
     </Router>
