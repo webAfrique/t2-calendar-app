@@ -108,24 +108,22 @@ function Title() {
             <ListItemButton sx={{ pl: 2 }}>
               <TextField id="outlined-basic" size="small" variant="outlined" />
             </ListItemButton>
-            <ListItemButton sx={{ p: 1 }}>
+            <ListItemButton sx={{ p: 2 }}>
               <ListItemText primary="Alignment" />
               <ToggleButtonGroup
                 size="small"
                 {...control}
-                aria-label="Small sizes"
-              >
+                aria-label="Small sizes">
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
-            <ListItemButton sx={{ p: 1 }}>
+            <ListItemButton sx={{ p: 2 }}>
               <ListItemText primary="Font Family" />
               <Select
                 value={fontFamily}
                 size="small"
                 onChange={handleFontFamilyChange}
-                sx={{ padding: 0 }}
-              >
+                sx={{ padding: 0 }}>
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -133,7 +131,7 @@ function Title() {
                 ))}
               </Select>
             </ListItemButton>
-            <ListItemButton sx={{ p: 1 }}>
+            <ListItemButton sx={{ p: 2 }}>
               <ListItemText primary="Color" />
 
               <MuiColorInput
@@ -144,14 +142,13 @@ function Title() {
                 onChange={handleColorChange}
               />
             </ListItemButton>
-            <ListItemButton sx={{ p: 1 }}>
+            <ListItemButton sx={{ p: 2 }}>
               <ListItemText primary="Size" />
               <Select
                 value={selectedSize}
                 size="small"
                 onChange={handleSizeChange}
-                sx={{ minWidth: "80px", padding: 0 }}
-              >
+                sx={{ minWidth: "80px", padding: 0 }}>
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -164,14 +161,13 @@ function Title() {
                 <MenuItem value={64}>64</MenuItem>
               </Select>
             </ListItemButton>
-            <ListItemButton sx={{ p: 1 }}>
+            <ListItemButton sx={{ p: 2 }}>
               <ListItemText primary="Font Style" />
               <ToggleButtonGroup
                 size="small"
                 value={fontStyle}
                 onChange={handleFontStyleChange}
-                aria-label="text formatting"
-              >
+                aria-label="text formatting">
                 <ToggleButton value="bold" aria-label="bold">
                   <FormatBoldIcon />
                 </ToggleButton>
