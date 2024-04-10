@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -32,13 +32,25 @@ const fontFamilies = [
   "Courier New",
 ];
 
-function Title() {
+function Title({ setTitleStyles }) {
   const [open, setOpen] = React.useState(false);
   const [alignment, setAlignment] = React.useState("");
   const [fontFamily, setFontFamily] = React.useState("Roboto");
-  const [color, setColor] = React.useState("#ffffff");
+  const [color, setColor] = React.useState("black");
   const [selectedSize, setSelectedSize] = React.useState(16);
   const [fontStyle, setFontStyle] = React.useState([]);
+
+  useEffect(() => {
+    setTitleStyles({
+      textAlign: alignment,
+      fontFamily: fontFamily,
+      color: color,
+      fontSize: selectedSize,
+      textDecoration: fontStyle.includes("underlined") ? "underline" : "none",
+      fontWeight: fontStyle.includes("bold") ? "bold" : "normal",
+      fontStyle: fontStyle.includes("italic") ? "italic" : "normal",
+    });
+  }, [alignment, fontFamily, color, selectedSize, fontStyle, setTitleStyles]);
 
   const handleClick = () => {
     setOpen(!open);
