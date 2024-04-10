@@ -1,11 +1,11 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import Title from "../component/editor/Title";
+import DateCalendar from "../component/editor/DateCalendar";
 
-const drawerWidth = 260;
+const drawerWidth = 350;
 
 function Editor() {
   const [titleStyles, setTitleStyles] = React.useState({});
@@ -14,8 +14,7 @@ function Editor() {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
+        aria-label="mailbox folders">
         <Drawer
           variant="permanent"
           sx={{
@@ -25,9 +24,9 @@ function Editor() {
               width: drawerWidth,
             },
           }}
-          open
-        >
+          open>
           <Title setTitleStyles={setTitleStyles} />
+          <DateCalendar />
         </Drawer>
       </Box>
       <Box
@@ -36,8 +35,7 @@ function Editor() {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
+        }}>
         <Typography paragraph style={titleStyles}>
           Test
         </Typography>
