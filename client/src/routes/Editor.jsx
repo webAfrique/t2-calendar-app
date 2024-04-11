@@ -14,6 +14,7 @@ const drawerWidth = 350;
 
 function Editor() {
   const [titleStyles, setTitleStyles] = React.useState({});
+  const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
   const [dates, setDates] = React.useState([]);
   const [create, setCreate] = React.useState(false);
   const [inputText, setInputText] = useState("");
@@ -25,7 +26,7 @@ function Editor() {
         <Box
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="mailbox folders">
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -36,14 +37,15 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open>
+            open
+          >
             <Title
               setTitleStyles={setTitleStyles}
               inputText={inputText}
               setInputText={setInputText}
             />
             <DateCalendar setDates={setDates} />
-            <Background />
+            <Background setBackgoroundStyles={setBackgoroundStyles} />
             <Shapes />
 
             <Button
@@ -56,6 +58,7 @@ function Editor() {
                 color: "white",
                 borderRadius: "30px",
                 textTransform: "capitalize",
+                fontWeight: "bold",
                 "&:hover": {
                   backgroundColor: "white",
                   color: "#476C92",
@@ -64,19 +67,23 @@ function Editor() {
                   border: "1px solid",
                 },
               }}
-              onClick={() => setCreate(true)}>
+              onClick={() => setCreate(true)}
+            >
               Create
             </Button>
           </Drawer>
         </Box>
 
         <Box
+          style={backgoroundStyles}
           component="main"
           sx={{
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}>
+            height: "100vh",
+          }}
+        >
           <Typography paragraph style={titleStyles}>
             {inputText}
           </Typography>
@@ -85,7 +92,7 @@ function Editor() {
               <Calendar dates={dates} />
             ) : (
               <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
-                Click Create to start
+                Click Create to see hatches
               </Typography>
             )}
           </Box>
