@@ -99,8 +99,6 @@ function Title({ setTitleStyles }) {
 
   const titleMenu = (
     <div>
-      <Toolbar />
-      <Divider />
       <List>
         {/* Title list item */}
         <ListItem disablePadding>
