@@ -8,6 +8,7 @@ import DateCalendar from "../component/editor/DateCalendar";
 import Calendar from "../component/editor/Calender";
 import Background from "../component/editor/Background";
 import { Divider } from "@mui/material";
+import Shapes from "../component/editor/Shapes";
 
 const drawerWidth = 350;
 
@@ -43,6 +44,7 @@ function Editor() {
             />
             <DateCalendar setDates={setDates} />
             <Background />
+            <Shapes />
 
             <Button
               variant="contained"
