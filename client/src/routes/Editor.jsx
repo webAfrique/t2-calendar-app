@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
@@ -15,6 +15,7 @@ function Editor() {
   const [titleStyles, setTitleStyles] = React.useState({});
   const [dates, setDates] = React.useState([]);
   const [create, setCreate] = React.useState(false);
+  const [inputText, setInputText] = useState("");
 
   return (
     <>
@@ -23,8 +24,7 @@ function Editor() {
         <Box
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="mailbox folders"
-        >
+          aria-label="mailbox folders">
           <Drawer
             variant="permanent"
             sx={{
@@ -35,9 +35,12 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open
-          >
-            <Title setTitleStyles={setTitleStyles} />
+            open>
+            <Title
+              setTitleStyles={setTitleStyles}
+              inputText={inputText}
+              setInputText={setInputText}
+            />
             <DateCalendar setDates={setDates} />
             <Background />
 
@@ -59,8 +62,7 @@ function Editor() {
                   border: "1px solid",
                 },
               }}
-              onClick={() => setCreate(true)}
-            >
+              onClick={() => setCreate(true)}>
               Create
             </Button>
           </Drawer>
@@ -72,10 +74,9 @@ function Editor() {
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}
-        >
+          }}>
           <Typography paragraph style={titleStyles}>
-            Title
+            {inputText}
           </Typography>
           <Box>
             {create ? ( // if create is true, render Canvas component
