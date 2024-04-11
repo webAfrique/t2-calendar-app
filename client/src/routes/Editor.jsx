@@ -1,9 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
 import Title from "../component/editor/Title";
 import DateCalendar from "../component/editor/DateCalendar";
+import Calendar from "../component/editor/Calender";
 import Background from "../component/editor/Background";
 import { Divider } from "@mui/material";
 
@@ -11,6 +13,9 @@ const drawerWidth = 350;
 
 function Editor() {
   const [titleStyles, setTitleStyles] = React.useState({});
+  const [dates, setDates] = React.useState([]);
+  const [create, setCreate] = React.useState(false);
+
   return (
     <>
       <Divider />
@@ -33,10 +38,34 @@ function Editor() {
             open
           >
             <Title setTitleStyles={setTitleStyles} />
-            <DateCalendar />
+            <DateCalendar setDates={setDates} />
             <Background />
+
+            <Button
+              variant="contained"
+              sx={{
+                display: "block",
+                margin: "auto",
+                width: "100px",
+                backgroundColor: "#476C92",
+                color: "white",
+                borderRadius: "30px",
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#476C92",
+                  borderColor: "#476C92",
+                  boxShadow: "none",
+                  border: "1px solid",
+                },
+              }}
+              onClick={() => setCreate(true)}
+            >
+              Create
+            </Button>
           </Drawer>
         </Box>
+
         <Box
           component="main"
           sx={{
@@ -46,8 +75,17 @@ function Editor() {
           }}
         >
           <Typography paragraph style={titleStyles}>
-            Test
+            Title
           </Typography>
+          <Box>
+            {create ? ( // if create is true, render Canvas component
+              <Calendar dates={dates} />
+            ) : (
+              <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
+                Click Create to start
+              </Typography>
+            )}
+          </Box>
         </Box>
       </Box>
     </>
