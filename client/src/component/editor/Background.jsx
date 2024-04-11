@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -24,9 +24,15 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-function Background() {
+function Background({ setBackgoroundStyles }) {
   const [open, setOpen] = React.useState(false);
-  const [color, setColor] = React.useState("red");
+  const [color, setColor] = React.useState("white");
+
+  useEffect(() => {
+    setBackgoroundStyles({
+      backgroundColor: color,
+    });
+  }, [color]);
 
   const handleClick = () => {
     setOpen(!open);
