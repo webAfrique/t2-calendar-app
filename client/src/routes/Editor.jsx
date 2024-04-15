@@ -25,8 +25,7 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -37,8 +36,7 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open
-          >
+            open>
             <Title
               setTitleStyles={setTitleStyles}
               inputText={inputText}
@@ -67,8 +65,7 @@ function Editor() {
                   border: "1px solid",
                 },
               }}
-              onClick={() => setCreate(true)}
-            >
+              onClick={() => setCreate(true)}>
               Create
             </Button>
           </Drawer>
@@ -82,8 +79,7 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}
-        >
+          }}>
           <Typography paragraph style={titleStyles}>
             {inputText}
           </Typography>
