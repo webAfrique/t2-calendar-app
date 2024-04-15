@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-import Typography from "@mui/material/Typography";
-import Title from "../component/editor/Title";
-import DateCalendar from "../component/editor/DateCalendar";
-import Calendar from "../component/editor/Calender";
-import Background from "../component/editor/Background";
+//import Typography from "@mui/material/Typography";
+// import Title from "../component/editor/Title";
+// import DateCalendar from "../component/editor/DateCalendar";
+//import Calendar from "../component/editor/Calender";
+// import Background from "../component/editor/Background";
 import { Divider } from "@mui/material";
-import Shapes from "../component/editor/Shapes";
+import Hatch from "../component/editor/Hatch";
+// import Shapes from "../component/editor/Shapes";
 
 const drawerWidth = 350;
 
 function Editor() {
-  const [titleStyles, setTitleStyles] = React.useState({});
-  const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
-  const [dates, setDates] = React.useState([]);
-  const [create, setCreate] = React.useState(false);
-  const [inputText, setInputText] = useState("");
+  //const [titleStyles, setTitleStyles] = React.useState({});
+  //const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
+  //const [dates, setDates] = React.useState([]);
+  //const [create, setCreate] = React.useState(false);
+  //const [inputText, setInputText] = useState("");
 
   return (
     <>
@@ -37,14 +38,19 @@ function Editor() {
               },
             }}
             open>
-            <Title
-              setTitleStyles={setTitleStyles}
-              inputText={inputText}
-              setInputText={setInputText}
-            />
-            <DateCalendar setDates={setDates} />
-            <Background setBackgoroundStyles={setBackgoroundStyles} />
-            <Shapes />
+            {/* please place your single hatch menu components below */}
+
+            {/* code below will be later set conditionally */}
+            <>
+              {/*  <Title
+                setTitleStyles={setTitleStyles}
+                inputText={inputText}
+                setInputText={setInputText}
+              />
+              <DateCalendar setDates={setDates} />
+              <Background setBackgoroundStyles={setBackgoroundStyles} />
+              <Shapes /> */}
+            </>
 
             <Button
               variant="contained"
@@ -64,15 +70,39 @@ function Editor() {
                   boxShadow: "none",
                   border: "1px solid",
                 },
-              }}
-              onClick={() => setCreate(true)}>
-              Create
+              }}>
+              Save
             </Button>
+
+            {/* this button below will be rendered conditionally */}
+            {/*   <Button
+              variant="contained"
+              sx={{
+                display: "block",
+                margin: "auto",
+                width: "100px",
+                backgroundColor: "#476C92",
+                color: "white",
+                borderRadius: "30px",
+                textTransform: "capitalize",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "#476C92",
+                  borderColor: "#476C92",
+                  boxShadow: "none",
+                  border: "1px solid",
+                },
+              }}
+              onClick={() => setCreate(true)}
+            >
+              Create
+            </Button> */}
           </Drawer>
         </Box>
 
         <Box
-          style={backgoroundStyles}
+          /*    style={backgoroundStyles} */
           component="main"
           sx={{
             flexGrow: 1,
@@ -80,7 +110,9 @@ function Editor() {
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
           }}>
-          <Typography paragraph style={titleStyles}>
+          <Hatch date="1" />
+          {/* this code will be rendered conditionally later */}
+          {/* <Typography paragraph style={titleStyles}>
             {inputText}
           </Typography>
           <Box>
@@ -91,7 +123,7 @@ function Editor() {
                 Click Create to see hatches
               </Typography>
             )}
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </>

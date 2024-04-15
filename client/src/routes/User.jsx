@@ -51,7 +51,7 @@ function User() {
       }}>
       {" "}
       <UserAvatar />
-      <Typography variant="body1" sx={{ mb: 5 }}>
+      <Typography variant="body1" sx={{ my: 2 }}>
         {user ? `${user.email}, welcome back!` : "Loading user information..."}
       </Typography>
       {calendars.length > 0 ? (
@@ -61,7 +61,7 @@ function User() {
             flexDirection: "column",
             alignItems: "center",
           }}>
-          <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
+          <Typography variant="h5" sx={{ textAlign: "center", mt: 5 }}>
             Your calendars
           </Typography>
           <TableContainer component={Paper} sx={{ my: 2 }}>
