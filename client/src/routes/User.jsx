@@ -1,54 +1,3 @@
-// import { useState } from "react";
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { auth } from "../../../server/firebase";
-
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
-// const calendars = [
-//   { id: 1, name: "chokolokobangoshe" },
-//   { id: 2, name: "na wetin dey haffen" },
-//   { id: 3, name: "Senibo Dagogo Jack" },
-//   { id: 4, name: "honourable nkagbara" },
-// ];
-
-// function User() {
-//   const [user, loading, error] = useAuthState(auth);
-//   const [calendar, setCalendar] = useState([]);
-
-//   return (
-//     <div className="user-dashboard">
-//       <AccountCircleIcon
-//         color="disabled"
-//         style={{ width: "100px", height: "100px" }}
-//       />
-//       <p>{user.email}</p>
-//       {calendars.length > 0 ? (
-//         <div>
-//           <h2 style={{ textAlign: "center" }}>Your calendars</h2>
-//           <ul style={{ padding: "none", listStyle: "none" }}>
-//             {calendars.map((calendar) => (
-//               <li key={calendar.id} style={{ marginTop: "10px" }}>
-//                 {calendar.name}
-//                 <a href="" style={{ marginLeft: "25px" }}>
-//                   <button>View</button>
-//                 </a>
-//                 <a href="" style={{ marginLeft: "25px" }}>
-//                   <button>Editor</button>
-//                 </a>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       ) : (
-//         <p>You have no calendars</p>
-//       )}
-//       <a href="">Create new calendar</a>
-//     </div>
-//   );
-// }
-
-// export default User;
-
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../server/firebase";
@@ -102,7 +51,7 @@ function User() {
       }}>
       {" "}
       <UserAvatar />
-      <Typography variant="body1" sx={{ mb: 2 }}>
+      <Typography variant="body1" sx={{ mb: 5 }}>
         {user ? `${user.email}, welcome back!` : "Loading user information..."}
       </Typography>
       {calendars.length > 0 ? (
@@ -112,9 +61,9 @@ function User() {
             flexDirection: "column",
             alignItems: "center",
           }}>
-          {/* <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
+          <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
             Your calendars
-          </Typography> */}
+          </Typography>
           <TableContainer component={Paper} sx={{ my: 2 }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableBody>
@@ -126,17 +75,51 @@ function User() {
                       <Button
                         component={Link}
                         to={`/calendars/${calendar.id}/view`}
-                        variant="contained">
+                        variant="contained"
+                        sx={{ mx: 1 }}>
                         {calendar.name}
                       </Button>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" sx={{ pr: 1 }}>
                       <IconButton
                         component={Link}
                         to={`/calendars/${calendar.id}/view`}
                         color="primary"
-                        aria-label="view calendar">
+                        aria-label="view calendar"
+                        sx={{ mx: 1 }}>
                         <VisibilityOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        component={Link}
+                        to={`/calendars/${calendar.id}/edit`}
+                        color="primary"
+                        aria-label="edit calendar"
+                        sx={{ mx: 1 }}>
+                        <EditOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        component={Link}
+                        to={`/calendars/${calendar.id}/delete`}
+                        color="primary"
+                        aria-label="delete calendar"
+                        sx={{ mx: 1 }}>
+                        <DeleteOutlineOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        component={Link}
+                        to={`/calendars/${calendar.id}/like`}
+                        color="primary"
+                        aria-label="like calendar"
+                        sx={{ mx: 1 }}>
+                        <FavoriteBorderOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        component={Link}
+                        to={`/calendars/${calendar.id}/share`}
+                        color="primary"
+                        aria-label="share calendar"
+                        sx={{ mx: 1 }}>
+                        <ShareIcon />
                       </IconButton>
                     </TableCell>
                     {/* <TableCell align="right">
@@ -155,40 +138,6 @@ function User() {
                         Edit
                       </Button>
                     </TableCell> */}
-                    <TableCell align="right">
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/edit`}
-                        color="primary"
-                        aria-label="edit calendar">
-                        <EditOutlinedIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/delete`}
-                        color="primary"
-                        aria-label="delete calendar">
-                        <DeleteOutlineOutlinedIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell align="right">
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/like`}
-                        color="primary"
-                        aria-label="like calendar">
-                        <FavoriteBorderOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/share`}
-                        color="primary"
-                        aria-label="share calendar">
-                        <ShareIcon />
-                      </IconButton>
-                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -204,6 +153,7 @@ function User() {
                   height: "45px",
                   backgroundColor: "#476C92",
                   color: "white",
+                  fontWeight: "bold",
                   borderRadius: "30px",
                   textTransform: "capitalize",
                   "&:hover": {
@@ -214,14 +164,24 @@ function User() {
                     border: "1px solid",
                   },
                 }}>
-                Create Another
+                Create New
               </Button>
             </Link>
           </Box>
         </Box>
       ) : (
-        <Box>
-          <p>You have no calendars.</p>
+        <Box
+          className="user-dashboard"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            minHeight: "50vh",
+            justifyContent: "center",
+          }}>
+          <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
+            You have no calendars
+          </Typography>
           <Box>
             <Link to="/editor">
               <Button
@@ -231,6 +191,7 @@ function User() {
                   height: "45px",
                   backgroundColor: "#476C92",
                   color: "white",
+                  fontWeight: "bold",
                   borderRadius: "30px",
                   textTransform: "capitalize",
                   "&:hover": {
@@ -241,7 +202,7 @@ function User() {
                     border: "1px solid",
                   },
                 }}>
-                Create Now
+                Create
               </Button>
             </Link>
           </Box>
