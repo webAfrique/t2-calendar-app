@@ -19,6 +19,7 @@ function Editor() {
   //const [dates, setDates] = React.useState([]);
   //const [create, setCreate] = React.useState(false);
   //const [inputText, setInputText] = useState("");
+  //const [shape, setShape] = useState("");
 
   return (
     <>
@@ -26,7 +27,8 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -37,7 +39,8 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
 
             {/* code below will be later set conditionally */}
@@ -49,7 +52,7 @@ function Editor() {
               />
               <DateCalendar setDates={setDates} />
               <Background setBackgoroundStyles={setBackgoroundStyles} />
-              <Shapes /> */}
+              <Shapes setShape={setShape} shape={shape} /> */}
             </>
 
             <Button
@@ -70,7 +73,8 @@ function Editor() {
                   boxShadow: "none",
                   border: "1px solid",
                 },
-              }}>
+              }}
+            >
               Save
             </Button>
 
@@ -109,7 +113,8 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}>
+          }}
+        >
           <Hatch date="1" />
           {/* this code will be rendered conditionally later */}
           {/* <Typography paragraph style={titleStyles}>
@@ -117,7 +122,7 @@ function Editor() {
           </Typography>
           <Box>
             {create ? ( // if create is true, render Canvas component
-              <Calendar dates={dates} />
+              <Calendar dates={dates} shape={shape} />
             ) : (
               <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
                 Click Create to see hatches

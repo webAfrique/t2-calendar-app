@@ -19,9 +19,8 @@ const shapes = [
   { name: "Star", icon: <StarOutlineOutlinedIcon /> },
 ];
 
-function Shapes() {
+function Shapes({ setShape, shape }) {
   const [open, setOpen] = React.useState(false);
-  const [shape, setShape] = React.useState("Square");
 
   const handleClick = () => {
     setOpen(!open);
@@ -57,11 +56,11 @@ function Shapes() {
                 onChange={handleShapeChange}
                 sx={{ padding: 0, width: 150 }}
               >
-                {shapes.map((shape) => (
-                  <MenuItem key={shape.name} value={shape.name}>
+                {shapes.map((item) => (
+                  <MenuItem key={item.name} value={item.name}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      {shape.icon}
-                      {shape.name}
+                      {item.icon}
+                      {item.name}
                     </Box>
                   </MenuItem>
                 ))}
