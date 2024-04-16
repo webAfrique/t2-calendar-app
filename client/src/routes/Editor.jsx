@@ -11,6 +11,7 @@ import { Divider } from "@mui/material";
 import Hatch from "../component/editor/Hatch";
 import WidthHeight from "../component/hatchEditor/WidthHeight";
 // import Shapes from "../component/editor/Shapes";
+import TextEditor from "../component/hatchEditor/TextEditor";
 
 const drawerWidth = 350;
 
@@ -22,6 +23,9 @@ function Editor() {
   //const [inputText, setInputText] = useState("");
   //const [shape, setShape] = useState("");
   const [hatchDimensions, setHatchDimensions] = useState({});
+  const [hatchTextStyles, setHatchTextStyles] = React.useState({});
+  const [inputHatchText, setInputHatchText] = useState("");
+
 
   return (
     <>
@@ -45,6 +49,10 @@ function Editor() {
           >
             {/* please place your single hatch menu components below */}
             <WidthHeight setHatchDimensions={setHatchDimensions} />
+            <TextEditor
+            setHatchTextStyles={setHatchTextStyles}
+            inputHatchText={inputHatchText}
+            setInputHatchText={setInputHatchText}/>
 
             {/* code below will be later set conditionally */}
             <>
