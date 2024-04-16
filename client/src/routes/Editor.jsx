@@ -26,6 +26,7 @@ function Editor() {
   const [hatchDimensions, setHatchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [inputHatchText, setInputHatchText] = useState("");
+  const [hatchNumber, setHatchNumber] = useState();
 
   return (
     <>
@@ -33,7 +34,8 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -44,7 +46,8 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
             <WidthHeight setHatchDimensions={setHatchDimensions} />
             <TextEditor
@@ -52,7 +55,7 @@ function Editor() {
               inputHatchText={inputHatchText}
               setInputHatchText={setInputHatchText}
             />
-            <BasicModal />
+            <BasicModal hatchNumber={hatchNumber} />
 
             {/* code below will be later set conditionally */}
             <>
@@ -84,7 +87,8 @@ function Editor() {
                   boxShadow: "none",
                   border: "1px solid",
                 },
-              }}>
+              }}
+            >
               Save
             </Button>
 
@@ -123,8 +127,13 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}>
-          <Hatch date="1" hatchDimensions={hatchDimensions} />
+          }}
+        >
+          <Hatch
+            date="1"
+            hatchDimensions={hatchDimensions}
+            setHatchNumber={setHatchNumber}
+          />
           {/* this code will be rendered conditionally later */}
           {/* <Typography paragraph style={titleStyles}>
             {inputText}
