@@ -12,6 +12,7 @@ import Hatch from "../component/editor/Hatch";
 import WidthHeight from "../component/hatchEditor/WidthHeight";
 // import Shapes from "../component/editor/Shapes";
 import TextEditor from "../component/hatchEditor/TextEditor";
+import BasicModal from "../component/hatchEditor/BasicModal";
 
 const drawerWidth = 350;
 
@@ -26,15 +27,13 @@ function Editor() {
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [inputHatchText, setInputHatchText] = useState("");
 
-
   return (
     <>
       <Divider />
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -45,14 +44,15 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             <WidthHeight setHatchDimensions={setHatchDimensions} />
             <TextEditor
-            setHatchTextStyles={setHatchTextStyles}
-            inputHatchText={inputHatchText}
-            setInputHatchText={setInputHatchText}/>
+              setHatchTextStyles={setHatchTextStyles}
+              inputHatchText={inputHatchText}
+              setInputHatchText={setInputHatchText}
+            />
+            <BasicModal />
 
             {/* code below will be later set conditionally */}
             <>
@@ -84,8 +84,7 @@ function Editor() {
                   boxShadow: "none",
                   border: "1px solid",
                 },
-              }}
-            >
+              }}>
               Save
             </Button>
 
@@ -124,8 +123,7 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}
-        >
+          }}>
           <Hatch date="1" hatchDimensions={hatchDimensions} />
           {/* this code will be rendered conditionally later */}
           {/* <Typography paragraph style={titleStyles}>
