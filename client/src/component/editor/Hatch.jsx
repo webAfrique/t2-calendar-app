@@ -2,7 +2,7 @@ import Draggable from "react-draggable";
 import { Box, Card, Typography } from "@mui/material";
 import Star from "./Star";
 
-const Hatch = ({ date, shape, hatchDimensions }) => {
+const Hatch = ({ date, shape, hatchDimensions, setHatchNumber }) => {
   const isCircle = shape === "Circle";
   const isStar = shape === "Star";
   const { width, height } = hatchDimensions;
@@ -45,7 +45,7 @@ const Hatch = ({ date, shape, hatchDimensions }) => {
 
   return (
     <Draggable>
-      <Card style={style}>
+      <Card style={style} onClick={() => setHatchNumber(date)}>
         <Typography variant="h6" style={{ textAlign: "center", color: "grey" }}>
           {date}
         </Typography>

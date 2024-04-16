@@ -17,26 +17,41 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal({ hatchNumber }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          paddingBottom: 2,
+          paddingTop: 2,
+          marginTop: 2,
+        }}
+      >
+        <Button onClick={handleOpen} sx={{ fontWeight: "bold" }}>
+          Preview hatch # {hatchNumber}
+        </Button>
+      </Box>
+
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+        aria-describedby="modal-modal-description"
+      >
         <Box sx={style}>
           <Typography
             sx={{ mb: 2 }}
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            textAlign={"center"}>
+            textAlign={"center"}
+          >
             Title
           </Typography>
           <Box
@@ -47,7 +62,8 @@ export default function BasicModal() {
               alignContent: "center",
               border: "1px dashed grey",
               textAlign: "center",
-            }}>
+            }}
+          >
             Image
           </Box>
           <Typography
@@ -55,7 +71,8 @@ export default function BasicModal() {
             id="modal-modal-description"
             variant="h6"
             component="h2"
-            textAlign={"center"}>
+            textAlign={"center"}
+          >
             Text
           </Typography>
           <Box
@@ -66,7 +83,8 @@ export default function BasicModal() {
               alignContent: "center",
               border: "1px dashed grey",
               textAlign: "center",
-            }}>
+            }}
+          >
             Video
           </Box>
           <Button
@@ -88,7 +106,9 @@ export default function BasicModal() {
                 boxShadow: "none",
                 border: "1px solid",
               },
-            }}>
+            }}
+            onClick={handleClose} // close the modal
+          >
             Back to calendar
           </Button>
         </Box>
