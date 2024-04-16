@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -27,6 +27,7 @@ const VisuallyHiddenInput = styled("input")({
 function Background({ setBackgoroundStyles }) {
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState("white");
+  const hiddenFileInput = useRef(null);
 
   useEffect(() => {
     setBackgoroundStyles({
@@ -47,10 +48,17 @@ function Background({ setBackgoroundStyles }) {
       const file = event.target.files[0];
       console.log(file);
       // You can now use the file object for further processing
+      const url = URL.createObjectURL(file);
+      setBackgoroundStyles({
+        backgroundImage: `url(${url})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      });
     };
 
     return (
       <Button
+        onClick={() => hiddenFileInput.current.click()}
         variant="outlined"
         component="label"
         role={undefined}
@@ -67,7 +75,11 @@ function Background({ setBackgoroundStyles }) {
         }}
       >
         Upload File
-        <VisuallyHiddenInput type="file" onChange={handleUpload} />
+        <VisuallyHiddenInput
+          type="file"
+          onChange={handleUpload}
+          ref={hiddenFileInput}
+        />
       </Button>
     );
   }
