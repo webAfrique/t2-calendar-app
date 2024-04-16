@@ -13,6 +13,7 @@ import WidthHeight from "../component/hatchEditor/WidthHeight";
 // import Shapes from "../component/editor/Shapes";
 import TextEditor from "../component/hatchEditor/TextEditor";
 import BasicModal from "../component/hatchEditor/BasicModal";
+import HatchNavigation from "../component/hatchEditor/HatchNavigation";
 
 const drawerWidth = 350;
 
@@ -49,6 +50,7 @@ function Editor() {
             open
           >
             {/* please place your single hatch menu components below */}
+            <HatchNavigation hatchNumber={hatchNumber} />
             <WidthHeight setHatchDimensions={setHatchDimensions} />
             <TextEditor
               setHatchTextStyles={setHatchTextStyles}
@@ -69,7 +71,8 @@ function Editor() {
               <Shapes setShape={setShape} shape={shape} /> */}
             </>
 
-            <Button
+            {/* maybe we don't need this button as changes will be tracked by redux */}
+            {/*        <Button
               variant="contained"
               sx={{
                 display: "block",
@@ -90,7 +93,7 @@ function Editor() {
               }}
             >
               Save
-            </Button>
+            </Button> */}
 
             {/* this button below will be rendered conditionally */}
             {/*   <Button
