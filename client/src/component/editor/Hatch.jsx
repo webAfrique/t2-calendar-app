@@ -2,16 +2,19 @@ import Draggable from "react-draggable";
 import { Box, Card, Typography } from "@mui/material";
 import Star from "./Star";
 
-const ShapedBox = ({ date, shape }) => {
+const Hatch = ({ date, shape, hatchDimensions }) => {
   const isCircle = shape === "Circle";
   const isStar = shape === "Star";
+  const { width, height } = hatchDimensions;
 
   const style = {
     border: "1px dotted #333",
-    width: "100px",
-    height: "100px",
+    width: width,
+    height: height,
     borderRadius: isCircle ? "50%" : "0",
   }; // default style
+
+  console.log("style", style);
 
   if (isStar) {
     return (
@@ -41,18 +44,14 @@ const ShapedBox = ({ date, shape }) => {
   } // if shape is Star
 
   return (
-    <Card style={style}>
-      <Typography variant="h6" style={{ textAlign: "center", color: "grey" }}>
-        {date}
-      </Typography>
-    </Card>
+    <Draggable>
+      <Card style={style}>
+        <Typography variant="h6" style={{ textAlign: "center", color: "grey" }}>
+          {date}
+        </Typography>
+      </Card>
+    </Draggable>
   ); // if shape is Square or Circle
 };
-
-const Hatch = ({ date, shape }) => (
-  <Draggable>
-    <ShapedBox date={date} shape={shape} />
-  </Draggable>
-);
 
 export default Hatch;
