@@ -148,76 +148,105 @@ function Header() {
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
-              <Link to="/">
-                <Button
-                  onClick={() => auth.signOut()}
-                  variant="contained"
-                  sx={{
-                    width: "100px",
-                    backgroundColor: "#476C92",
-                    color: "white",
-                    borderRadius: "30px",
-                    textTransform: "capitalize",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#476C92",
-                      borderColor: "#476C92",
-                      boxShadow: "none",
-                      border: "1px solid",
-                    },
-                  }}
-                >
-                  Log out
-                </Button>
-              </Link>
+              <>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                  <Typography
+                    style={{
+                      color: "#00a8cd",
+                    }}
+                  >
+                    {user.displayName ? user.displayName : user.email}
+                  </Typography>
+                </Box>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                  <Link
+                    to="/user"
+                    style={{
+                      color: "#00a8cd",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Calendars
+                  </Link>
+                </Box>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                  <Link to="/">
+                    <Button
+                      onClick={() => auth.signOut()}
+                      variant="contained"
+                      sx={{
+                        width: "100px",
+                        backgroundColor: "#476C92",
+                        color: "white",
+                        borderRadius: "30px",
+                        textTransform: "capitalize",
+                        "&:hover": {
+                          backgroundColor: "white",
+                          color: "#476C92",
+                          borderColor: "#476C92",
+                          boxShadow: "none",
+                          border: "1px solid",
+                        },
+                      }}
+                    >
+                      Log out
+                    </Button>
+                  </Link>
+                </Box>
+              </>
             ) : (
-              <Link to="/login">
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "100px",
-                    backgroundColor: "#476C92",
-                    color: "white",
-                    borderRadius: "30px",
-                    textTransform: "capitalize",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#476C92",
-                      borderColor: "#476C92",
-                      boxShadow: "none",
-                      border: "1px solid",
-                    },
-                  }}
-                >
-                  Log in
-                </Button>
-              </Link>
+              <>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                  <Link to="/login">
+                    <Button
+                      variant="contained"
+                      sx={{
+                        width: "100px",
+                        backgroundColor: "#476C92",
+                        color: "white",
+                        borderRadius: "30px",
+                        textTransform: "capitalize",
+                        "&:hover": {
+                          backgroundColor: "white",
+                          color: "#476C92",
+                          borderColor: "#476C92",
+                          boxShadow: "none",
+                          border: "1px solid",
+                        },
+                      }}
+                    >
+                      Log in
+                    </Button>
+                  </Link>
+                </Box>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                  <Link to="/register">
+                    <Button
+                      variant="contained"
+                      sx={{
+                        width: "100px",
+                        backgroundColor: "#476C92",
+                        color: "white",
+                        borderRadius: "30px",
+                        textTransform: "capitalize",
+                        "&:hover": {
+                          backgroundColor: "white",
+                          color: "#476C92",
+                          borderColor: "#476C92",
+                          boxShadow: "none",
+                          border: "1px solid",
+                        },
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </Link>
+                </Box>
+              </>
             )}
           </Box>
 
-          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
-            <Link to="/register">
-              <Button
-                variant="contained"
-                sx={{
-                  width: "100px",
-                  backgroundColor: "#476C92",
-                  color: "white",
-                  borderRadius: "30px",
-                  textTransform: "capitalize",
-                  "&:hover": {
-                    backgroundColor: "white",
-                    color: "#476C92",
-                    borderColor: "#476C92",
-                    boxShadow: "none",
-                    border: "1px solid",
-                  },
-                }}
-              >
-                Register
-              </Button>
-            </Link>
-          </Box>
+          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}></Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
