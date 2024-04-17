@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../server/firebase";
 import { Box, Button, Typography } from "@mui/material";
@@ -39,6 +40,11 @@ function User() {
     fetchCalendars();
   }, []);
 
+  // if user is not logged in, redirect to login page
+  if (user === null) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <Box
       className="user-dashboard"
@@ -48,7 +54,8 @@ function User() {
         alignItems: "center",
         minHeight: "70vh",
         justifyContent: "center",
-      }}>
+      }}
+    >
       {" "}
       <UserAvatar />
       <Typography variant="body1" sx={{ my: 2 }}>
@@ -60,7 +67,8 @@ function User() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-          }}>
+          }}
+        >
           <Typography variant="h5" sx={{ textAlign: "center", mt: 5 }}>
             Your calendars
           </Typography>
@@ -70,13 +78,15 @@ function User() {
                 {calendars.map((calendar) => (
                   <TableRow
                     key={calendar.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
                     <TableCell component="th" scope="row">
                       <Button
                         component={Link}
                         to={`/calendars/${calendar.id}/view`}
                         variant="contained"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         {calendar.name}
                       </Button>
                     </TableCell>
@@ -86,7 +96,8 @@ function User() {
                         to={`/calendars/${calendar.id}/view`}
                         color="primary"
                         aria-label="view calendar"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         <VisibilityOutlinedIcon />
                       </IconButton>
                       <IconButton
@@ -94,7 +105,8 @@ function User() {
                         to={`/calendars/${calendar.id}/edit`}
                         color="primary"
                         aria-label="edit calendar"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         <EditOutlinedIcon />
                       </IconButton>
                       <IconButton
@@ -102,7 +114,8 @@ function User() {
                         to={`/calendars/${calendar.id}/delete`}
                         color="primary"
                         aria-label="delete calendar"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         <DeleteOutlineOutlinedIcon />
                       </IconButton>
                       <IconButton
@@ -110,7 +123,8 @@ function User() {
                         to={`/calendars/${calendar.id}/like`}
                         color="primary"
                         aria-label="like calendar"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         <FavoriteBorderOutlinedIcon />
                       </IconButton>
                       <IconButton
@@ -118,7 +132,8 @@ function User() {
                         to={`/calendars/${calendar.id}/share`}
                         color="primary"
                         aria-label="share calendar"
-                        sx={{ mx: 1 }}>
+                        sx={{ mx: 1 }}
+                      >
                         <ShareIcon />
                       </IconButton>
                     </TableCell>
@@ -163,7 +178,8 @@ function User() {
                     boxShadow: "none",
                     border: "1px solid",
                   },
-                }}>
+                }}
+              >
                 Create New
               </Button>
             </Link>
@@ -178,7 +194,8 @@ function User() {
             alignItems: "center",
             minHeight: "50vh",
             justifyContent: "center",
-          }}>
+          }}
+        >
           <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
             You have no calendars
           </Typography>
@@ -201,7 +218,8 @@ function User() {
                     boxShadow: "none",
                     border: "1px solid",
                   },
-                }}>
+                }}
+              >
                 Create
               </Button>
             </Link>

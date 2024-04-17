@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { auth } from "../../../server/firebase";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
@@ -28,6 +31,11 @@ function Editor() {
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
+
+  // if user is not logged in, redirect to login page
+  if (!auth.currentUser) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
