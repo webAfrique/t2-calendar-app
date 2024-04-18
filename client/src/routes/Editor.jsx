@@ -68,7 +68,7 @@ function Editor() {
               setInputHatchText={setInputHatchText}
             />
             <Video onVideoAdd={handleAddVideo} /> 
-            <BasicModal hatchNumber={hatchNumber} />
+            <BasicModal hatchNumber={hatchNumber}  videoURL={onVideoAdd}/>
 
             {/* code below will be later set conditionally */}
             <>
