@@ -17,6 +17,7 @@ import WidthHeight from "../component/hatchEditor/WidthHeight";
 import TextEditor from "../component/hatchEditor/TextEditor";
 import BasicModal from "../component/hatchEditor/BasicModal";
 import HatchNavigation from "../component/hatchEditor/HatchNavigation";
+import Video from "../component/hatchEditor/Video";
 
 const drawerWidth = 350;
 
@@ -31,6 +32,7 @@ function Editor() {
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
+  const [onVideoAdd, handleAddVideo] = useState("");
 
   // if user is not logged in, redirect to login page
   if (!auth.currentUser) {
@@ -65,6 +67,7 @@ function Editor() {
               inputHatchText={inputHatchText}
               setInputHatchText={setInputHatchText}
             />
+            <Video onVideoAdd={handleAddVideo} /> 
             <BasicModal hatchNumber={hatchNumber} />
 
             {/* code below will be later set conditionally */}
