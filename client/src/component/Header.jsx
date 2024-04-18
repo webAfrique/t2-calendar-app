@@ -149,24 +149,38 @@ function Header() {
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
               <>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                <Box
+                  sx={{
+                    p: 0,
+                    mx: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "30px",
+                  }}
+                >
                   <Typography
                     style={{
-                      color: "#00a8cd",
+                      color: "#476C92",
+                      fontWeight: "bold",
                     }}
                   >
-                    {user.displayName ? user.displayName : user.email}
+                    Welcome, {user.displayName ? user.displayName : user.email}!
                   </Typography>
-                </Box>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+
                   <Link
                     to="/user"
                     style={{
-                      color: "#00a8cd",
                       textDecoration: "none",
                     }}
                   >
-                    Calendars
+                    <Typography
+                      style={{
+                        color: "#476C92",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Calendars
+                    </Typography>
                   </Link>
                 </Box>
                 <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
