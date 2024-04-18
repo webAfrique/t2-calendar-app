@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -19,14 +19,19 @@ import { MuiColorInput } from "mui-color-input";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 
 // For the react/prop-types rule/ validation/ typechecking/ eslint error:
 
 TextEditorMenu.propTypes = {
-  setTitleStyles: PropTypes.func.isRequired,
-  inputText: PropTypes.string.isRequired,
-  setInputText: PropTypes.func.isRequired,
+  inputHatchTitle: PropTypes.string.isRequired,
+  setInputHatchTitle: PropTypes.func.isRequired,
+  inputHatchText: PropTypes.string.isRequired,
+  setInputHatchText: PropTypes.func.isRequired,
+  setHatchTitleStyles: PropTypes.func.isRequired,
+  setHatchTextStyles: PropTypes.func.isRequired,
 };
 
 const fontFamilies = [
@@ -39,16 +44,24 @@ const fontFamilies = [
   "Courier New",
 ];
 
-function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
+function TextEditorMenu({
+  inputHatchTitle,
+  setInputHatchTitle,
+  inputHatchText,
+  setInputHatchText,
+  setHatchTitleStyles,
+  setHatchTextStyles,
+}) {
   const [open, setOpen] = React.useState(false);
   const [alignment, setAlignment] = React.useState("");
   const [fontFamily, setFontFamily] = React.useState("Roboto");
   const [color, setColor] = React.useState("black");
   const [selectedSize, setSelectedSize] = React.useState(16);
   const [fontStyle, setFontStyle] = React.useState([]);
+  const [activeField, setActiveField] = useState("title");
 
   useEffect(() => {
-    setHatchTextStyles({
+    const newStyles = {
       textAlign: alignment,
       fontFamily: fontFamily,
       color: color,
@@ -56,15 +69,32 @@ function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
       textDecoration: fontStyle.includes("underlined") ? "underline" : "none",
       fontWeight: fontStyle.includes("bold") ? "bold" : "normal",
       fontStyle: fontStyle.includes("italic") ? "italic" : "normal",
-    });
-  }, [alignment, fontFamily, color, selectedSize, fontStyle]);
+    };
+
+    if (activeField === "text") {
+      setHatchTextStyles(newStyles);
+    } else {
+      setHatchTitleStyles(newStyles);
+    }
+  }, [
+    alignment,
+    fontFamily,
+    color,
+    selectedSize,
+    fontStyle,
+    activeField,
+    setHatchTextStyles,
+    setHatchTitleStyles,
+  ]);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const handleAlignment = (newAlignment) => {
-    setAlignment(newAlignment);
+  const handleAlignment = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
   const handleFontFamilyChange = (event) => {
@@ -81,6 +111,11 @@ function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
 
   const handleFontStyleChange = (event, newStyles) => {
     setFontStyle(newStyles);
+  };
+
+  const handleFieldToggle = (field) => {
+    setActiveField(field);
+    console.log(field, activeField);
   };
 
   const children = [
@@ -111,7 +146,12 @@ function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
           <ListItemButton onClick={handleClick}>
             <ListItemText
               primary={
-                <span style={{ fontWeight: "bold", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginLeft: 5,
+                  }}>
                   T
                 </span>
               }
@@ -122,23 +162,64 @@ function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pb: 1, pl: 2, pr: 2 }}>
-              <TextField
-                id="filled-multiline-static"
-                multiline
-                rows={4}
-                variant="filled"
-                fullWidth
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                InputProps={{
-                  disableUnderline: true, 
-                  sx: {
-                    minHeight: '100px',
-                    paddingTop: '10px',
-                    paddingBottom: '10px',
-                  },
-                }}
-              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                  width: "100%",
+                }}>
+                <ToggleButtonGroup
+                  value={activeField}
+                  exclusive
+                  onChange={(event, newField) => {
+                    if (newField !== null) {
+                      // Prevent deselecting both toggle buttons
+                      handleFieldToggle(newField);
+                    }
+                  }}
+                  fullWidth
+                  color="primary">
+                  {" "}
+                  <ToggleButton value="title" aria-label="title">
+                    Title
+                  </ToggleButton>
+                  <ToggleButton value="text" aria-label="text">
+                    Text
+                  </ToggleButton>
+                </ToggleButtonGroup>
+                {activeField === "title" && (
+                  <TextField
+                    id="outlined-basic"
+                    placeholder="Hatch title"
+                    size="small"
+                    variant="outlined"
+                    fullWidth
+                    value={inputHatchTitle}
+                    onChange={(e) => setInputHatchTitle(e.target.value)}
+                  />
+                )}
+                {activeField === "text" && (
+                  <TextField
+                    id="filled-multiline-static"
+                    placeholder="Text"
+                    multiline
+                    rows={4}
+                    variant="filled"
+                    fullWidth
+                    value={inputHatchText}
+                    onChange={(e) => setInputHatchText(e.target.value)}
+                    InputProps={{
+                      disableUnderline: true,
+                      sx: {
+                        minHeight: "100px",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                      },
+                    }}
+                  />
+                )}
+              </Box>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText primary="Alignment" />
@@ -214,6 +295,7 @@ function TextEditorMenu({ setHatchTextStyles, inputText, setInputText }) {
           </List>
         </Collapse>
       </List>
+      <Divider />
     </div>
   );
 

@@ -31,6 +31,8 @@ function Editor() {
   //const [shape, setShape] = useState("");
   const [hatchDimensions, setHatchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
+  const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
+  const [inputHatchTitle, setInputHatchTitle] = useState("");
   const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
@@ -50,8 +52,7 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -62,20 +63,21 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             <HatchNavigation hatchNumber={hatchNumber} />
             <WidthHeight setHatchDimensions={setHatchDimensions} />
             <TextEditor
               setHatchTextStyles={setHatchTextStyles}
+              setHatchTitleStyles={setHatchTitleStyles}
+              inputHatchTitle={inputHatchTitle}
+              setInputHatchTitle={setInputHatchTitle}
               inputHatchText={inputHatchText}
               setInputHatchText={setInputHatchText}
             />
             <Video onVideoAdd={handleAddVideo} />
             {/*  <BasicModal hatchNumber={hatchNumber} videoURL={onVideoAdd} /> */}
             <UploadImage setSrc={setSrc} />
-
             {/* code below will be later set conditionally */}
             <>
               {/*  <Title
@@ -95,8 +97,7 @@ function Editor() {
                 paddingBottom: 2,
                 paddingTop: 2,
                 marginTop: 2,
-              }}
-            >
+              }}>
               <Button onClick={() => setOpen(true)} sx={{ fontWeight: "bold" }}>
                 Preview hatch # {hatchNumber}
               </Button>
@@ -137,8 +138,7 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}
-        >
+          }}>
           <Hatch
             date="1"
             hatchDimensions={hatchDimensions}
@@ -151,6 +151,11 @@ function Editor() {
               open={open}
               videoURL={onVideoAdd}
               onClose={() => setOpen(false)}
+              hatchNumber={hatchNumber}
+              inputHatchTitle={inputHatchTitle}
+              inputHatchText={inputHatchText}
+              hatchTitleStyles={hatchTitleStyles}
+              hatchTextStyles={hatchTextStyles}
             />
           )}
           {/* this code will be rendered conditionally later */}

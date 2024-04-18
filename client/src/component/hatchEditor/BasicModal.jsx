@@ -24,24 +24,32 @@ function convertToEmbedURL(url) {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 }
 
-export default function BasicModal({ setOpen, src, open, videoURL }) {
+export default function BasicModal({
+  hatchTextStyles,
+  hatchTitleStyles,
+  hatchNumber,
+  inputHatchTitle,
+  inputHatchText,
+  setOpen,
+  src,
+  open,
+  videoURL,
+}) {
   return (
     <div>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, ...hatchTitleStyles }}
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            textAlign={"center"}
-          >
-            Title
+            textAlign={"center"}>
+            {inputHatchTitle}
           </Typography>
           <Box
             component="section"
@@ -64,20 +72,18 @@ export default function BasicModal({ setOpen, src, open, videoURL }) {
                 sx={{ mb: 2 }}
                 id="modal-modal-title"
                 component="h2"
-                textAlign={"center"}
-              >
+                textAlign={"center"}>
                 Image
               </Typography>
             )}
           </Box>
           <Typography
-            sx={{ my: 2 }}
+            sx={{ my: 2, ...hatchTextStyles }}
             id="modal-modal-description"
             variant="h6"
             component="h2"
-            textAlign={"center"}
-          >
-            Text
+            textAlign={"center"}>
+            {inputHatchText}
           </Typography>
           <Box
             component="section"
@@ -87,8 +93,7 @@ export default function BasicModal({ setOpen, src, open, videoURL }) {
               alignContent: "center",
               border: "1px dashed grey",
               textAlign: "center",
-            }}
-          >
+            }}>
             {videoURL && (
               <iframe
                 src={convertToEmbedURL(videoURL)}
