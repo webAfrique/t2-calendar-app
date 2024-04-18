@@ -18,6 +18,7 @@ import TextEditor from "../component/hatchEditor/TextEditor";
 import BasicModal from "../component/hatchEditor/BasicModal";
 import HatchNavigation from "../component/hatchEditor/HatchNavigation";
 import Video from "../component/hatchEditor/Video";
+import UploadImage from "../component/hatchEditor/UploadImage";
 
 const drawerWidth = 350;
 
@@ -33,6 +34,10 @@ function Editor() {
   const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
+
+  //modal window related settings
+  const [src, setSrc] = useState(null);
+  const [open, setOpen] = useState(false);
 
   // if user is not logged in, redirect to login page
   if (!auth.currentUser) {
@@ -67,8 +72,9 @@ function Editor() {
               inputHatchText={inputHatchText}
               setInputHatchText={setInputHatchText}
             />
-            <Video onVideoAdd={handleAddVideo} /> 
-            <BasicModal hatchNumber={hatchNumber}  videoURL={onVideoAdd}/>
+            <Video onVideoAdd={handleAddVideo} />
+            {/*  <BasicModal hatchNumber={hatchNumber} videoURL={onVideoAdd} /> */}
+            <UploadImage setSrc={setSrc} />
 
             {/* code below will be later set conditionally */}
             <>
@@ -82,29 +88,19 @@ function Editor() {
               <Shapes setShape={setShape} shape={shape} /> */}
             </>
 
-            {/* maybe we don't need this button as changes will be tracked by redux */}
-            {/*        <Button
-              variant="contained"
+            <Box
               sx={{
-                display: "block",
-                margin: "auto",
-                width: "100px",
-                backgroundColor: "#476C92",
-                color: "white",
-                borderRadius: "30px",
-                textTransform: "capitalize",
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "white",
-                  color: "#476C92",
-                  borderColor: "#476C92",
-                  boxShadow: "none",
-                  border: "1px solid",
-                },
+                display: "flex",
+                justifyContent: "center",
+                paddingBottom: 2,
+                paddingTop: 2,
+                marginTop: 2,
               }}
             >
-              Save
-            </Button> */}
+              <Button onClick={() => setOpen(true)} sx={{ fontWeight: "bold" }}>
+                Preview hatch # {hatchNumber}
+              </Button>
+            </Box>
 
             {/* this button below will be rendered conditionally */}
             {/*   <Button
@@ -148,6 +144,15 @@ function Editor() {
             hatchDimensions={hatchDimensions}
             setHatchNumber={setHatchNumber}
           />
+          {open && (
+            <BasicModal
+              setOpen={setOpen}
+              src={src}
+              open={open}
+              videoURL={onVideoAdd}
+              onClose={() => setOpen(false)}
+            />
+          )}
           {/* this code will be rendered conditionally later */}
           {/* <Typography paragraph style={titleStyles}>
             {inputText}

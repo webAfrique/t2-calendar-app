@@ -24,30 +24,12 @@ function convertToEmbedURL(url) {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 }
 
-export default function BasicModal({ hatchNumber, videoURL}) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+export default function BasicModal({ setOpen, src, open, videoURL }) {
   return (
     <div>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          paddingBottom: 2,
-          paddingTop: 2,
-          marginTop: 2,
-        }}
-      >
-        <Button onClick={handleOpen} sx={{ fontWeight: "bold" }}>
-          Preview hatch # {hatchNumber}
-        </Button>
-      </Box>
-
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -65,13 +47,28 @@ export default function BasicModal({ hatchNumber, videoURL}) {
             component="section"
             sx={{
               p: 3,
-              height: "100px",
+              height: "200px",
               alignContent: "center",
-              border: "1px dashed grey",
+              border: !src && "1px dashed grey", // border if no image
               textAlign: "center",
             }}
+            style={{
+              backgroundImage: `url(${src})`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }} // set the background image
           >
-            Image
+            {!src && (
+              <Typography
+                sx={{ mb: 2 }}
+                id="modal-modal-title"
+                component="h2"
+                textAlign={"center"}
+              >
+                Image
+              </Typography>
+            )}
           </Box>
           <Typography
             sx={{ my: 2 }}
@@ -92,11 +89,14 @@ export default function BasicModal({ hatchNumber, videoURL}) {
               textAlign: "center",
             }}
           >
-            {videoURL && 
-            <iframe src={convertToEmbedURL(videoURL)} 
-            title="Video" 
-            width="100%" 
-            height="100%" />}
+            {videoURL && (
+              <iframe
+                src={convertToEmbedURL(videoURL)}
+                title="Video"
+                width="100%"
+                height="100%"
+              />
+            )}
           </Box>
           <Button
             variant="contained"
@@ -118,7 +118,7 @@ export default function BasicModal({ hatchNumber, videoURL}) {
                 border: "1px solid",
               },
             }}
-            onClick={handleClose} // close the modal
+            onClick={() => setOpen(false)} // close the modal
           >
             Back to calendar
           </Button>
