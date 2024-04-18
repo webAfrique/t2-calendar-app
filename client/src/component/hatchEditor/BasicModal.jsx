@@ -17,7 +17,14 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ hatchNumber }) {
+function convertToEmbedURL(url) {
+  const regex = /(?:v=)(.*?)(?:&|$)/;
+  const match = url.match(regex);
+  const videoId = match ? match[1] : null;
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+}
+
+export default function BasicModal({ hatchNumber, videoURL}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -85,7 +92,11 @@ export default function BasicModal({ hatchNumber }) {
               textAlign: "center",
             }}
           >
-            Video
+            {videoURL && 
+            <iframe src={convertToEmbedURL(videoURL)} 
+            title="Video" 
+            width="100%" 
+            height="100%" />}
           </Box>
           <Button
             variant="contained"
