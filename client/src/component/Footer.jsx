@@ -36,19 +36,20 @@ function Footer() {
       <Box
         component="footer"
         sx={{
-          py: 3,
+          py: 1,
           px: 2,
           backgroundColor: "#fff",
           position: "fixed",
           left: 0,
           right: 0,
           bottom: 0,
-          width: "100%",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-        <Container>
+        <Container
+          maxWidth="false"
+          sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-start" }}>
           <Typography
             variant="body1"
             sx={{
@@ -61,10 +62,12 @@ function Footer() {
             Copyright &copy; {new Date().getFullYear()}
           </Typography>
         </Container>
-        <Container>
+        <Container maxWidth="false">
           <SocialIcons />
         </Container>
-        <Container>
+        <Container
+          maxWidth="false"
+          sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
           <Typography
             variant="body1"
             sx={{
