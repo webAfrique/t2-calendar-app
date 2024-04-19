@@ -22,8 +22,6 @@ function WidthHeight({ setHatchDimensions }) {
     });
   }, [hatchWidth, hatchHeight]);
 
-  console.log(hatchWidth);
-
   const handleClick = () => {
     setOpen(!open);
   };

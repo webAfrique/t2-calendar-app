@@ -1,6 +1,12 @@
 import Hatch from "./Hatch";
 
-function Calendar({ dates, shape }) {
+function Calendar({
+  dates,
+  shape,
+  setIsClicked,
+  setHatchNumber,
+  hatchDimensions,
+}) {
   const isStar = shape === "Star";
 
   const style = {
@@ -14,7 +20,14 @@ function Calendar({ dates, shape }) {
   return (
     <div style={style}>
       {dates.map((date) => (
-        <Hatch key={date} date={date} shape={shape} />
+        <Hatch
+          key={date}
+          date={date}
+          shape={shape}
+          setIsClicked={setIsClicked}
+          setHatchNumber={setHatchNumber}
+          hatchDimensions={hatchDimensions}
+        />
       ))}
     </div>
   );

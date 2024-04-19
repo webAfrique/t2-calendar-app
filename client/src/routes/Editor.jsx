@@ -1,34 +1,34 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { auth } from "../../../server/firebase";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
-//import Typography from "@mui/material/Typography";
-// import Title from "../component/editor/Title";
-// import DateCalendar from "../component/editor/DateCalendar";
-//import Calendar from "../component/editor/Calender";
-// import Background from "../component/editor/Background";
+import Typography from "@mui/material/Typography";
+import Title from "../component/editor/Title";
+import DateCalendar from "../component/editor/DateCalendar";
+import Calendar from "../component/editor/Calender";
+import Background from "../component/editor/Background";
 import { Divider } from "@mui/material";
 import Hatch from "../component/editor/Hatch";
 import WidthHeight from "../component/hatchEditor/WidthHeight";
-// import Shapes from "../component/editor/Shapes";
+import Shapes from "../component/editor/Shapes";
 import TextEditor from "../component/hatchEditor/TextEditor";
 import BasicModal from "../component/hatchEditor/BasicModal";
 import HatchNavigation from "../component/hatchEditor/HatchNavigation";
 import Video from "../component/hatchEditor/Video";
 import UploadImage from "../component/hatchEditor/UploadImage";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 const drawerWidth = 350;
 
 function Editor() {
-  //const [titleStyles, setTitleStyles] = React.useState({});
-  //const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
-  //const [dates, setDates] = React.useState([]);
-  //const [create, setCreate] = React.useState(false);
-  //const [inputText, setInputText] = useState("");
-  //const [shape, setShape] = useState("");
+  const [titleStyles, setTitleStyles] = React.useState({});
+  const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
+  const [dates, setDates] = React.useState([]);
+  const [create, setCreate] = React.useState(false);
+  const [inputText, setInputText] = useState("");
+  const [shape, setShape] = useState("");
   const [hatchDimensions, setHatchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
@@ -36,6 +36,7 @@ function Editor() {
   const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   //modal window related settings
   const [src, setSrc] = useState(null);
@@ -52,7 +53,8 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -63,87 +65,101 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
-            <HatchNavigation hatchNumber={hatchNumber} />
-            <WidthHeight setHatchDimensions={setHatchDimensions} />
-            <TextEditor
-              setHatchTextStyles={setHatchTextStyles}
-              setHatchTitleStyles={setHatchTitleStyles}
-              inputHatchTitle={inputHatchTitle}
-              setInputHatchTitle={setInputHatchTitle}
-              inputHatchText={inputHatchText}
-              setInputHatchText={setInputHatchText}
-            />
-            <Video onVideoAdd={handleAddVideo} />
-            {/*  <BasicModal hatchNumber={hatchNumber} videoURL={onVideoAdd} /> */}
-            <UploadImage setSrc={setSrc} />
-            {/* code below will be later set conditionally */}
-            <>
-              {/*  <Title
-                setTitleStyles={setTitleStyles}
-                inputText={inputText}
-                setInputText={setInputText}
-              />
-              <DateCalendar setDates={setDates} />
-              <Background setBackgoroundStyles={setBackgoroundStyles} />
-              <Shapes setShape={setShape} shape={shape} /> */}
-            </>
+            {isClicked && (
+              <>
+                <HatchNavigation hatchNumber={hatchNumber} />
+                <WidthHeight setHatchDimensions={setHatchDimensions} />
+                <TextEditor
+                  setHatchTextStyles={setHatchTextStyles}
+                  setHatchTitleStyles={setHatchTitleStyles}
+                  inputHatchTitle={inputHatchTitle}
+                  setInputHatchTitle={setInputHatchTitle}
+                  inputHatchText={inputHatchText}
+                  setInputHatchText={setInputHatchText}
+                />
+                <UploadImage setSrc={setSrc} />
+                <Video onVideoAdd={handleAddVideo} />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    paddingBottom: 2,
+                    paddingTop: 2,
+                    marginTop: 2,
+                    gap: 2,
+                  }}
+                >
+                  <Button
+                    onClick={() => setOpen(true)}
+                    sx={{ fontWeight: "bold" }}
+                  >
+                    Preview hatch # {hatchNumber}
+                  </Button>
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                paddingBottom: 2,
-                paddingTop: 2,
-                marginTop: 2,
-              }}>
-              <Button onClick={() => setOpen(true)} sx={{ fontWeight: "bold" }}>
-                Preview hatch # {hatchNumber}
-              </Button>
-            </Box>
+                  <Button color="primary" onClick={() => setIsClicked(false)}>
+                    <ExitToAppOutlinedIcon
+                      style={{ transform: "scaleX(-1)", marginRight: "10px" }}
+                    />
+                    Calendar
+                  </Button>
+                </Box>
+              </>
+            )}
+            {/* code below will be shown when no hatches are clicked*/}
+            {!isClicked && (
+              <>
+                <Title
+                  setTitleStyles={setTitleStyles}
+                  inputText={inputText}
+                  setInputText={setInputText}
+                />
+                <DateCalendar setDates={setDates} />
+                <Background setBackgoroundStyles={setBackgoroundStyles} />
+                <Shapes setShape={setShape} shape={shape} />
 
-            {/* this button below will be rendered conditionally */}
-            {/*   <Button
-              variant="contained"
-              sx={{
-                display: "block",
-                margin: "auto",
-                width: "100px",
-                backgroundColor: "#476C92",
-                color: "white",
-                borderRadius: "30px",
-                textTransform: "capitalize",
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "white",
-                  color: "#476C92",
-                  borderColor: "#476C92",
-                  boxShadow: "none",
-                  border: "1px solid",
-                },
-              }}
-              onClick={() => setCreate(true)}
-            >
-              Create
-            </Button> */}
+                {/* this button below will be rendered conditionally */}
+                <Button
+                  variant="contained"
+                  sx={{
+                    display: "block",
+                    margin: "auto",
+                    width: "100px",
+                    backgroundColor: "#476C92",
+                    color: "white",
+                    borderRadius: "30px",
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#476C92",
+                      borderColor: "#476C92",
+                      boxShadow: "none",
+                      border: "1px solid",
+                    },
+                  }}
+                  onClick={() => setCreate(true)}
+                >
+                  Create
+                </Button>
+              </>
+            )}
           </Drawer>
         </Box>
 
         <Box
-          /*    style={backgoroundStyles} */
+          style={backgoroundStyles}
           component="main"
           sx={{
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
-            height: "100vh",
-          }}>
-          <Hatch
-            date="1"
-            hatchDimensions={hatchDimensions}
-            setHatchNumber={setHatchNumber}
-          />
+            height: `calc(100vh - 110px)`,
+          }}
+        >
           {open && (
             <BasicModal
               setOpen={setOpen}
@@ -159,18 +175,32 @@ function Editor() {
             />
           )}
           {/* this code will be rendered conditionally later */}
-          {/* <Typography paragraph style={titleStyles}>
-            {inputText}
+
+          <Typography paragraph style={titleStyles}>
+            {!inputText ? (
+              <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
+                Calendar name
+              </Typography>
+            ) : (
+              inputText
+            )}
           </Typography>
           <Box>
             {create ? ( // if create is true, render Canvas component
-              <Calendar dates={dates} shape={shape} />
+              <Calendar
+                dates={dates}
+                shape={shape}
+                setIsClicked={setIsClicked}
+                setHatchNumber={setHatchNumber}
+                hatchDimensions={hatchDimensions}
+                setHatchDimensions={setHatchDimensions}
+              />
             ) : (
               <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
                 Click Create to see hatches
               </Typography>
             )}
-          </Box> */}
+          </Box>
         </Box>
       </Box>
     </>
