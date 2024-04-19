@@ -49,12 +49,11 @@ function Editor() {
 
   return (
     <>
-      <Divider />
+      <Divider sx={{ borderColor: "#9AC8E8" }} />
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -62,11 +61,11 @@ function Editor() {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                marginTop: "70px",
+                marginTop: "65px",
+                borderColor: "#9AC8E8",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
@@ -91,12 +90,10 @@ function Editor() {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}
-                >
+                  }}>
                   <Button
                     onClick={() => setOpen(true)}
-                    sx={{ fontWeight: "bold" }}
-                  >
+                    sx={{ fontWeight: "bold" }}>
                     Preview hatch # {hatchNumber}
                   </Button>
 
@@ -141,8 +138,7 @@ function Editor() {
                       border: "1px solid",
                     },
                   }}
-                  onClick={() => setCreate(true)}
-                >
+                  onClick={() => setCreate(true)}>
                   Create
                 </Button>
               </>
@@ -158,8 +154,7 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: `calc(100vh - 110px)`,
-          }}
-        >
+          }}>
           {open && (
             <BasicModal
               setOpen={setOpen}

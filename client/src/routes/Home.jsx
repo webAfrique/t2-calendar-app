@@ -11,7 +11,7 @@ const Home = () => {
       <Box
         sx={{
           margin: 0,
-          height: "calc(100vh - 68.5px - 44px)",
+          height: "calc(100vh - 66px - 44px)",
           backgroundImage: "url(/hero_image.jpg)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>

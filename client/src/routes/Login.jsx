@@ -40,8 +40,7 @@ export default function Login() {
       <Grid
         container
         component="main"
-        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}
-      >
+        sx={{ height: "calc(100vh - 66px - 44px)" }}>
         <CssBaseline />
         <Grid
           item
@@ -68,8 +67,7 @@ export default function Login() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-            }}
-          >
+            }}>
             <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -80,8 +78,7 @@ export default function Login() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+              sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -109,19 +106,18 @@ export default function Login() {
                 sx={{
                   mt: 3,
                   mb: 2,
-                  backgroundColor: "#9AC8E8",
-                  color: "#476C92",
+                  backgroundColor: "#476C92",
+                  color: "#FFFFFF",
                   "&:hover": {
-                    backgroundColor: "#476C92",
-                    color: "#FFFFFF",
+                    backgroundColor: "#9AC8E8",
+                    color: "#476C92",
                   },
-                }}
-              >
+                }}>
                 Log In
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
