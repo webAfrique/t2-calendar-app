@@ -16,7 +16,6 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-// import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import ShareIcon from "@mui/icons-material/Share";
 
 function User() {
@@ -26,8 +25,7 @@ function User() {
   useEffect(() => {
     // Simulate fetching calendars
     const fetchCalendars = async () => {
-      // Simulated delay to mimic fetching data
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setCalendars([
         { id: 1, name: "chokolokobangoshe" },
@@ -137,22 +135,6 @@ function User() {
                         <ShareIcon />
                       </IconButton>
                     </TableCell>
-                    {/* <TableCell align="right">
-                      <Button
-                        component={Link}
-                        to={`/calendars/${calendar.id}/view`}
-                        variant="outlined">
-                        View
-                      </Button>
-                    </TableCell> */}
-                    {/* <TableCell align="right">
-                      <Button
-                        component={Link}
-                        to={`/calendars/${calendar.id}/edit`}
-                        variant="outlined">
-                        Edit
-                      </Button>
-                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
