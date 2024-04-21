@@ -47,7 +47,8 @@ function Header() {
         backgroundColor: "#fff",
         boxShadow: "none",
         borderBottom: "2px solid #9AC8E8",
-      }}>
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/">
@@ -77,7 +78,8 @@ function Header() {
               letterSpacing: ".3rem",
               color: "#00a8cd",
               textDecoration: "none",
-            }}>
+            }}
+          >
             WIME
           </Typography>
 
@@ -88,7 +90,8 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="#00a8cd">
+              color="#00a8cd"
+            >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -107,7 +110,8 @@ function Header() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-              }}>
+              }}
+            >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -130,7 +134,8 @@ function Header() {
               letterSpacing: ".3rem",
               color: "#00a8cd",
               textDecoration: "none",
-            }}>
+            }}
+          >
             WIME
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
@@ -138,7 +143,8 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#00a8cd", display: "block" }}>
+                sx={{ my: 2, color: "#00a8cd", display: "block" }}
+              >
                 {page}
               </Button>
             ))}
@@ -153,12 +159,14 @@ function Header() {
                     display: "flex",
                     alignItems: "center",
                     gap: "30px",
-                  }}>
+                  }}
+                >
                   <Typography
                     style={{
                       color: "#476C92",
                       fontWeight: "bold",
-                    }}>
+                    }}
+                  >
                     Welcome, {user.displayName ? user.displayName : user.email}!
                   </Typography>
 
@@ -166,17 +174,19 @@ function Header() {
                     to="/user"
                     style={{
                       textDecoration: "none",
-                    }}>
+                    }}
+                  >
                     <Typography
                       style={{
                         color: "#476C92",
                         fontWeight: "bold",
-                      }}>
+                      }}
+                    >
                       Calendars
                     </Typography>
                   </Link>
                 </Box>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
                   <Link to="/">
                     <Button
                       onClick={() => auth.signOut()}
@@ -195,7 +205,8 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Log out
                     </Button>
                   </Link>
@@ -222,12 +233,13 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Log in
                     </Button>
                   </Link>
                 </Box>
-                <Box>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
                   <Link to="/register">
                     <Button
                       variant="contained"
@@ -245,7 +257,8 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Register
                     </Button>
                   </Link>
@@ -254,13 +267,12 @@ function Header() {
             )}
           </Box>
 
-          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}></Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0, display: { xs: "flex", md: "none" } }}>
+                sx={{ p: 0, display: { xs: "flex", md: "none" } }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -278,7 +290,8 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
+              onClose={handleCloseUserMenu}
+            >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
