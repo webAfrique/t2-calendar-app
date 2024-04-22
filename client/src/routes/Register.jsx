@@ -42,7 +42,7 @@ export default function Register2() {
       <Grid
         container
         component="main"
-        sx={{ height: "calc(100vh - 68.5px - 78.5px)" }}>
+        sx={{ height: "calc(100vh - 66px - 44px)" }}>
         <CssBaseline />
         <Grid
           item
@@ -143,7 +143,7 @@ export default function Register2() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/login" variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>

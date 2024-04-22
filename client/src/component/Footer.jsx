@@ -10,23 +10,36 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 function SocialIcons() {
   return (
-    <Grid item container spacing={3} justifyContent={"center"}>
-      <Grid item>
-        <Link href="#" color="inherit">
-          <FacebookIcon />
-        </Link>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+      }}>
+      <Grid
+        item
+        container
+        spacing={3}
+        justifyContent={"center"}
+        alignItems={"center"}>
+        <Grid item>
+          <Link href="#" color="inherit">
+            <FacebookIcon />
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="#" color="inherit">
+            <TwitterIcon />
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link href="#" color="inherit">
+            <InstagramIcon />
+          </Link>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Link href="#" color="inherit">
-          <TwitterIcon />
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link href="#" color="inherit">
-          <InstagramIcon />
-        </Link>
-      </Grid>
-    </Grid>
+    </Box>
   );
 }
 
@@ -36,19 +49,21 @@ function Footer() {
       <Box
         component="footer"
         sx={{
-          py: 3,
+          py: 1,
           px: 2,
           backgroundColor: "#fff",
           position: "fixed",
           left: 0,
           right: 0,
           bottom: 0,
-          width: "100%",
+          borderTop: "2px solid #9AC8E8",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}>
-        <Container>
+        <Container
+          maxWidth="false"
+          sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-start" }}>
           <Typography
             variant="body1"
             sx={{
@@ -61,10 +76,18 @@ function Footer() {
             Copyright &copy; {new Date().getFullYear()}
           </Typography>
         </Container>
-        <Container>
+        <Container
+          maxWidth="false"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
           <SocialIcons />
         </Container>
-        <Container>
+        <Container
+          maxWidth="false"
+          sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
           <Typography
             variant="body1"
             sx={{

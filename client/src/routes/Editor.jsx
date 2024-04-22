@@ -38,8 +38,6 @@ function Editor({ calendarView }) {
   const [onVideoAdd, handleAddVideo] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
-  console.log(backgoroundStyles);
-
   //modal window related settings
   const [src, setSrc] = useState(null);
   const [open, setOpen] = useState(false);
@@ -132,6 +130,7 @@ function Editor({ calendarView }) {
                     onClick={() => setOpen(true)}
                     sx={{ fontWeight: "bold" }}
                   >
+
                     Preview hatch # {hatchNumber}
                   </Button>
 
@@ -178,6 +177,7 @@ function Editor({ calendarView }) {
                   }}
                   onClick={() => setCreate(true)}
                 >
+
                   Create
                 </Button>
               </>
@@ -195,6 +195,7 @@ function Editor({ calendarView }) {
             height: `calc(100vh - 110px)`,
           }}
         >
+
           {open && (
             <BasicModal
               setOpen={setOpen}

@@ -2,7 +2,6 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../server/firebase";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -44,7 +43,11 @@ function Header() {
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "#fff", boxShadow: "none" }}
+      sx={{
+        backgroundColor: "#fff",
+        boxShadow: "none",
+        borderBottom: "2px solid #9AC8E8",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -183,7 +186,7 @@ function Header() {
                     </Typography>
                   </Link>
                 </Box>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
                   <Link to="/">
                     <Button
                       onClick={() => auth.signOut()}
@@ -192,6 +195,7 @@ function Header() {
                         width: "100px",
                         backgroundColor: "#476C92",
                         color: "white",
+                        fontWeight: "bold",
                         borderRadius: "30px",
                         textTransform: "capitalize",
                         "&:hover": {
@@ -210,12 +214,14 @@ function Header() {
               </>
             ) : (
               <>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
                   <Link to="/login">
                     <Button
                       variant="contained"
                       sx={{
+                        mx: 2,
                         width: "100px",
+                        fontWeight: "bold",
                         backgroundColor: "#476C92",
                         color: "white",
                         borderRadius: "30px",
@@ -233,12 +239,13 @@ function Header() {
                     </Button>
                   </Link>
                 </Box>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}>
+                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
                   <Link to="/register">
                     <Button
                       variant="contained"
                       sx={{
                         width: "100px",
+                        fontWeight: "bold",
                         backgroundColor: "#476C92",
                         color: "white",
                         borderRadius: "30px",
@@ -259,8 +266,6 @@ function Header() {
               </>
             )}
           </Box>
-
-          <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 2 }}></Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

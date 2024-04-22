@@ -11,7 +11,7 @@ const Home = () => {
       <Box
         sx={{
           margin: 0,
-          height: "calc(100vh - 68.5px - 76.2px)",
+          height: "calc(100vh - 66px - 44px)",
           backgroundImage: "url(/hero_image.jpg)",
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
@@ -63,6 +63,7 @@ const Home = () => {
                 height: "45px",
                 backgroundColor: "#476C92",
                 color: "white",
+                fontWeight: "bold",
                 borderRadius: "30px",
                 textTransform: "capitalize",
                 "&:hover": {
