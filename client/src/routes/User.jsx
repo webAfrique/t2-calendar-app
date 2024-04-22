@@ -78,13 +78,10 @@ function User() {
         >
           <Typography
             component="h1"
-            variant="h2"
+            variant="h5"
             sx={{
-              fontFamily: "Inter",
-              fontSize: "32px",
-              color: "#333333",
-              textAlign: "center",
-              mt: 5,
+              fontWeight: "bold",
+              marginTop: 4,
             }}
           >
             Your calendars
@@ -102,15 +99,12 @@ function User() {
                       <Typography
                         component={Link}
                         to={`/calendars/${calendar.id}/view`}
-                        variant="h4"
+                        variant="h6"
                         sx={{
                           mx: 1,
-                          fontFamily: "Inter",
-                          fontSize: "24px",
                           fontWeight: "bold",
-                          color: "#00A8CD",
-                          textAlign: "center",
-                          marginBottom: "30px",
+                          textDecoration: "none",
+                          color: "#476C92",
                         }}
                       >
                         {calendar.name}
@@ -163,22 +157,6 @@ function User() {
                         <ShareIcon />
                       </IconButton>
                     </TableCell>
-                    {/* <TableCell align="right">
-                      <Button
-                        component={Link}
-                        to={`/calendars/${calendar.id}/view`}
-                        variant="outlined">
-                        View
-                      </Button>
-                    </TableCell> */}
-                    {/* <TableCell align="right">
-                      <Button
-                        component={Link}
-                        to={`/calendars/${calendar.id}/edit`}
-                        variant="outlined">
-                        Edit
-                      </Button>
-                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
@@ -189,7 +167,7 @@ function User() {
               <Button
                 variant="contained"
                 sx={{
-                  my: 2,
+                  marginTop: 5,
                   width: "150px",
                   height: "45px",
                   backgroundColor: "#476C92",
