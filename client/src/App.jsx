@@ -9,7 +9,7 @@ import User from "./routes/User";
 import Editor from "./routes/Editor";
 
 function App() {
-  const [calendarView, setCalendarView] = useState("preview");
+  const [calendarView, setCalendarView] = useState("editor");
   return (
     <Router>
       <Routes>
