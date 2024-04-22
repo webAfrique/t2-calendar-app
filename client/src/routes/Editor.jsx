@@ -22,7 +22,7 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 const drawerWidth = 350;
 
-function Editor() {
+function Editor({ calendarView }) {
   const [titleStyles, setTitleStyles] = React.useState({});
   const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
   const [dates, setDates] = React.useState([]);
@@ -42,6 +42,38 @@ function Editor() {
   const [src, setSrc] = useState(null);
   const [open, setOpen] = useState(false);
 
+  //display calendar in preview or editor mode depending on the calendarView prop
+
+  if (calendarView === "preview") {
+    return (
+      <Box
+        style={backgoroundStyles}
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          height: `calc(100vh - 110px)`,
+          margin: "auto",
+        }}
+      >
+        <Typography paragraph style={titleStyles}>
+          {inputText}
+        </Typography>
+        <Box>
+          <Calendar
+            dates={dates}
+            shape={shape}
+            setIsClicked={setIsClicked}
+            setHatchNumber={setHatchNumber}
+            hatchDimensions={hatchDimensions}
+            setHatchDimensions={setHatchDimensions}
+          />
+        </Box>
+      </Box>
+    );
+  }
+
   // if user is not logged in, redirect to login page
   if (!auth.currentUser) {
     return <Navigate to="/login" />;
@@ -53,7 +85,8 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -65,7 +98,8 @@ function Editor() {
                 borderColor: "#9AC8E8",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
@@ -90,10 +124,13 @@ function Editor() {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}>
+                  }}
+                >
                   <Button
                     onClick={() => setOpen(true)}
-                    sx={{ fontWeight: "bold" }}>
+                    sx={{ fontWeight: "bold" }}
+                  >
+
                     Preview hatch # {hatchNumber}
                   </Button>
 
@@ -138,7 +175,9 @@ function Editor() {
                       border: "1px solid",
                     },
                   }}
-                  onClick={() => setCreate(true)}>
+                  onClick={() => setCreate(true)}
+                >
+
                   Create
                 </Button>
               </>
@@ -154,7 +193,9 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: `calc(100vh - 110px)`,
-          }}>
+          }}
+        >
+
           {open && (
             <BasicModal
               setOpen={setOpen}

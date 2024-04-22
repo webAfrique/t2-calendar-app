@@ -27,12 +27,16 @@ const VisuallyHiddenInput = styled("input")({
 function Background({ setBackgoroundStyles }) {
   const [open, setOpen] = React.useState(false);
   const [color, setColor] = React.useState("white");
+  const [imageURL, setImageURL] = React.useState("");
 
   useEffect(() => {
     setBackgoroundStyles({
       backgroundColor: color,
+      backgroundImage: `url(${imageURL})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
     });
-  }, [color]);
+  }, [color, imageURL, setBackgoroundStyles]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -48,11 +52,7 @@ function Background({ setBackgoroundStyles }) {
       console.log("file", file);
       // You can now use the file object for further processing
       const url = URL.createObjectURL(file);
-      setBackgoroundStyles({
-        backgroundImage: `url(${url})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      });
+      setImageURL(url);
     };
 
     return (

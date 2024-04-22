@@ -22,7 +22,7 @@ const Hatch = ({
     borderRadius: isCircle ? "50%" : "0",
   }; // default style
 
-  console.log("style", style);
+  //console.log("style", style);
 
   if (isStar) {
     return (
