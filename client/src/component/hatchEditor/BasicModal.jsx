@@ -88,20 +88,29 @@ export default function BasicModal({
           <Box
             component="section"
             sx={{
-              p: 3,
-              height: "100px",
+              height: "200px",
               alignContent: "center",
-              border: "1px dashed grey",
+              border: !videoURL && "1px dashed grey",
               textAlign: "center",
-            }}>
-            {videoURL && (
-              <iframe
-                src={convertToEmbedURL(videoURL)}
-                title="Video"
-                width="100%"
-                height="100%"
-              />
-            )}
+            }}
+            >
+          {videoURL ? (
+          <iframe
+              src={convertToEmbedURL(videoURL)}
+              title="Video"
+              width="100%"
+              height="100%"
+              style={{ border: 'none', padding: 0 }}
+          />
+            ) : (
+              <Typography
+              sx={{ mb: 2 }}
+              id="modal-modal-title"
+              component="h2"
+              textAlign={"center"}>
+              Video
+            </Typography>
+          )}
           </Box>
           <Button
             variant="contained"
