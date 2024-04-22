@@ -3,12 +3,19 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import EditorHeader from "../component/editor/EditorHeader";
 
-function Root() {
+function Root({ calendarView, setCalendarView }) {
   const location = useLocation();
   const isEditorPage = location.pathname.includes("/editor");
   return (
     <div>
-      {isEditorPage ? <EditorHeader /> : <Header />}
+      {isEditorPage ? (
+        <EditorHeader
+          calendarView={calendarView}
+          setCalendarView={setCalendarView}
+        />
+      ) : (
+        <Header />
+      )}
       <Outlet />
       {!isEditorPage && <Footer />}
     </div>

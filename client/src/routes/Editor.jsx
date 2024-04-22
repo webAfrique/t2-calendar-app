@@ -22,14 +22,17 @@ import UploadImage from "../component/hatchEditor/UploadImage";
 
 const drawerWidth = 350;
 
-function Editor() {
+function Editor({ calendarView }) {
   //const [titleStyles, setTitleStyles] = React.useState({});
   //const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
   //const [dates, setDates] = React.useState([]);
   //const [create, setCreate] = React.useState(false);
   //const [inputText, setInputText] = useState("");
   //const [shape, setShape] = useState("");
-  const [hatchDimensions, setHatchDimensions] = useState({});
+  const [hatchDimensions, setHatchDimensions] = useState({
+    width: "100px",
+    height: "100px",
+  });
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
   const [inputHatchTitle, setInputHatchTitle] = useState("");
@@ -40,6 +43,43 @@ function Editor() {
   //modal window related settings
   const [src, setSrc] = useState(null);
   const [open, setOpen] = useState(false);
+
+  //display calendar in preview or editor mode depending on the calendarView prop
+
+  if (calendarView === "preview") {
+    return (
+      <Box
+        /*    style={backgoroundStyles} */
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          height: "100vh",
+        }}
+      >
+        <Hatch
+          date="1"
+          hatchDimensions={hatchDimensions}
+          setHatchNumber={setHatchNumber}
+        />
+        {open && (
+          <BasicModal
+            setOpen={setOpen}
+            src={src}
+            open={open}
+            videoURL={onVideoAdd}
+            onClose={() => setOpen(false)}
+            hatchNumber={hatchNumber}
+            inputHatchTitle={inputHatchTitle}
+            inputHatchText={inputHatchText}
+            hatchTitleStyles={hatchTitleStyles}
+            hatchTextStyles={hatchTextStyles}
+          />
+        )}
+      </Box>
+    );
+  }
 
   // if user is not logged in, redirect to login page
   if (!auth.currentUser) {
@@ -52,7 +92,8 @@ function Editor() {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -63,7 +104,8 @@ function Editor() {
                 marginTop: "70px",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
             <HatchNavigation hatchNumber={hatchNumber} />
             <WidthHeight setHatchDimensions={setHatchDimensions} />
@@ -97,7 +139,8 @@ function Editor() {
                 paddingBottom: 2,
                 paddingTop: 2,
                 marginTop: 2,
-              }}>
+              }}
+            >
               <Button onClick={() => setOpen(true)} sx={{ fontWeight: "bold" }}>
                 Preview hatch # {hatchNumber}
               </Button>
@@ -138,7 +181,8 @@ function Editor() {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: "100vh",
-          }}>
+          }}
+        >
           <Hatch
             date="1"
             hatchDimensions={hatchDimensions}
