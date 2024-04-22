@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../../server/firebase";
+import { auth, getUser } from "../../../server/firebase";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,6 +24,17 @@ function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, loading, error] = useAuthState(auth);
+  const [username, setUsername] = React.useState("");
+
+  React.useEffect(() => {
+    if (user) {
+      const fetchUser = async () => {
+        const userData = await getUser(user.uid);
+        setUsername(userData.name);
+      };
+      fetchUser();
+    }
+  }, [user]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -167,7 +178,7 @@ function Header() {
                       fontWeight: "bold",
                     }}
                   >
-                    Welcome, {user.displayName ? user.displayName : user.email}!
+                    Welcome, {username}!
                   </Typography>
 
                   <Link

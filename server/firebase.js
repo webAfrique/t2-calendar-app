@@ -64,3 +64,10 @@ export const loginWithEmailAndPassword = async (email, password) => {
     alert(error.message);
   }
 };
+
+export const getUser = async(uid) => {
+  const q = query(collection(db, 'users'), where('uid', '==', uid))
+  const querySnapshot = await getDocs(q)
+  const user = querySnapshot.docs[0].data()
+  return user
+}
