@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Logo from "../../assets/WIME-logo.png";
+import Logo from "../../assets/Advent_Calendar.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Container } from "@mui/material";
 
@@ -25,12 +25,11 @@ function EditorHeader({ calendarView, setCalendarView }) {
             <Avatar
               src={Logo}
               alt="Logo"
+              variant="square"
               sx={{
                 mr: 1,
                 width: 60,
                 height: 60,
-                backgroundColor: "transparent",
-                borderRadius: "50%",
               }}
             />
           </Link>
