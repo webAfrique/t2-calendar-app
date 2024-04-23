@@ -33,7 +33,7 @@ function EditorHeader({ calendarView, setCalendarView }) {
               }}
             />
           </Link>
-
+          <Link to="/user" style={{textDecoration: "none"}}>
           <Typography
             variant="h6"
             noWrap
@@ -49,8 +49,11 @@ function EditorHeader({ calendarView, setCalendarView }) {
               textDecoration: "none",
             }}
           >
+            
             WIME
           </Typography>
+          </Link>
+          
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ p: 0, display: { md: "flex" }, mx: 2 }}>
