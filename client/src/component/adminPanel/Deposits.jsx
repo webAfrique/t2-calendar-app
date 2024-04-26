@@ -22,16 +22,16 @@ Title.propTypes = {
 export default function Deposits() {
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Total Users</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        23
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+        on 26 Apr, 2024
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          View users
         </Link>
       </div>
     </React.Fragment>

@@ -10,9 +10,15 @@ import Chart from "../component/adminPanel/Chart";
 import Deposits from "../component/adminPanel/Deposits";
 import Orders from "../component/adminPanel/Orders";
 
+import { auth } from "../../../server/firebase";
+
 const defaultTheme = createTheme();
 
 const AdminPanel = () => {
+  const user = auth.currentUser;
+  if (user) {
+    console.log(user);
+  }
   return (
     <>
       <div>

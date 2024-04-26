@@ -55,8 +55,7 @@ function Editor({ calendarView }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: `calc(100vh - 110px)`,
           margin: "auto",
-        }}
-      >
+        }}>
         <Typography paragraph style={titleStyles}>
           {inputText}
         </Typography>
@@ -85,8 +84,7 @@ function Editor({ calendarView }) {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -98,8 +96,7 @@ function Editor({ calendarView }) {
                 borderColor: "#9AC8E8",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
@@ -124,13 +121,10 @@ function Editor({ calendarView }) {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}
-                >
+                  }}>
                   <Button
                     onClick={() => setOpen(true)}
-                    sx={{ fontWeight: "bold" }}
-                  >
-
+                    sx={{ fontWeight: "bold" }}>
                     Preview hatch # {hatchNumber}
                   </Button>
 
@@ -175,9 +169,7 @@ function Editor({ calendarView }) {
                       border: "1px solid",
                     },
                   }}
-                  onClick={() => setCreate(true)}
-                >
-
+                  onClick={() => setCreate(true)}>
                   Create
                 </Button>
               </>
@@ -193,9 +185,7 @@ function Editor({ calendarView }) {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: `calc(100vh - 110px)`,
-          }}
-        >
-
+          }}>
           {open && (
             <BasicModal
               setOpen={setOpen}

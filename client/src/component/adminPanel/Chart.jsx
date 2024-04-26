@@ -4,21 +4,21 @@ import { LineChart, axisClasses } from "@mui/x-charts";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount: amount ?? null };
+// Generate Calendars Data
+function createData(week, amount) {
+  return { week, amount: amount ?? null };
 }
 
 const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00"),
+  createData("week16", 0),
+  createData("week17", 5),
+  createData("week18", 10),
+  createData("week19", 15),
+  createData("week20", 20),
+  createData("week21", 25),
+  createData("week22", 30),
+  createData("week23", 35),
+  createData("week24"),
 ];
 
 function Title(props) {
@@ -38,7 +38,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Created Calendars</Title>
       <div style={{ width: "100%", flexGrow: 1, overflow: "hidden" }}>
         <LineChart
           dataset={data}
@@ -51,20 +51,20 @@ export default function Chart() {
           xAxis={[
             {
               scaleType: "point",
-              dataKey: "time",
+              dataKey: "week",
               tickNumber: 2,
               tickLabelStyle: theme.typography.body2,
             },
           ]}
           yAxis={[
             {
-              label: "Sales ($)",
+              label: "numbers",
               labelStyle: {
                 ...theme.typography.body1,
                 fill: theme.palette.text.primary,
               },
               tickLabelStyle: theme.typography.body2,
-              max: 2500,
+              max: 50,
               tickNumber: 3,
             },
           ]}
