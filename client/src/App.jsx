@@ -8,6 +8,7 @@ import Home from "./routes/Home";
 import User from "./routes/User";
 import Editor from "./routes/Editor";
 import AdminPanel from "./routes/AdminPanel";
+import ErrorPage from "./routes/ErrorPage";
 
 function App() {
   const [calendarView, setCalendarView] = useState("editor");
@@ -26,6 +27,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="user" element={<User />} />
+          <Route path="*" element={<ErrorPage />} />
           <Route
             path="editor"
             element={<Editor calendarView={calendarView} />}
