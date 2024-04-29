@@ -49,8 +49,7 @@ function ErrorPage() {
           mb: 2,
         }}></Box>
       <Typography>
-        The page you are looking for doesn't exist or an other error occurred.{" "}
-        <br />
+        The page you are looking for doesn't exist. <br />
         <Button
           component={Link}
           to="/"
