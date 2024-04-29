@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import Instruction from "../component/Instruction";
 
 const defaultTheme = createTheme();
 
@@ -79,6 +80,7 @@ const Home = () => {
           </Link>
         </Box>
       </Box>
+      <Instruction />
     </ThemeProvider>
   );
 };

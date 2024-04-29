@@ -45,10 +45,24 @@ function Header() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    scrollToSection("instruction");
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const sectionElement = document.getElementById(sectionId);
+    const offset = 0;
+    if (sectionElement) {
+      const targetScroll = sectionElement.offsetTop - offset;
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
@@ -120,11 +134,14 @@ function Header() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
+                textDecoration: "none",
                 display: { xs: "block", md: "none" },
               }}
-            >
+            >             
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} 
+                textDecoration="none"
+                onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -149,12 +166,13 @@ function Header() {
           >
             WIME
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5, }}
+          >  
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "#00a8cd", display: "block" }}
+                onClick={handleCloseNavMenu} 
+                sx={{ my: 2, color: "#00a8cd", display: "block", textDecoration: "none"}}
               >
                 {page}
               </Button>
