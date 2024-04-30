@@ -10,17 +10,17 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import { TextField } from "@mui/material";
 
-function WidthHeight({ setHatchDimensions }) {
+function WidthHeight(/* { setHatchDimensions } */) {
   const [open, setOpen] = useState(false);
-  const [hatchWidth, setHatchWidth] = useState(100);
-  const [hatchHeight, setHatchHeight] = useState(100);
+  /*   const [hatchWidth, setHatchWidth] = useState(100);
+  const [hatchHeight, setHatchHeight] = useState(100); */
 
-  useEffect(() => {
-    setHatchDimensions({
-      width: hatchWidth,
-      height: hatchHeight,
-    });
-  }, [hatchWidth, hatchHeight]);
+  // useEffect(() => {
+  //   setHatchDimensions({
+  //     width: hatchWidth,
+  //     height: hatchHeight,
+  //   });
+  // }, [hatchWidth, hatchHeight]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -49,8 +49,8 @@ function WidthHeight({ setHatchDimensions }) {
                 }}
                 variant="standard"
                 sx={{ width: "120px" }}
-                onChange={(e) => setHatchWidth(+e.target.value)}
-                value={hatchWidth}
+                /*   onChange={(e) => setHatchWidth(+e.target.value)}
+                value={hatchWidth} */
               />
             </ListItemButton>
             <ListItemButton sx={{ pr: 0 }}>
@@ -63,8 +63,8 @@ function WidthHeight({ setHatchDimensions }) {
                 }}
                 variant="standard"
                 sx={{ width: "120px" }}
-                onChange={(e) => setHatchHeight(+e.target.value)}
-                value={hatchHeight}
+                /*  onChange={(e) => setHatchHeight(+e.target.value)}
+                value={hatchHeight} */
               />
             </ListItemButton>
           </List>

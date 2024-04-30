@@ -19,17 +19,15 @@ import HatchNavigation from "../component/hatchEditor/HatchNavigation";
 import Video from "../component/hatchEditor/Video";
 import UploadImage from "../component/hatchEditor/UploadImage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 350;
 
 function Editor({ calendarView }) {
-  const [titleStyles, setTitleStyles] = React.useState({});
   const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
-  const [dates, setDates] = React.useState([]);
   const [create, setCreate] = React.useState(false);
-  const [inputText, setInputText] = useState("");
   const [shape, setShape] = useState("");
-  const [hatchDimensions, setHatchDimensions] = useState({});
+  // const [hatchDimensions, setHastchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
   const [inputHatchTitle, setInputHatchTitle] = useState("");
@@ -37,6 +35,10 @@ function Editor({ calendarView }) {
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+
+  //regarding calendar slice
+  const calendarTitle = useSelector((state) => state.calendar.calendarTitle);
+  const calendarStyles = useSelector((state) => state.calendar.styles);
 
   //modal window related settings
   const [src, setSrc] = useState(null);
@@ -55,13 +57,13 @@ function Editor({ calendarView }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: `calc(100vh - 110px)`,
           margin: "auto",
-        }}>
-        <Typography paragraph style={titleStyles}>
-          {inputText}
+        }}
+      >
+        <Typography paragraph style={calendarStyles}>
+          {calendarTitle}
         </Typography>
         <Box>
           <Calendar
-            dates={dates}
             shape={shape}
             setIsClicked={setIsClicked}
             setHatchNumber={setHatchNumber}
@@ -84,7 +86,8 @@ function Editor({ calendarView }) {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -96,12 +99,13 @@ function Editor({ calendarView }) {
                 borderColor: "#9AC8E8",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
                 <HatchNavigation hatchNumber={hatchNumber} />
-                <WidthHeight setHatchDimensions={setHatchDimensions} />
+                <WidthHeight /* setHatchDimensions={setHatchDimensions} */ />
                 <TextEditor
                   setHatchTextStyles={setHatchTextStyles}
                   setHatchTitleStyles={setHatchTitleStyles}
@@ -121,10 +125,12 @@ function Editor({ calendarView }) {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}>
+                  }}
+                >
                   <Button
                     onClick={() => setOpen(true)}
-                    sx={{ fontWeight: "bold" }}>
+                    sx={{ fontWeight: "bold" }}
+                  >
                     Preview hatch # {hatchNumber}
                   </Button>
 
@@ -140,12 +146,8 @@ function Editor({ calendarView }) {
             {/* code below will be shown when no hatches are clicked*/}
             {!isClicked && (
               <>
-                <Title
-                  setTitleStyles={setTitleStyles}
-                  inputText={inputText}
-                  setInputText={setInputText}
-                />
-                <DateCalendar setDates={setDates} />
+                <Title />
+                <DateCalendar />
                 <Background setBackgoroundStyles={setBackgoroundStyles} />
                 <Shapes setShape={setShape} shape={shape} />
 
@@ -169,7 +171,8 @@ function Editor({ calendarView }) {
                       border: "1px solid",
                     },
                   }}
-                  onClick={() => setCreate(true)}>
+                  onClick={() => setCreate(true)}
+                >
                   Create
                 </Button>
               </>
@@ -185,7 +188,8 @@ function Editor({ calendarView }) {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: `calc(100vh - 110px)`,
-          }}>
+          }}
+        >
           {open && (
             <BasicModal
               setOpen={setOpen}
@@ -202,24 +206,24 @@ function Editor({ calendarView }) {
           )}
           {/* this code will be rendered conditionally later */}
 
-          <Typography paragraph style={titleStyles}>
-            {!inputText ? (
-              <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
-                Calendar name
-              </Typography>
-            ) : (
-              inputText
-            )}
-          </Typography>
+          {!calendarTitle ? (
+            <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
+              Calendar name
+            </Typography>
+          ) : (
+            <Typography paragraph style={calendarStyles}>
+              {calendarTitle}
+            </Typography>
+          )}
+
           <Box>
             {create ? ( // if create is true, render Canvas component
               <Calendar
-                dates={dates}
                 shape={shape}
                 setIsClicked={setIsClicked}
                 setHatchNumber={setHatchNumber}
-                hatchDimensions={hatchDimensions}
-                setHatchDimensions={setHatchDimensions}
+                /*  hatchDimensions={hatchDimensions}
+                setHatchDimensions={setHatchDimensions} */
               />
             ) : (
               <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
