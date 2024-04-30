@@ -18,6 +18,8 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-charts": "^7.3.0",
     "@mui/x-date-pickers": "^7.1.1",
+    "@reduxjs/toolkit": "^2.2.3",
+    "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.10",
     "lottie-web": "^5.12.2",
@@ -27,6 +29,7 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-firebase-hooks": "^5.1.1",
+    "react-redux": "^9.1.1",
     "react-router-dom": "^6.22.3",
     "styled-components": "^6.1.8"
   },

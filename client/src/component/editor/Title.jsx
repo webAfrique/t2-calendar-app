@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import Divider from "@mui/material/Divider";
+import React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import Toolbar from "@mui/material/Toolbar";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -21,6 +19,18 @@ import { MuiColorInput } from "mui-color-input";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
+//regarding slice below
+import { useSelector, useDispatch } from "react-redux";
+import {
+  typedTitle,
+  alignmentSet,
+  fontFamilySet,
+  colorSet,
+  fontSizeSet,
+  textDecorationSet,
+  boldSet,
+  italicSet,
+} from "../../features/calendarSlice";
 
 const fontFamilies = [
   "Roboto",
@@ -32,48 +42,46 @@ const fontFamilies = [
   "Courier New",
 ];
 
-function Title({ setTitleStyles, inputText, setInputText }) {
+function Title() {
   const [open, setOpen] = React.useState(false);
-  const [alignment, setAlignment] = React.useState("");
-  const [fontFamily, setFontFamily] = React.useState("Roboto");
-  const [color, setColor] = React.useState("black");
-  const [selectedSize, setSelectedSize] = React.useState(16);
-  const [fontStyle, setFontStyle] = React.useState([]);
 
-  useEffect(() => {
-    setTitleStyles({
-      textAlign: alignment,
-      fontFamily: fontFamily,
-      color: color,
-      fontSize: selectedSize,
-      textDecoration: fontStyle.includes("underlined") ? "underline" : "none",
-      fontWeight: fontStyle.includes("bold") ? "bold" : "normal",
-      fontStyle: fontStyle.includes("italic") ? "italic" : "normal",
-    });
-  }, [alignment, fontFamily, color, selectedSize, fontStyle, setTitleStyles]);
+  //regarding slice below
+  const dispatch = useDispatch();
+  const title = useSelector((state) => state.calendar.calendarTitle);
+  const alignment = useSelector((state) => state.calendar.styles.textAlign);
+  const fontFamily = useSelector((state) => state.calendar.styles.fontFamily);
+  const color = useSelector((state) => state.calendar.styles.color);
+  const fontSize = useSelector((state) => state.calendar.styles.fontSize);
+  console.log("alignment", alignment);
+
+  const handleHighlightChange = (event, newStyles) => {
+    if (newStyles.includes("bold")) {
+      dispatch(boldSet(newStyles));
+    } else if (newStyles.includes("italic")) {
+      dispatch(italicSet(newStyles));
+    } else if (newStyles.includes("underline")) {
+      dispatch(textDecorationSet(newStyles));
+    }
+  };
+  //create highlighted with grey for selected highlighter in menu
 
   const handleClick = () => {
     setOpen(!open);
   };
 
   const handleAlignment = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    dispatch(alignmentSet(newAlignment));
   };
-
   const handleFontFamilyChange = (event) => {
-    setFontFamily(event.target.value);
+    dispatch(fontFamilySet(event.target.value));
   };
 
   const handleColorChange = (newColor) => {
-    setColor(newColor);
+    dispatch(colorSet(newColor));
   };
 
   const handleSizeChange = (event) => {
-    setSelectedSize(event.target.value);
-  };
-
-  const handleFontStyleChange = (event, newStyles) => {
-    setFontStyle(newStyles);
+    dispatch(fontSizeSet(event.target.value));
   };
 
   const children = [
@@ -86,9 +94,9 @@ function Title({ setTitleStyles, inputText, setInputText }) {
     <ToggleButton value="right" key="right">
       <FormatAlignRightIcon />
     </ToggleButton>,
-    <ToggleButton value="justify" key="justify">
+    /*  <ToggleButton value="justify" key="justify">
       <FormatAlignJustifyIcon />
-    </ToggleButton>,
+    </ToggleButton>, */
   ];
 
   const control = {
@@ -100,7 +108,6 @@ function Title({ setTitleStyles, inputText, setInputText }) {
   const titleMenu = (
     <div>
       <List>
-        {/* Title list item */}
         <ListItem disablePadding>
           <ListItemButton onClick={handleClick}>
             <ListItemText
@@ -121,16 +128,18 @@ function Title({ setTitleStyles, inputText, setInputText }) {
                 size="small"
                 variant="outlined"
                 fullWidth
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
+                value={title}
+                onChange={(e) => dispatch(typedTitle(e.target.value))}
               />
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText primary="Alignment" />
               <ToggleButtonGroup
+                value={alignment}
                 size="small"
                 {...control}
-                aria-label="Small sizes">
+                aria-label="Small sizes"
+              >
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
@@ -140,7 +149,8 @@ function Title({ setTitleStyles, inputText, setInputText }) {
                 value={fontFamily}
                 size="small"
                 onChange={handleFontFamilyChange}
-                sx={{ padding: 0 }}>
+                sx={{ padding: 0 }}
+              >
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -153,7 +163,7 @@ function Title({ setTitleStyles, inputText, setInputText }) {
 
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "100px" }}
+                sx={{ padding: 0, maxWidth: "120px" }}
                 format="hex"
                 value={color}
                 onChange={handleColorChange}
@@ -162,10 +172,11 @@ function Title({ setTitleStyles, inputText, setInputText }) {
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText primary="Size" />
               <Select
-                value={selectedSize}
+                value={fontSize}
                 size="small"
                 onChange={handleSizeChange}
-                sx={{ minWidth: "80px", padding: 0 }}>
+                sx={{ minWidth: "80px", padding: 0 }}
+              >
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -182,16 +193,17 @@ function Title({ setTitleStyles, inputText, setInputText }) {
               <ListItemText primary="Font Style" />
               <ToggleButtonGroup
                 size="small"
-                value={fontStyle}
-                onChange={handleFontStyleChange}
-                aria-label="text formatting">
+                /*  value={highlights} */
+                aria-label="text formatting"
+                onChange={handleHighlightChange}
+              >
                 <ToggleButton value="bold" aria-label="bold">
                   <FormatBoldIcon />
                 </ToggleButton>
                 <ToggleButton value="italic" aria-label="italic">
                   <FormatItalicIcon />
                 </ToggleButton>
-                <ToggleButton value="underlined" aria-label="underlined">
+                <ToggleButton value="underline" aria-label="underline">
                   <FormatUnderlinedIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
