@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //initial state
 const initialState = {
-  calendarTitle: "",
+  title: "",
   styles: {
     textAlign: "",
     fontFamily: "Roboto",
@@ -31,7 +31,7 @@ const calendarSlice = createSlice({
   reducers: {
     //action - individual state transitions
     typedTitle: (state, action) => {
-      state.calendarTitle = action.payload;
+      state.title = action.payload;
     },
     alignmentSet: (state, action) => {
       state.styles.textAlign = action.payload;
