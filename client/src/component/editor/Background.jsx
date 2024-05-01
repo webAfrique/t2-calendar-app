@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,58 +9,50 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import { MuiColorInput } from "mui-color-input";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import {
+  backgroundImageSet,
+  backgroundColorSet,
+  backgroundFileNameSet,
+  backgroundFileNameDelete,
+  backgroundImageDelete,
+} from "../../features/calendarSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
-
-function Background({ setBackgoroundStyles }) {
+function Background() {
   const [open, setOpen] = React.useState(false);
-  const [color, setColor] = React.useState("white");
-  const [imageURL, setImageURL] = React.useState("");
-  const [file, setFile] = useState(null);
-
-  useEffect(() => {
-    setBackgoroundStyles({
-      backgroundColor: color,
-      backgroundImage: `url(${imageURL})`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-    });
-  }, [color, imageURL, setBackgoroundStyles]);
+  const color = useSelector((state) => state.calendar.background.color);
+  const fileName = useSelector((state) => state.calendar.background.fileName);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const handleResetColor = () => {
+    color !== "white" && dispatch(backgroundColorSet("white"));
+  };
+
   const handleColorChange = (newColor) => {
-    setColor(newColor);
+    dispatch(backgroundColorSet(newColor));
   };
   const deleteHandler = () => {
-    setImageURL("");
-    setFile(null);
+    dispatch(backgroundFileNameDelete());
+    dispatch(backgroundImageDelete());
   };
 
   function FileUploadButton() {
     const handleUpload = (event) => {
       const file = event.target.files[0];
-      setFile(file.name);
+      dispatch(backgroundFileNameSet(file.name));
+
       console.log("file", file);
+
       // You can now use the file object for further processing
       const url = URL.createObjectURL(file);
-      setImageURL(url);
+      dispatch(backgroundImageSet(url));
     };
 
     return (
@@ -116,18 +108,21 @@ function Background({ setBackgoroundStyles }) {
                 justifyContent: "center",
               }}
             >
-              <Typography variant="body1">{file}</Typography>
-              {file && (
+              <Typography variant="body1">{fileName}</Typography>
+              {fileName && (
                 <IconButton onClick={deleteHandler}>
                   <ClearIcon />
                 </IconButton>
               )}
             </Box>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Background color" />
+              <ListItemText
+                primary="Background color"
+                onClick={handleResetColor}
+              />
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "140px" }}
+                sx={{ padding: 0, maxWidth: "138px" }}
                 format="hex"
                 value={color}
                 onChange={handleColorChange}
