@@ -25,7 +25,6 @@ const drawerWidth = 350;
 
 function Editor({ calendarView }) {
   const [create, setCreate] = React.useState(false);
-  const [shape, setShape] = useState("");
   // const [hatchDimensions, setHastchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
@@ -71,7 +70,6 @@ function Editor({ calendarView }) {
         </Typography>
         <Box>
           <Calendar
-            shape={shape}
             setIsClicked={setIsClicked}
             setHatchNumber={setHatchNumber}
             hatchDimensions={hatchDimensions}
@@ -156,7 +154,7 @@ function Editor({ calendarView }) {
                 <Title />
                 <DateCalendar />
                 <Background />
-                <Shapes setShape={setShape} shape={shape} />
+                <Shapes />
 
                 {/* this button below will be rendered conditionally */}
                 <Button
@@ -226,7 +224,6 @@ function Editor({ calendarView }) {
           <Box>
             {create ? ( // if create is true, render Canvas component
               <Calendar
-                shape={shape}
                 setIsClicked={setIsClicked}
                 setHatchNumber={setHatchNumber}
                 /*  hatchDimensions={hatchDimensions}

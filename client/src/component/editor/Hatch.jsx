@@ -1,14 +1,10 @@
 import Draggable from "react-draggable";
 import { Box, Card, Typography } from "@mui/material";
 import Star from "./Star";
+import { useSelector } from "react-redux";
 
-const Hatch = ({
-  date,
-  shape,
-  setIsClicked,
-  hatchDimensions,
-  setHatchNumber,
-}) => {
+const Hatch = ({ date, setIsClicked, hatchDimensions, setHatchNumber }) => {
+  const shape = useSelector((state) => state.calendar.shape);
   const isCircle = shape === "Circle";
   const isStar = shape === "Star";
   //const { width, height } = hatchDimensions;
@@ -20,9 +16,10 @@ const Hatch = ({
     width: "100px",
     height: "100px",
     borderRadius: isCircle ? "50%" : "0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }; // default style
-
-  //console.log("style", style);
 
   if (isStar) {
     return (
@@ -66,7 +63,12 @@ const Hatch = ({
           setHatchNumber(date);
         }}
       >
-        <Typography variant="h6" style={{ textAlign: "center", color: "grey" }}>
+        <Typography
+          variant="h6"
+          style={{
+            color: "grey",
+          }}
+        >
           {date}
         </Typography>
       </Card>
