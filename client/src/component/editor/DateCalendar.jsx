@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { DateRange } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Divider from "@mui/material/Divider";
@@ -11,18 +10,12 @@ import ListItemText from "@mui/material/ListItemText";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { datesSet } from "../../features/calendarSlice";
 
 const DateCalendar = () => {
   const dispatch = useDispatch();
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: "selection",
-    },
-  ]);
+  const range = useSelector((state) => state.calendar.calendarRange);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -30,7 +23,6 @@ const DateCalendar = () => {
   };
 
   const handleSelect = (ranges) => {
-    setRange([ranges.selection]);
     dispatch(datesSet(ranges));
   };
 
