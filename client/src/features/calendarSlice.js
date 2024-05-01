@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addDays } from "date-fns";
 
 //initial state
 const initialState = {
@@ -13,6 +14,13 @@ const initialState = {
     fontStyle: "normal",
   },
   dates: [],
+  calendarRange: [
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ],
   background: {
     color: "white",
     imageURL: "",
@@ -59,14 +67,19 @@ const calendarSlice = createSlice({
     },
     datesSet: (state, action) => {
       const dates = [];
-      const startDate = action.payload.selection.startDate.getDate();
-      const endDate = action.payload.selection.endDate.getDate();
+      const startDate = action.payload.selection.startDate;
+      const endDate = action.payload.selection.endDate;
 
-      for (let date = startDate; date <= endDate; date++) {
+      for (let date = startDate.getDate(); date <= endDate.getDate(); date++) {
         dates.push(date);
       }
-      state.styles.dates = dates;
-      console.log("datesSet", state.styles.dates);
+      state.dates = dates;
+      state.calendarRange = [
+        {
+          startDate: startDate,
+          endDate: endDate,
+        },
+      ];
     },
     backgroundImageSet: (state, action) => {
       state.background.imageURL = action.payload;

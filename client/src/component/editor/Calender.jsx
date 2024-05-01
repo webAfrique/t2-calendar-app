@@ -2,6 +2,7 @@ import Hatch from "./Hatch";
 import { useSelector } from "react-redux";
 
 function Calendar({ shape, setIsClicked, setHatchNumber, hatchDimensions }) {
+  const dates = useSelector((state) => state.calendar.dates);
   const isStar = shape === "Star";
 
   const style = {
@@ -12,7 +13,6 @@ function Calendar({ shape, setIsClicked, setHatchNumber, hatchDimensions }) {
     justifyContent: "space-around",
     gap: isStar ? "0" : "10px",
   };
-  const dates = useSelector((state) => state.calendar.styles.dates);
 
   return (
     <div style={style}>
