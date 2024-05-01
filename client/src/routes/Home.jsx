@@ -3,6 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Instruction from "../component/Instruction";
+import Pricing from "../component/Pricing";
 
 const defaultTheme = createTheme();
 
@@ -81,6 +82,7 @@ const Home = () => {
         </Box>
       </Box>
       <Instruction />
+      <Pricing />
     </ThemeProvider>
   );
 };

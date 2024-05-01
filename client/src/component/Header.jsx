@@ -45,7 +45,6 @@ function Header() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-    scrollToSection("instruction");
   };
 
   const handleCloseUserMenu = () => {
@@ -138,13 +137,20 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}
             >             
-              {pages.map((page) => (
-                <MenuItem key={page} 
-                textDecoration="none"
-                onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+             
+                <MenuItem sx={{ textDecoration: "none" }} 
+                onClick={() => {scrollToSection('instruction');
+                handleCloseNavMenu();
+              }} 
+                > 
+                  <Typography textAlign="center">Instruction</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem sx={{ textDecoration: "none" }} 
+                onClick={() => {scrollToSection('pricing');
+                handleCloseNavMenu();
+                }}>
+                  <Typography textAlign="center">Pricing</Typography>
+                </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -168,15 +174,18 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5, }}
           >  
-            {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu} 
+                onClick={() => scrollToSection('instruction')} 
                 sx={{ my: 2, color: "#00a8cd", display: "block", textDecoration: "none"}}
               >
-                {page}
+                Instruction
               </Button>
-            ))}
+              <Button
+                onClick={() => scrollToSection('pricing')}
+                sx={{ my: 2, color: "#00a8cd", display: "block", textDecoration: "none"}}
+              >
+                Pricing
+              </Button>
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
