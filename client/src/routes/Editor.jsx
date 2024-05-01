@@ -24,7 +24,6 @@ import { useSelector } from "react-redux";
 const drawerWidth = 350;
 
 function Editor({ calendarView }) {
-  const [backgoroundStyles, setBackgoroundStyles] = React.useState({});
   const [create, setCreate] = React.useState(false);
   const [shape, setShape] = useState("");
   // const [hatchDimensions, setHastchDimensions] = useState({});
@@ -39,6 +38,14 @@ function Editor({ calendarView }) {
   //regarding calendar slice
   const calendarTitle = useSelector((state) => state.calendar.calendarTitle);
   const calendarStyles = useSelector((state) => state.calendar.styles);
+  const { color, imageURL } = useSelector((state) => state.calendar.background);
+
+  const backgoroundStyles = {
+    backgroundColor: color,
+    backgroundImage: `url(${imageURL})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  };
 
   //modal window related settings
   const [src, setSrc] = useState(null);
@@ -148,7 +155,7 @@ function Editor({ calendarView }) {
               <>
                 <Title />
                 <DateCalendar />
-                <Background setBackgoroundStyles={setBackgoroundStyles} />
+                <Background />
                 <Shapes setShape={setShape} shape={shape} />
 
                 {/* this button below will be rendered conditionally */}

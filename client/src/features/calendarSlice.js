@@ -13,6 +13,11 @@ const initialState = {
     fontStyle: "normal",
   },
   dates: [],
+  background: {
+    color: "white",
+    imageURL: "",
+    fileName: "",
+  },
 };
 
 //create a slice
@@ -62,6 +67,21 @@ const calendarSlice = createSlice({
       state.styles.dates = dates;
       console.log("datesSet", state.styles.dates);
     },
+    backgroundImageSet: (state, action) => {
+      state.background.imageURL = action.payload;
+    },
+    backgroundImageDelete: (state) => {
+      state.background.imageURL = "";
+    },
+    backgroundFileNameSet: (state, action) => {
+      state.background.fileName = action.payload;
+    },
+    backgroundFileNameDelete: (state) => {
+      state.background.fileName = "";
+    },
+    backgroundColorSet: (state, action) => {
+      state.background.color = action.payload;
+    },
   },
 });
 
@@ -78,4 +98,9 @@ export const {
   boldSet,
   italicSet,
   datesSet,
+  backgroundImageSet,
+  backgroundColorSet,
+  backgroundFileNameSet,
+  backgroundFileNameDelete,
+  backgroundImageDelete,
 } = calendarSlice.actions;
