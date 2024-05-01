@@ -35,7 +35,7 @@ function Editor({ calendarView }) {
   const [isClicked, setIsClicked] = useState(false);
 
   //regarding calendar slice
-  const calendarTitle = useSelector((state) => state.calendar.calendarTitle);
+  const calendarTitle = useSelector((state) => state.calendar.title);
   const calendarStyles = useSelector((state) => state.calendar.styles);
   const { color, imageURL } = useSelector((state) => state.calendar.background);
 

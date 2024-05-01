@@ -47,7 +47,7 @@ function Title() {
 
   //regarding slice below
   const dispatch = useDispatch();
-  const title = useSelector((state) => state.calendar.calendarTitle);
+  const title = useSelector((state) => state.calendar.title);
   const alignment = useSelector((state) => state.calendar.styles.textAlign);
   const fontFamily = useSelector((state) => state.calendar.styles.fontFamily);
   const color = useSelector((state) => state.calendar.styles.color);
