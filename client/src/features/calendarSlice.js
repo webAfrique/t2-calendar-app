@@ -18,6 +18,7 @@ const initialState = {
     imageURL: "",
     fileName: "",
   },
+  shape: "Square",
 };
 
 //create a slice
@@ -82,6 +83,9 @@ const calendarSlice = createSlice({
     backgroundColorSet: (state, action) => {
       state.background.color = action.payload;
     },
+    shapeSet: (state, action) => {
+      state.shape = action.payload;
+    },
   },
 });
 
@@ -103,4 +107,5 @@ export const {
   backgroundFileNameSet,
   backgroundFileNameDelete,
   backgroundImageDelete,
+  shapeSet,
 } = calendarSlice.actions;

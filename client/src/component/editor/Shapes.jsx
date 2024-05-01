@@ -12,6 +12,8 @@ import SquareOutlinedIcon from "@mui/icons-material/SquareOutlined";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import { Box, Divider } from "@mui/material";
+import { shapeSet } from "../../features/calendarSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const shapes = [
   { name: "Square", icon: <SquareOutlinedIcon /> },
@@ -19,14 +21,16 @@ const shapes = [
   { name: "Star", icon: <StarOutlineOutlinedIcon /> },
 ];
 
-function Shapes({ setShape, shape }) {
+function Shapes() {
   const [open, setOpen] = React.useState(false);
+  const shape = useSelector((state) => state.calendar.shape);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setOpen(!open);
   };
   const handleShapeChange = (event) => {
-    setShape(event.target.value);
+    dispatch(shapeSet(event.target.value));
   };
 
   const shapesMenu = (
