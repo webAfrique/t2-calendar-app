@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Logo from "../../assets/Advent_Calendar.png";
+import Logo from "../../assets/Advent_Calendar_Logo.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Container } from "@mui/material";
 

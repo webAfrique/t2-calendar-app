@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import Logo from "../assets/Advent_Calendar.png";
+import Logo from "../assets/Advent_Calendar_Logo.png";
 
 const pages = ["Instruction", "Pricing"];
 const settings = ["Register", "Log in"];
