@@ -23,7 +23,14 @@ const DateCalendar = () => {
   };
 
   const handleSelect = (ranges) => {
-    dispatch(datesSet(ranges));
+    dispatch(
+      datesSet({
+        selection: {
+          startDate: ranges.selection.startDate.toISOString(),
+          endDate: ranges.selection.endDate.toISOString(),
+        },
+      })
+    );
   };
 
   const DateMenu = (

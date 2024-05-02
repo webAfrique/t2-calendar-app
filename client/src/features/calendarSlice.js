@@ -16,8 +16,8 @@ const initialState = {
   dates: [],
   calendarRange: [
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      startDate: new Date().toISOString(),
+      endDate: addDays(new Date(), 1).toISOString(),
       key: "selection",
     },
   ],
@@ -67,8 +67,8 @@ const calendarSlice = createSlice({
     },
     datesSet: (state, action) => {
       const dates = [];
-      const startDate = action.payload.selection.startDate;
-      const endDate = action.payload.selection.endDate;
+      const startDate = new Date(action.payload.selection.startDate);
+      const endDate = new Date(action.payload.selection.endDate);
 
       for (let date = startDate.getDate(); date <= endDate.getDate(); date++) {
         dates.push(date);
@@ -76,8 +76,9 @@ const calendarSlice = createSlice({
       state.dates = dates;
       state.calendarRange = [
         {
-          startDate: startDate,
-          endDate: endDate,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          key: "selection",
         },
       ];
     },
