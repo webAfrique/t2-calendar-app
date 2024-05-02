@@ -20,6 +20,7 @@ import {
   backgroundImageDelete,
 } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Carousel from "./Carousel";
 
 function Background() {
   const [open, setOpen] = React.useState(false);
@@ -70,8 +71,7 @@ function Background() {
           color: "black",
 
           p: 1,
-        }}
-      >
+        }}>
         Upload File
         <input type="file" hidden onChange={handleUpload} />
       </Button>
@@ -106,8 +106,7 @@ function Background() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <Typography variant="body1">{fileName}</Typography>
               {fileName && (
                 <IconButton onClick={deleteHandler}>
@@ -127,6 +126,20 @@ function Background() {
                 value={color}
                 onChange={handleColorChange}
               />
+            </ListItemButton>
+            <ListItemButton
+              sx={{
+                pt: 1,
+                pb: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}>
+              <ListItemText
+                primary="Default images"
+                // onClick={handleResetColor}
+              />
+              <Carousel />
             </ListItemButton>
           </List>
         </Collapse>
