@@ -56,139 +56,125 @@ function User() {
       className="user-dashboard"
       sx={{
         display: "flex",
-        mt: 3,
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "70vh",
+        minHeight: "calc(100vh - 68.5px - 46px)",
         justifyContent: "center",
-      }}
-    >
-      {" "}
-      <UserAvatar />
-      <Typography variant="body1" sx={{ my: 2 }}>
-        {user ? `${username}, welcome back!` : "Loading user information..."}
-      </Typography>
+      }}>
       {calendars.length > 0 ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <>
           <Typography
-            component="h1"
-            variant="h5"
+            component="h2"
+            variant="h4"
             sx={{
+              fontFamily: "Inter",
               fontWeight: "bold",
-              marginTop: 4,
-            }}
-          >
+              color: "#476C92",
+              mt: -5,
+              mb: 5,
+            }}>
             Your calendars
           </Typography>
 
-          <TableContainer component={Paper} sx={{ my: 2 }}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableBody>
-                {calendars.map((calendar) => (
-                  <TableRow
-                    key={calendar.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <Typography
-                        component={Link}
-                        to={`/calendars/${calendar.id}/view`}
-                        variant="h6"
-                        sx={{
-                          mx: 1,
-                          fontWeight: "bold",
-                          textDecoration: "none",
-                          color: "#476C92",
-                        }}
-                      >
-                        {calendar.name}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right" sx={{ pr: 1 }}>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/view`}
-                        color="primary"
-                        aria-label="view calendar"
-                        sx={{ mx: 1 }}
-                      >
-                        <VisibilityOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/edit`}
-                        color="primary"
-                        aria-label="edit calendar"
-                        sx={{ mx: 1 }}
-                      >
-                        <EditOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/delete`}
-                        color="primary"
-                        aria-label="delete calendar"
-                        sx={{ mx: 1 }}
-                      >
-                        <DeleteOutlineOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/like`}
-                        color="primary"
-                        aria-label="like calendar"
-                        sx={{ mx: 1 }}
-                      >
-                        <FavoriteBorderOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        component={Link}
-                        to={`/calendars/${calendar.id}/share`}
-                        color="primary"
-                        aria-label="share calendar"
-                        sx={{ mx: 1 }}
-                      >
-                        <ShareIcon />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Box>
-            <Link to="/editor">
-              <Button
-                variant="contained"
-                sx={{
-                  marginTop: 5,
-                  width: "150px",
-                  height: "45px",
-                  backgroundColor: "#476C92",
-                  color: "white",
-                  fontWeight: "bold",
-                  borderRadius: "30px",
-                  textTransform: "capitalize",
-                  "&:hover": {
-                    backgroundColor: "white",
-                    color: "#476C92",
-                    borderColor: "#476C92",
-                    boxShadow: "none",
-                    border: "1px solid",
-                  },
-                }}
-              >
-                Create New
-              </Button>
-            </Link>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              minHeight: "50vh",
+            }}>
+            <TableContainer component={Paper} sx={{ my: 2 }}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableBody>
+                  {calendars.map((calendar) => (
+                    <TableRow
+                      key={calendar.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}>
+                      <TableCell component="th" scope="row">
+                        <Typography
+                          component={Link}
+                          to={`/calendars/${calendar.id}/view`}
+                          variant="h6"
+                          sx={{
+                            mx: 1,
+                            fontWeight: "bold",
+                            textDecoration: "none",
+                            color: "#00A8CD",
+                          }}>
+                          {calendar.name}
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="right" sx={{ pr: 1 }}>
+                        <IconButton
+                          component={Link}
+                          to={`/calendars/${calendar.id}/view`}
+                          aria-label="view calendar"
+                          sx={{ mx: 1, color: "#00A8CD" }}>
+                          <VisibilityOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          component={Link}
+                          to={`/calendars/${calendar.id}/edit`}
+                          aria-label="edit calendar"
+                          sx={{ mx: 1, color: "#00A8CD" }}>
+                          <EditOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          component={Link}
+                          to={`/calendars/${calendar.id}/delete`}
+                          aria-label="delete calendar"
+                          sx={{ mx: 1, color: "#00A8CD" }}>
+                          <DeleteOutlineOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          component={Link}
+                          to={`/calendars/${calendar.id}/like`}
+                          aria-label="like calendar"
+                          sx={{ mx: 1, color: "#00A8CD" }}>
+                          <FavoriteBorderOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          component={Link}
+                          to={`/calendars/${calendar.id}/share`}
+                          aria-label="share calendar"
+                          sx={{ mx: 1, color: "#00A8CD" }}>
+                          <ShareIcon />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box>
+              <Link to="/editor">
+                <Button
+                  variant="contained"
+                  sx={{
+                    mt: 5,
+                    width: "150px",
+                    height: "45px",
+                    backgroundColor: "#476C92",
+                    color: "white",
+                    fontWeight: "bold",
+                    borderRadius: "30px",
+                    textTransform: "capitalize",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#476C92",
+                      borderColor: "#476C92",
+                      boxShadow: "none",
+                      border: "1px solid",
+                    },
+                  }}>
+                  Create New
+                </Button>
+              </Link>
+            </Box>
           </Box>
-        </Box>
+        </>
       ) : (
         <Box
           className="user-dashboard"
@@ -198,9 +184,17 @@ function User() {
             alignItems: "center",
             minHeight: "50vh",
             justifyContent: "center",
-          }}
-        >
-          <Typography variant="h5" sx={{ textAlign: "center", my: 2 }}>
+          }}>
+          <Typography
+            component="h2"
+            variant="h4"
+            sx={{
+              fontFamily: "Inter",
+              fontWeight: "bold",
+              color: "#476C92",
+              mt: -5,
+              mb: 5,
+            }}>
             You have no calendars
           </Typography>
           <Box>
@@ -222,8 +216,7 @@ function User() {
                     boxShadow: "none",
                     border: "1px solid",
                   },
-                }}
-              >
+                }}>
                 Create
               </Button>
             </Link>
