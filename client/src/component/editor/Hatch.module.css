@@ -31,7 +31,7 @@
 }
 
 .door:hover .backImage {
-  background-image: url("../../assets/Advent_Calendar.png");
+  background-image: url("../../assets/Advent_Calendar_Logo.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
