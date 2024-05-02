@@ -1,7 +1,8 @@
 import Draggable from "react-draggable";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Star from "./Star";
 import { useSelector } from "react-redux";
+import styles from "./Hatch.module.css";
 
 const Hatch = ({ date, setIsClicked, hatchDimensions, setHatchNumber }) => {
   const shape = useSelector((state) => state.calendar.shape);
@@ -10,15 +11,8 @@ const Hatch = ({ date, setIsClicked, hatchDimensions, setHatchNumber }) => {
   //const { width, height } = hatchDimensions;
 
   const style = {
-    border: "1px dotted #333",
-    // width: width,
-    // height: height,
-    width: "100px",
-    height: "100px",
+    border: "1px dotted #666",
     borderRadius: isCircle ? "50%" : "0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
   }; // default style
 
   if (isStar) {
@@ -37,14 +31,14 @@ const Hatch = ({ date, setIsClicked, hatchDimensions, setHatchNumber }) => {
         >
           <Star />
           <Typography
-            variant="h6"
+            variant="h5"
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
               textAlign: "center",
-              color: "grey",
+              color: "white",
             }}
           >
             {date}
@@ -56,22 +50,22 @@ const Hatch = ({ date, setIsClicked, hatchDimensions, setHatchNumber }) => {
 
   return (
     <Draggable>
-      <Card
-        style={style}
+      <div
         onClick={() => {
           setIsClicked(true);
           setHatchNumber(date);
         }}
+        className={styles.door}
       >
-        <Typography
-          variant="h6"
-          style={{
-            color: "grey",
-          }}
-        >
-          {date}
-        </Typography>
-      </Card>
+        <div className={styles.doorFront} style={style}>
+          <div className={styles.doorNumber}>
+            <Typography variant="h5">{date}</Typography>
+          </div>
+        </div>
+        <div className={styles.doorBack}>
+          <div className={styles.backImage} style={style}></div>
+        </div>
+      </div>
     </Draggable>
   ); // if shape is Square or Circle
 };

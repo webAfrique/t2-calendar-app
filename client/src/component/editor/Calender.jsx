@@ -8,9 +8,9 @@ function Calendar({ shape, setIsClicked, setHatchNumber, hatchDimensions }) {
   const style = {
     width: "100%",
     height: "fit-content",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    display: "grid",
+    gridTemplateColumns: "repeat(5, 1fr)",
+    justifyItems: "center",
     gap: isStar ? "0" : "10px",
   };
 
