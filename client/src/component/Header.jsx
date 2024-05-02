@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../assets/Advent_Calendar_Logo.png";
 
-const pages = ["Instruction", "Pricing"];
+/* const pages = ["Instruction", "Pricing"]; */
 const settings = ["Register", "Log in"];
 
 function Header() {
@@ -56,10 +56,10 @@ function Header() {
     const offset = 0;
     if (sectionElement) {
       const targetScroll = sectionElement.offsetTop - offset;
-      sectionElement.scrollIntoView({ behavior: 'smooth' });
+      sectionElement.scrollIntoView({ behavior: "smooth" });
       window.scrollTo({
         top: targetScroll,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -136,21 +136,25 @@ function Header() {
                 textDecoration: "none",
                 display: { xs: "block", md: "none" },
               }}
-            >             
-             
-                <MenuItem sx={{ textDecoration: "none" }} 
-                onClick={() => {scrollToSection('instruction');
-                handleCloseNavMenu();
-              }} 
-                > 
-                  <Typography textAlign="center">Instruction</Typography>
-                </MenuItem>
-                <MenuItem sx={{ textDecoration: "none" }} 
-                onClick={() => {scrollToSection('pricing');
-                handleCloseNavMenu();
-                }}>
-                  <Typography textAlign="center">Pricing</Typography>
-                </MenuItem>
+            >
+              <MenuItem
+                sx={{ textDecoration: "none" }}
+                onClick={() => {
+                  scrollToSection("instruction");
+                  handleCloseNavMenu();
+                }}
+              >
+                <Typography textAlign="center">Instruction</Typography>
+              </MenuItem>
+              <MenuItem
+                sx={{ textDecoration: "none" }}
+                onClick={() => {
+                  scrollToSection("pricing");
+                  handleCloseNavMenu();
+                }}
+              >
+                <Typography textAlign="center">Pricing</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -172,20 +176,29 @@ function Header() {
           >
             WIME
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5, }}
-          >  
-              <Button
-                onClick={() => scrollToSection('instruction')} 
-                sx={{ my: 2, color: "#00a8cd", display: "block", textDecoration: "none"}}
-              >
-                Instruction
-              </Button>
-              <Button
-                onClick={() => scrollToSection('pricing')}
-                sx={{ my: 2, color: "#00a8cd", display: "block", textDecoration: "none"}}
-              >
-                Pricing
-              </Button>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
+            <Button
+              onClick={() => scrollToSection("instruction")}
+              sx={{
+                my: 2,
+                color: "#00a8cd",
+                display: "block",
+                textDecoration: "none",
+              }}
+            >
+              Instruction
+            </Button>
+            <Button
+              onClick={() => scrollToSection("pricing")}
+              sx={{
+                my: 2,
+                color: "#00a8cd",
+                display: "block",
+                textDecoration: "none",
+              }}
+            >
+              Pricing
+            </Button>
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
@@ -205,7 +218,7 @@ function Header() {
                       fontWeight: "bold",
                     }}
                   >
-                    Welcome, {username}!
+                    {username && `Welcome, ${username}!`}
                   </Typography>
 
                   <Link
