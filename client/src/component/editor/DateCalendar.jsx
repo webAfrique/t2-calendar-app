@@ -16,6 +16,7 @@ import { datesSet } from "../../features/calendarSlice";
 const DateCalendar = () => {
   const dispatch = useDispatch();
   const range = useSelector((state) => state.calendar.calendarRange);
+  console.log("range", range);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -26,8 +27,8 @@ const DateCalendar = () => {
     dispatch(
       datesSet({
         selection: {
-          startDate: ranges.selection.startDate.toISOString(),
-          endDate: ranges.selection.endDate.toISOString(),
+          startDate: ranges.selection.startDate,
+          endDate: ranges.selection.endDate,
         },
       })
     );
