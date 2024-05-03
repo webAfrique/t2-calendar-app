@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Instruction from "../component/Instruction";
@@ -23,18 +23,22 @@ const Home = () => {
           backgroundSize: "100% 100%",
           backgroundPosition: "center",
           display: "flex",
-          flexDirection: "column",
+         flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           padding: "0 50px",
         }}>
+          <Container id="home" sx={{ py: { xs: 8, sm: 16 } }}>
+            <Grid container spacing={6}>
+              <Grid item xs={12} md={8}>
+              <div>
         <Typography
           component="h1"
           variant="h2"
           gutterBottom
           sx={{
             fontFamily: "Inter",
-            fontSize: "64px",
+            fontSize: { xs: "36px", md: "64px" },
             fontWeight: "bold",
             color: "#00A8CD",
             textAlign: "center",
@@ -48,15 +52,16 @@ const Home = () => {
           gutterBottom
           sx={{
             fontFamily: "Inter",
-            fontSize: "24px",
+            fontSize: { xs: "18px", md: "24px" },
             fontWeight: "bold",
-            color: "#00A8CD",
+            color: "#476C92",
             textAlign: "center",
             marginBottom: "30px",
           }}>
           Use our platform to customise your digital advent calendar
         </Typography>
-        <Box>
+        </div>
+        <Box textAlign={"center"}>
           <Link to="/login">
             <Button
               variant="contained"
@@ -79,7 +84,11 @@ const Home = () => {
               Create Now
             </Button>
           </Link>
-        </Box>
+          </Box>
+        
+      </Grid>
+    </Grid>
+  </Container>
       </Box>
       <Instruction />
       <Pricing />
