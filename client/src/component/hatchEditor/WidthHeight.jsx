@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -9,18 +9,26 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import { TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { widthSet, heightSet } from "../../features/hatchSlice";
 
-function WidthHeight(/* { setHatchDimensions } */) {
+function WidthHeight({ hatchNumber }) {
   const [open, setOpen] = useState(false);
-  /*   const [hatchWidth, setHatchWidth] = useState(100);
-  const [hatchHeight, setHatchHeight] = useState(100); */
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setHatchDimensions({
-  //     width: hatchWidth,
-  //     height: hatchHeight,
-  //   });
-  // }, [hatchWidth, hatchHeight]);
+  const hatchWidth = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.width : 100;
+  });
+
+  const hatchHeight = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.height : 100;
+  });
 
   const handleClick = () => {
     setOpen(!open);
@@ -49,8 +57,16 @@ function WidthHeight(/* { setHatchDimensions } */) {
                 }}
                 variant="standard"
                 sx={{ width: "120px" }}
-                /*   onChange={(e) => setHatchWidth(+e.target.value)}
-                value={hatchWidth} */
+                onChange={(e) =>
+                  dispatch(
+                    widthSet({
+                      value: +e.target.value,
+                      hatchNumber: hatchNumber,
+                    })
+                  )
+                }
+                placeholder="100"
+                value={hatchWidth}
               />
             </ListItemButton>
             <ListItemButton sx={{ pr: 0 }}>
@@ -63,8 +79,16 @@ function WidthHeight(/* { setHatchDimensions } */) {
                 }}
                 variant="standard"
                 sx={{ width: "120px" }}
-                /*  onChange={(e) => setHatchHeight(+e.target.value)}
-                value={hatchHeight} */
+                onChange={(e) =>
+                  dispatch(
+                    heightSet({
+                      value: +e.target.value,
+                      hatchNumber: hatchNumber,
+                    })
+                  )
+                }
+                placeholder="100"
+                value={hatchHeight}
               />
             </ListItemButton>
           </List>

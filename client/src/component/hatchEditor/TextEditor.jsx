@@ -22,6 +22,8 @@ import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import { useDispatch, useSelector } from "react-redux";
+import { titleSet, textSet } from "../../features/hatchSlice";
 
 // For the react/prop-types rule/ validation/ typechecking/ eslint error:
 
@@ -45,20 +47,33 @@ const fontFamilies = [
 ];
 
 function TextEditorMenu({
-  inputHatchTitle,
-  setInputHatchTitle,
-  inputHatchText,
-  setInputHatchText,
+  hatchNumber,
+
   setHatchTitleStyles,
   setHatchTextStyles,
 }) {
   const [open, setOpen] = React.useState(false);
-  const [alignment, setAlignment] = React.useState("");
-  const [fontFamily, setFontFamily] = React.useState("Roboto");
-  const [color, setColor] = React.useState("black");
+  const [alignment, setAlignment] = React.useState("center");
+  const [fontFamily, setFontFamily] = React.useState("Arial");
+  const [color, setColor] = React.useState("#000");
   const [selectedSize, setSelectedSize] = React.useState(16);
   const [fontStyle, setFontStyle] = React.useState([]);
   const [activeField, setActiveField] = useState("title");
+
+  //redux
+  const dispatch = useDispatch();
+  const title = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.title : "";
+  });
+  const text = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.text : "";
+  });
 
   useEffect(() => {
     const newStyles = {
@@ -115,7 +130,6 @@ function TextEditorMenu({
 
   const handleFieldToggle = (field) => {
     setActiveField(field);
-    console.log(field, activeField);
   };
 
   const children = [
@@ -151,7 +165,8 @@ function TextEditorMenu({
                     fontWeight: "bold",
                     textAlign: "center",
                     marginLeft: 5,
-                  }}>
+                  }}
+                >
                   T
                 </span>
               }
@@ -168,7 +183,8 @@ function TextEditorMenu({
                   flexDirection: "column",
                   gap: 2,
                   width: "100%",
-                }}>
+                }}
+              >
                 <ToggleButtonGroup
                   value={activeField}
                   exclusive
@@ -179,7 +195,8 @@ function TextEditorMenu({
                     }
                   }}
                   fullWidth
-                  color="primary">
+                  color="primary"
+                >
                   {" "}
                   <ToggleButton value="title" aria-label="title">
                     Title
@@ -191,24 +208,38 @@ function TextEditorMenu({
                 {activeField === "title" && (
                   <TextField
                     id="outlined-basic"
-                    placeholder="Hatch title"
+                    placeholder="Type your title here"
                     size="small"
                     variant="outlined"
                     fullWidth
-                    value={inputHatchTitle}
-                    onChange={(e) => setInputHatchTitle(e.target.value)}
+                    value={title}
+                    onChange={(e) =>
+                      dispatch(
+                        titleSet({
+                          value: e.target.value,
+                          hatchNumber: hatchNumber,
+                        })
+                      )
+                    }
                   />
                 )}
                 {activeField === "text" && (
                   <TextField
                     id="filled-multiline-static"
-                    placeholder="Text"
+                    placeholder="Type your text here"
                     multiline
                     rows={4}
                     variant="filled"
                     fullWidth
-                    value={inputHatchText}
-                    onChange={(e) => setInputHatchText(e.target.value)}
+                    value={text}
+                    onChange={(e) =>
+                      dispatch(
+                        textSet({
+                          value: e.target.value,
+                          hatchNumber: hatchNumber,
+                        })
+                      )
+                    }
                     InputProps={{
                       disableUnderline: true,
                       sx: {
@@ -226,7 +257,8 @@ function TextEditorMenu({
               <ToggleButtonGroup
                 size="small"
                 {...control}
-                aria-label="Small sizes">
+                aria-label="Small sizes"
+              >
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
@@ -236,7 +268,8 @@ function TextEditorMenu({
                 value={fontFamily}
                 size="small"
                 onChange={handleFontFamilyChange}
-                sx={{ padding: 0 }}>
+                sx={{ padding: 0 }}
+              >
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -261,7 +294,8 @@ function TextEditorMenu({
                 value={selectedSize}
                 size="small"
                 onChange={handleSizeChange}
-                sx={{ minWidth: "80px", padding: 0 }}>
+                sx={{ minWidth: "80px", padding: 0 }}
+              >
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -280,7 +314,8 @@ function TextEditorMenu({
                 size="small"
                 value={fontStyle}
                 onChange={handleFontStyleChange}
-                aria-label="text formatting">
+                aria-label="text formatting"
+              >
                 <ToggleButton value="bold" aria-label="bold">
                   <FormatBoldIcon />
                 </ToggleButton>
