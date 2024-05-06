@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,10 +8,14 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Chart from "../component/adminPanel/Chart";
-import Deposits from "../component/adminPanel/Deposits";
 import Orders from "../component/adminPanel/Orders";
+import Link from "@mui/material/Link";
+import PropTypes from "prop-types";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
-import { auth, getUser } from "../../../server/firebase";
+import { auth, getUser, getUserCount } from "../../../server/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const defaultTheme = createTheme();
@@ -19,6 +23,7 @@ const defaultTheme = createTheme();
 const AdminPanel = () => {
   const [user, loading, error] = useAuthState(auth);
   const [userData, setUserDate] = React.useState(null);
+  const [userCount, setUserCount] = useState(null);
 
   React.useEffect(() => {
     if (user) {
@@ -28,11 +33,108 @@ const AdminPanel = () => {
       };
       fetchUser();
     }
-  }, [userData, user]);
+  }, [user]);
 
-  if (!userData) {
-    return <div>loading...</div>;
-  } else if (userData.isAdmin) {
+  useEffect(() => {
+    fetchUserCount();
+  }, [user]);
+
+  const fetchUserCount = async () => {
+    try {
+      if (user) {
+        const totalCount = await getUserCount(user.uid);
+        setUserCount(totalCount);
+        // console.log(totalCount);
+      }
+    } catch (error) {
+      console.log("Error fetching user count:", error);
+    }
+  };
+
+  function preventDefault(event) {
+    event.preventDefault();
+  }
+
+  function Title(props) {
+    return (
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        {props.children}
+      </Typography>
+    );
+  }
+
+  Title.propTypes = {
+    children: PropTypes.node,
+  };
+
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "Europe/Helsinki", // Specify the Europe/Helsinki timezone for Finland
+  };
+
+  const date = new Date().toLocaleDateString("en-US", options);
+
+  const Deposits = () => {
+    return (
+      <React.Fragment>
+        <Title>Total Users</Title>
+        <Typography component="p" variant="h4">
+          {userCount}
+        </Typography>
+        <Typography color="text.secondary" sx={{ flex: 1 }}>
+          {date}
+        </Typography>
+      </React.Fragment>
+    );
+  };
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          height: "calc(100vh - 66px - 44px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+  if (error) {
+    return (
+      <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        {error.message}
+      </Alert>
+    );
+  }
+  if (!user) {
+    // User not logged in
+    return (
+      <Box
+        sx={{
+          height: "calc(100vh - 66px - 44px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <Alert severity="warning">
+          <AlertTitle>Reminder</AlertTitle>
+          Please log in as admin to access the Admin Panel.
+        </Alert>
+      </Box>
+    );
+  } else if (!userData) {
+    // User logged in but data not fetched yet
+    return <CircularProgress />;
+  } else if (!userData.isAdmin) {
+    // User logged in but not an admin
+    return <Navigate to="/user" />;
+  } else {
     return (
       <ThemeProvider theme={defaultTheme}>
         <Container maxWidth="lg">
@@ -45,8 +147,7 @@ const AdminPanel = () => {
                   display: "flex",
                   flexDirection: "column",
                   height: 240,
-                }}
-              >
+                }}>
                 <Chart />
               </Paper>
             </Grid>
@@ -58,8 +159,7 @@ const AdminPanel = () => {
                   display: "flex",
                   flexDirection: "column",
                   height: 240,
-                }}
-              >
+                }}>
                 <Deposits />
               </Paper>
             </Grid>
@@ -73,8 +173,6 @@ const AdminPanel = () => {
         </Container>
       </ThemeProvider>
     );
-  } else {
-    return <Navigate to="/user" />;
   }
 };
 
