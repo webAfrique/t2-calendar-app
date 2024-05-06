@@ -14,6 +14,7 @@ import {
   query,
   where,
   getFirestore,
+  getCountFromServer,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -35,6 +36,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 // Get access to the project database
 export const db = getFirestore(app);
+// Get access to the collection
 
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
@@ -71,3 +73,25 @@ export const getUser = async (uid) => {
   const user = querySnapshot.docs[0].data();
   return user;
 };
+
+export const getUserCount = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const totalCount = querySnapshot.size; // Use querySnapshot.size to get the count
+    return totalCount;
+  } catch (error) {
+    console.log("Error fetching user count:", error);
+    throw error; // Rethrow the error for error handling in the caller function
+  }
+};
+
+// export const getAllUsers = async () => {
+//   try {
+//     const querySnapshot = await getDocs(collection(db, "users"));
+//     const users = querySnapshot.docs.map((doc) => doc.data());
+//     return users;
+//   } catch (error) {
+//     console.log("Error fetching users:", error);
+//     throw error;
+//   }
+// };
