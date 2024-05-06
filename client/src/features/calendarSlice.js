@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addDays } from "date-fns";
+import hatch from "./hatchObject";
 
 //initial state
 const initialState = {
@@ -71,7 +72,8 @@ const calendarSlice = createSlice({
       const endDate = new Date(action.payload.selection.endDate);
 
       for (let date = startDate.getDate(); date <= endDate.getDate(); date++) {
-        dates.push(date);
+        const updatedHatch = { ...hatch, number: date };
+        dates.push(updatedHatch);
       }
       state.dates = dates;
       state.calendarRange = [

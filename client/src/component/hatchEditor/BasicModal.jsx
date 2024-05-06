@@ -1,8 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -28,28 +28,46 @@ export default function BasicModal({
   hatchTextStyles,
   hatchTitleStyles,
   hatchNumber,
-  inputHatchTitle,
-  inputHatchText,
   setOpen,
   src,
   open,
   videoURL,
 }) {
+  const title = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.title : "";
+  });
+  console.log("title Basic", title);
+
+  const text = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.text : "";
+  });
+
   return (
     <div>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+        aria-describedby="modal-modal-description"
+      >
         <Box sx={style}>
           <Typography
-            sx={{ mb: 2, ...hatchTitleStyles }}
+            sx={{
+              mb: 2,
+              ...(title
+                ? hatchTextStyles
+                : { textAlign: "center", color: "#666", fontStyle: "italic" }),
+            }}
             id="modal-modal-title"
-            variant="h6"
             component="h2"
-            textAlign={"center"}>
-            {inputHatchTitle}
+          >
+            {title ? title : "Title"}
           </Typography>
           <Box
             component="section"
@@ -69,21 +87,31 @@ export default function BasicModal({
           >
             {!src && (
               <Typography
-                sx={{ mb: 2 }}
+                sx={{
+                  m: 2,
+                  textAlign: "center",
+                  color: "#666",
+                  fontStyle: "italic",
+                }}
                 id="modal-modal-title"
                 component="h2"
-                textAlign={"center"}>
+                textAlign={"center"}
+              >
                 Image
               </Typography>
             )}
           </Box>
           <Typography
-            sx={{ my: 2, ...hatchTextStyles }}
+            sx={{
+              m: 2,
+              ...(text
+                ? hatchTextStyles
+                : { textAlign: "center", color: "#666", fontStyle: "italic" }),
+            }}
             id="modal-modal-description"
-            variant="h6"
             component="h2"
-            textAlign={"center"}>
-            {inputHatchText}
+          >
+            {text ? text : "Text"}
           </Typography>
           <Box
             component="section"
@@ -93,24 +121,29 @@ export default function BasicModal({
               border: !videoURL && "1px dashed grey",
               textAlign: "center",
             }}
-            >
-          {videoURL ? (
-          <iframe
-              src={convertToEmbedURL(videoURL)}
-              title="Video"
-              width="100%"
-              height="100%"
-              style={{ border: 'none', padding: 0 }}
-          />
+          >
+            {videoURL ? (
+              <iframe
+                src={convertToEmbedURL(videoURL)}
+                title="Video"
+                width="100%"
+                height="100%"
+                style={{ border: "none", padding: 0 }}
+              />
             ) : (
               <Typography
-              sx={{ mb: 2 }}
-              id="modal-modal-title"
-              component="h2"
-              textAlign={"center"}>
-              Video
-            </Typography>
-          )}
+                sx={{
+                  m: 2,
+                  textAlign: "center",
+                  color: "#666",
+                  fontStyle: "italic",
+                }}
+                id="modal-modal-title"
+                component="h2"
+              >
+                Video
+              </Typography>
+            )}
           </Box>
           <Button
             variant="contained"

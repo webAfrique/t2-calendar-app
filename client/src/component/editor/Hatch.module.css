@@ -1,6 +1,4 @@
 .door {
-  width: 100px;
-  height: 100px;
   position: relative;
   cursor: pointer;
   transform-style: preserve-3d;
@@ -32,9 +30,10 @@
 
 .door:hover .backImage {
   background-image: url("../../assets/Advent_Calendar_Logo.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: white;
 }
 .door:hover .doorNumber {
   color: transparent;

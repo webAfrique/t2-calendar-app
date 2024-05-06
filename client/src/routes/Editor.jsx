@@ -10,9 +10,8 @@ import DateCalendar from "../component/editor/DateCalendar";
 import Calendar from "../component/editor/Calender";
 import Background from "../component/editor/Background";
 import { Divider } from "@mui/material";
-import Hatch from "../component/editor/Hatch";
 import WidthHeight from "../component/hatchEditor/WidthHeight";
-import Shapes from "../component/editor/Shapes";
+//import Shapes from "../component/editor/Shapes";
 import TextEditor from "../component/hatchEditor/TextEditor";
 import BasicModal from "../component/hatchEditor/BasicModal";
 import HatchNavigation from "../component/hatchEditor/HatchNavigation";
@@ -24,12 +23,8 @@ import { useSelector } from "react-redux";
 const drawerWidth = 350;
 
 function Editor({ calendarView }) {
-  const [create, setCreate] = React.useState(false);
-  // const [hatchDimensions, setHastchDimensions] = useState({});
   const [hatchTextStyles, setHatchTextStyles] = React.useState({});
   const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
-  const [inputHatchTitle, setInputHatchTitle] = useState("");
-  const [inputHatchText, setInputHatchText] = useState("");
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
   const [isClicked, setIsClicked] = useState(false);
@@ -72,8 +67,6 @@ function Editor({ calendarView }) {
           <Calendar
             setIsClicked={setIsClicked}
             setHatchNumber={setHatchNumber}
-            hatchDimensions={hatchDimensions}
-            setHatchDimensions={setHatchDimensions}
           />
         </Box>
       </Box>
@@ -110,14 +103,11 @@ function Editor({ calendarView }) {
             {isClicked && (
               <>
                 <HatchNavigation hatchNumber={hatchNumber} />
-                <WidthHeight /* setHatchDimensions={setHatchDimensions} */ />
+                <WidthHeight hatchNumber={hatchNumber} />
                 <TextEditor
+                  hatchNumber={hatchNumber}
                   setHatchTextStyles={setHatchTextStyles}
                   setHatchTitleStyles={setHatchTitleStyles}
-                  inputHatchTitle={inputHatchTitle}
-                  setInputHatchTitle={setInputHatchTitle}
-                  inputHatchText={inputHatchText}
-                  setInputHatchText={setInputHatchText}
                 />
                 <UploadImage setSrc={setSrc} />
                 <Video onVideoAdd={handleAddVideo} />
@@ -134,14 +124,32 @@ function Editor({ calendarView }) {
                 >
                   <Button
                     onClick={() => setOpen(true)}
-                    sx={{ fontWeight: "bold" }}
+                    sx={{
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                      color: "#333",
+                      fontSize: "1.1rem",
+                    }}
                   >
-                    Preview hatch # {hatchNumber}
+                    Preview {hatchNumber}
                   </Button>
 
-                  <Button color="primary" onClick={() => setIsClicked(false)}>
+                  <Button
+                    color="primary"
+                    onClick={() => setIsClicked(false)}
+                    sx={{
+                      color: "#333",
+                      textTransform: "capitalize",
+                      fontSize: "1.1rem",
+                      fontWeight: "bold",
+                    }}
+                  >
                     <ExitToAppOutlinedIcon
-                      style={{ transform: "scaleX(-1)", marginRight: "10px" }}
+                      style={{
+                        transform: "scaleX(-1)",
+                        marginRight: "10px",
+                        color: "#333",
+                      }}
                     />
                     Calendar
                   </Button>
@@ -154,32 +162,7 @@ function Editor({ calendarView }) {
                 <Title />
                 <DateCalendar />
                 <Background />
-                <Shapes />
-
-                {/* this button below will be rendered conditionally */}
-                <Button
-                  variant="contained"
-                  sx={{
-                    display: "block",
-                    margin: "auto",
-                    width: "100px",
-                    backgroundColor: "#476C92",
-                    color: "white",
-                    borderRadius: "30px",
-                    textTransform: "capitalize",
-                    fontWeight: "bold",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#476C92",
-                      borderColor: "#476C92",
-                      boxShadow: "none",
-                      border: "1px solid",
-                    },
-                  }}
-                  onClick={() => setCreate(true)}
-                >
-                  Create
-                </Button>
+                {/* <Shapes /> */}
               </>
             )}
           </Drawer>
@@ -203,8 +186,6 @@ function Editor({ calendarView }) {
               videoURL={onVideoAdd}
               onClose={() => setOpen(false)}
               hatchNumber={hatchNumber}
-              inputHatchTitle={inputHatchTitle}
-              inputHatchText={inputHatchText}
               hatchTitleStyles={hatchTitleStyles}
               hatchTextStyles={hatchTextStyles}
             />
@@ -213,7 +194,7 @@ function Editor({ calendarView }) {
 
           {!calendarTitle ? (
             <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
-              Calendar name
+              Calendar name will appear here
             </Typography>
           ) : (
             <Typography paragraph style={calendarStyles}>
@@ -222,18 +203,11 @@ function Editor({ calendarView }) {
           )}
 
           <Box>
-            {create ? ( // if create is true, render Canvas component
-              <Calendar
-                setIsClicked={setIsClicked}
-                setHatchNumber={setHatchNumber}
-                /*  hatchDimensions={hatchDimensions}
-                setHatchDimensions={setHatchDimensions} */
-              />
-            ) : (
-              <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
-                Click Create to see hatches
-              </Typography>
-            )}
+            {/* if create is true, render Canvas component */}
+            <Calendar
+              setIsClicked={setIsClicked}
+              setHatchNumber={setHatchNumber}
+            />
           </Box>
         </Box>
       </Box>
