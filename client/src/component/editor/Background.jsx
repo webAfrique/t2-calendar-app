@@ -18,6 +18,8 @@ import {
   backgroundFileNameSet,
   backgroundFileNameDelete,
   backgroundImageDelete,
+  backgroundDefaultImageSet, //import background default image set action
+  backgroundDefaultImageDelete, //import background default image delete action
 } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
@@ -26,6 +28,9 @@ function Background() {
   const [open, setOpen] = React.useState(false);
   const color = useSelector((state) => state.calendar.background.color);
   const fileName = useSelector((state) => state.calendar.background.fileName);
+  const defaultImage = useSelector(
+    (state) => state.calendar.background.defaultImage
+  );
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -42,6 +47,14 @@ function Background() {
   const deleteHandler = () => {
     dispatch(backgroundFileNameDelete());
     dispatch(backgroundImageDelete());
+  };
+
+  const handleToggleDefaultImage = (imgPath) => {
+    if (defaultImage === imgPath) {
+      dispatch(backgroundDefaultImageDelete()); // Dispatch action to remove default image
+    } else {
+      dispatch(backgroundDefaultImageSet(imgPath)); // Dispatch action to set default image
+    }
   };
 
   function FileUploadButton() {
@@ -135,11 +148,15 @@ function Background() {
                 flexDirection: "column",
                 alignItems: "flex-start",
               }}>
-              <ListItemText
-                primary="Default images"
-                // onClick={handleResetColor}
+              <ListItemText primary="Default images" />
+              <Carousel
+                handleToggleDefaultImage={handleToggleDefaultImage}
+                defaultImage={defaultImage}
               />
-              <Carousel />
+              {/* Pass defaultImage to Calendar component */}
+              {/* {defaultImage && (
+                <img src={defaultImage} alt="Default Background" />
+              )} */}
             </ListItemButton>
           </List>
         </Collapse>

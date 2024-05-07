@@ -1,13 +1,17 @@
-import * as React from "react";
+import React from "react";
 import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+import { Box, Button } from "@mui/material";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
+import { useDispatch } from "react-redux";
+import {
+  backgroundDefaultImageSet,
+  backgroundDefaultImageDelete,
+} from "../../features/calendarSlice";
 
 const images = [
   {
@@ -19,11 +23,6 @@ const images = [
     label: "Cute Dog",
     imgPath:
       "https://images.unsplash.com/photo-1609463504690-b036bc73b97e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    label: "Adorable kitten",
-    imgPath:
-      "https://plus.unsplash.com/premium_photo-1661515689830-868de1148c0a?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     label: "Christmas deer decoration",
@@ -72,10 +71,11 @@ const images = [
   },
 ];
 
-function Carousel() {
+function Carousel({ handleSaveDefaultImage, defaultImage }) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
+  const dispatch = useDispatch(); // Initialize useDispatch
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -89,6 +89,14 @@ function Carousel() {
     setActiveStep(step);
   };
 
+  const handleToggleDefaultImage = (imgPath) => {
+    if (defaultImage === imgPath) {
+      dispatch(backgroundDefaultImageDelete()); // Dispatch action to remove default image
+    } else {
+      dispatch(backgroundDefaultImageSet(imgPath)); // Dispatch action to set default image
+    }
+  };
+
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
       <SwipeableViews
@@ -100,17 +108,30 @@ function Carousel() {
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                component="img"
                 sx={{
-                  height: 255,
-                  display: "block",
-                  maxWidth: 400,
-                  overflow: "hidden",
-                  width: "100%",
-                }}
-                src={step.imgPath}
-                alt={step.label}
-              />
+                  position: "relative",
+                  height: 245,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                <img
+                  src={step.imgPath}
+                  alt={step.label}
+                  style={{ maxWidth: "100%", maxHeight: "100%" }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleToggleDefaultImage(step.imgPath)}
+                  sx={{
+                    position: "absolute",
+                    bottom: 8,
+                    right: 8,
+                  }}>
+                  {defaultImage === step.imgPath ? "Remove" : "Save"}
+                </Button>
+              </Box>
             ) : null}
           </div>
         ))}

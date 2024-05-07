@@ -30,11 +30,15 @@ function Editor({ calendarView }) {
   //regarding calendar slice
   const calendarTitle = useSelector((state) => state.calendar.title);
   const calendarStyles = useSelector((state) => state.calendar.styles);
-  const { color, imageURL } = useSelector((state) => state.calendar.background);
+  const { color, imageURL, defaultImage } = useSelector(
+    //add defaultImage
+    (state) => state.calendar.background
+  );
 
   const backgoroundStyles = {
     backgroundColor: color,
-    backgroundImage: `url(${imageURL})`,
+    backgroundImage: defaultImage ? `url(${defaultImage})` : `url(${imageURL})`, // Use defaultImage if available, otherwise use imageURL
+    backgroundRepeat: "no-repeat",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
   };
@@ -56,8 +60,7 @@ function Editor({ calendarView }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: `calc(100vh - 110px)`,
           margin: "auto",
-        }}
-      >
+        }}>
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
@@ -82,8 +85,7 @@ function Editor({ calendarView }) {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -95,8 +97,7 @@ function Editor({ calendarView }) {
                 borderColor: "#9AC8E8",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
@@ -114,8 +115,7 @@ function Editor({ calendarView }) {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}
-                >
+                  }}>
                   <Button
                     onClick={() => setOpen(true)}
                     sx={{
@@ -123,8 +123,7 @@ function Editor({ calendarView }) {
                       textTransform: "capitalize",
                       color: "#333",
                       fontSize: "1.1rem",
-                    }}
-                  >
+                    }}>
                     Preview {hatchNumber}
                   </Button>
 
@@ -136,8 +135,7 @@ function Editor({ calendarView }) {
                       textTransform: "capitalize",
                       fontSize: "1.1rem",
                       fontWeight: "bold",
-                    }}
-                  >
+                    }}>
                     <ExitToAppOutlinedIcon
                       style={{
                         transform: "scaleX(-1)",
@@ -170,8 +168,7 @@ function Editor({ calendarView }) {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: `calc(100vh - 110px)`,
-          }}
-        >
+          }}>
           {open && (
             <BasicModal
               setOpen={setOpen}
