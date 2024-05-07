@@ -26,6 +26,7 @@ const initialState = {
     color: "white",
     imageURL: "",
     fileName: "",
+    defaultImage: "",
   },
   shape: "Square",
 };
@@ -96,6 +97,12 @@ const calendarSlice = createSlice({
     backgroundFileNameDelete: (state) => {
       state.background.fileName = "";
     },
+    backgroundDefaultImageSet: (state, action) => {
+      state.background.defaultImage = action.payload; //carousel default img set
+    },
+    backgroundDefaultImageDelete: (state) => {
+      state.background.defaultImage = ""; //carousel default img delete
+    },
     backgroundColorSet: (state, action) => {
       state.background.color = action.payload;
     },
@@ -123,5 +130,7 @@ export const {
   backgroundFileNameSet,
   backgroundFileNameDelete,
   backgroundImageDelete,
+  backgroundDefaultImageSet, //export carousel default img set
+  backgroundDefaultImageDelete, //export carousel default img delete
   shapeSet,
 } = calendarSlice.actions;

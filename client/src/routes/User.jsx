@@ -4,7 +4,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUser } from "../../../server/firebase";
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import UserAvatar from "../component/UserAvatar";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
