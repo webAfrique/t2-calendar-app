@@ -125,6 +125,32 @@ function TextEditorMenu({ hatchNumber }) {
     );
   };
 
+  const handleHighlightChange = (event, newStyles) => {
+    console.log("newStyles", newStyles);
+    if (newStyles.includes("bold")) {
+      dispatch(
+        boldSet({
+          hatchNumber: hatchNumber,
+          activeField: activeField,
+        })
+      );
+    } else if (newStyles.includes("italic")) {
+      dispatch(
+        italicSet({
+          hatchNumber: hatchNumber,
+          activeField: activeField,
+        })
+      );
+    } else if (newStyles.includes("underline")) {
+      dispatch(
+        textDecorationSet({
+          hatchNumber: hatchNumber,
+          activeField: activeField,
+        })
+      );
+    }
+  };
+
   const handleFieldToggle = (field) => {
     setActiveField(field);
   };
@@ -359,33 +385,8 @@ function TextEditorMenu({ hatchNumber }) {
               <ListItemText primary="Font Style" />
               <ToggleButtonGroup
                 size="small"
-                {...control2}
-                onChange={(event, newHighlighter) => {
-                  console.log("newHighlighter", newHighlighter);
-                  console.log(hatchNumber, activeField);
-                  if (newHighlighter.includes("underline")) {
-                    dispatch(
-                      textDecorationSet({
-                        hatchNumber: hatchNumber,
-                        activeField: activeField,
-                      })
-                    );
-                  } else if (newHighlighter.includes("bold")) {
-                    dispatch(
-                      boldSet({
-                        hatchNumber: hatchNumber,
-                        activeField: activeField,
-                      })
-                    );
-                  } else if (newHighlighter.includes("italic")) {
-                    dispatch(
-                      italicSet({
-                        hatchNumber: hatchNumber,
-                        activeField: activeField,
-                      })
-                    );
-                  }
-                }}
+                /* {...control2} */
+                onChange={handleHighlightChange}
                 aria-label="text formatting"
               >
                 {children2}
