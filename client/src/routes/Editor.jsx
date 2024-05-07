@@ -23,8 +23,6 @@ import { useSelector } from "react-redux";
 const drawerWidth = 350;
 
 function Editor({ calendarView }) {
-  const [hatchTextStyles, setHatchTextStyles] = React.useState({});
-  const [hatchTitleStyles, setHatchTitleStyles] = React.useState({});
   const [hatchNumber, setHatchNumber] = useState();
   const [onVideoAdd, handleAddVideo] = useState("");
   const [isClicked, setIsClicked] = useState(false);
@@ -104,11 +102,7 @@ function Editor({ calendarView }) {
               <>
                 <HatchNavigation hatchNumber={hatchNumber} />
                 <WidthHeight hatchNumber={hatchNumber} />
-                <TextEditor
-                  hatchNumber={hatchNumber}
-                  setHatchTextStyles={setHatchTextStyles}
-                  setHatchTitleStyles={setHatchTitleStyles}
-                />
+                <TextEditor hatchNumber={hatchNumber} />
                 <UploadImage setSrc={setSrc} />
                 <Video onVideoAdd={handleAddVideo} />
                 <Box
@@ -186,8 +180,6 @@ function Editor({ calendarView }) {
               videoURL={onVideoAdd}
               onClose={() => setOpen(false)}
               hatchNumber={hatchNumber}
-              hatchTitleStyles={hatchTitleStyles}
-              hatchTextStyles={hatchTextStyles}
             />
           )}
           {/* this code will be rendered conditionally later */}

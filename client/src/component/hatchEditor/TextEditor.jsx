@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -23,7 +23,17 @@ import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useDispatch, useSelector } from "react-redux";
-import { titleSet, textSet } from "../../features/hatchSlice";
+import {
+  titleSet,
+  textSet,
+  alignmentSet,
+  fontFamilySet,
+  colorSet,
+  fontSizeSet,
+  textDecorationSet,
+  boldSet,
+  italicSet,
+} from "../../features/hatchSlice";
 
 // For the react/prop-types rule/ validation/ typechecking/ eslint error:
 
@@ -46,18 +56,8 @@ const fontFamilies = [
   "Courier New",
 ];
 
-function TextEditorMenu({
-  hatchNumber,
-
-  setHatchTitleStyles,
-  setHatchTextStyles,
-}) {
+function TextEditorMenu({ hatchNumber }) {
   const [open, setOpen] = React.useState(false);
-  const [alignment, setAlignment] = React.useState("center");
-  const [fontFamily, setFontFamily] = React.useState("Arial");
-  const [color, setColor] = React.useState("#000");
-  const [selectedSize, setSelectedSize] = React.useState(16);
-  const [fontStyle, setFontStyle] = React.useState([]);
   const [activeField, setActiveField] = useState("title");
 
   //redux
@@ -75,57 +75,54 @@ function TextEditorMenu({
     return hatch ? hatch.text : "";
   });
 
-  useEffect(() => {
-    const newStyles = {
-      textAlign: alignment,
-      fontFamily: fontFamily,
-      color: color,
-      fontSize: selectedSize,
-      textDecoration: fontStyle.includes("underlined") ? "underline" : "none",
-      fontWeight: fontStyle.includes("bold") ? "bold" : "normal",
-      fontStyle: fontStyle.includes("italic") ? "italic" : "normal",
-    };
+  const titleStyles = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.titleStyles : null;
+  });
 
-    if (activeField === "text") {
-      setHatchTextStyles(newStyles);
-    } else {
-      setHatchTitleStyles(newStyles);
-    }
-  }, [
-    alignment,
-    fontFamily,
-    color,
-    selectedSize,
-    fontStyle,
-    activeField,
-    setHatchTextStyles,
-    setHatchTitleStyles,
-  ]);
+  const textStyles = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.textStyles : null;
+  });
+  console.log("titleStyles", titleStyles);
+  console.log("textStyles", textStyles);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const handleAlignment = (event, newAlignment) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
-    }
-  };
-
   const handleFontFamilyChange = (event) => {
-    setFontFamily(event.target.value);
+    dispatch(
+      fontFamilySet({
+        value: event.target.value,
+        hatchNumber: hatchNumber,
+        activeField: activeField,
+      })
+    );
   };
 
   const handleColorChange = (newColor) => {
-    setColor(newColor);
+    dispatch(
+      colorSet({
+        value: newColor,
+        hatchNumber: hatchNumber,
+        activeField: activeField,
+      })
+    );
   };
 
   const handleSizeChange = (event) => {
-    setSelectedSize(event.target.value);
-  };
-
-  const handleFontStyleChange = (event, newStyles) => {
-    setFontStyle(newStyles);
+    dispatch(
+      fontSizeSet({
+        value: event.target.value,
+        hatchNumber: hatchNumber,
+        activeField: activeField,
+      })
+    );
   };
 
   const handleFieldToggle = (field) => {
@@ -147,10 +144,40 @@ function TextEditorMenu({
     </ToggleButton>,
   ];
 
+  const children2 = [
+    <ToggleButton value="bold" key="bold">
+      <FormatBoldIcon />
+    </ToggleButton>,
+    <ToggleButton value="italic" key="italic">
+      <FormatItalicIcon />
+    </ToggleButton>,
+    <ToggleButton value="underline" key="underline">
+      <FormatUnderlinedIcon />
+    </ToggleButton>,
+  ];
+
+  //handle highlighter for alignment
   const control = {
-    value: alignment,
-    onChange: handleAlignment,
+    value:
+      activeField === "title" ? titleStyles.textAlign : textStyles.textAlign,
+
     exclusive: true,
+  };
+  //handle highlighter for styles
+  const control2 = {
+    value:
+      activeField === "title"
+        ? [
+            titleStyles.textDecoration,
+            titleStyles.fontWeight,
+            titleStyles.fontStyle,
+          ]
+        : [
+            textStyles.textDecoration,
+            textStyles.fontWeight,
+            textStyles.fontStyle,
+          ],
+    exclusive: false,
   };
 
   const titleMenu = (
@@ -258,6 +285,16 @@ function TextEditorMenu({
                 size="small"
                 {...control}
                 aria-label="Small sizes"
+                onChange={(event, newAlignment) => {
+                  console.log(newAlignment);
+                  dispatch(
+                    alignmentSet({
+                      value: newAlignment,
+                      hatchNumber: hatchNumber,
+                      activeField: activeField,
+                    })
+                  );
+                }}
               >
                 {children}
               </ToggleButtonGroup>
@@ -265,7 +302,11 @@ function TextEditorMenu({
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText primary="Font Family" />
               <Select
-                value={fontFamily}
+                value={
+                  activeField === "title"
+                    ? titleStyles.fontFamily
+                    : textStyles.fontFamily
+                }
                 size="small"
                 onChange={handleFontFamilyChange}
                 sx={{ padding: 0 }}
@@ -282,16 +323,22 @@ function TextEditorMenu({
 
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "100px" }}
+                sx={{ padding: 0, maxWidth: "125px" }}
                 format="hex"
-                value={color}
+                value={
+                  activeField === "title" ? titleStyles.color : textStyles.color
+                }
                 onChange={handleColorChange}
               />
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText primary="Size" />
               <Select
-                value={selectedSize}
+                value={
+                  activeField === "title"
+                    ? titleStyles.fontSize
+                    : textStyles.fontSize
+                }
                 size="small"
                 onChange={handleSizeChange}
                 sx={{ minWidth: "80px", padding: 0 }}
@@ -312,19 +359,36 @@ function TextEditorMenu({
               <ListItemText primary="Font Style" />
               <ToggleButtonGroup
                 size="small"
-                value={fontStyle}
-                onChange={handleFontStyleChange}
+                {...control2}
+                onChange={(event, newHighlighter) => {
+                  console.log("newHighlighter", newHighlighter);
+                  console.log(hatchNumber, activeField);
+                  if (newHighlighter.includes("underline")) {
+                    dispatch(
+                      textDecorationSet({
+                        hatchNumber: hatchNumber,
+                        activeField: activeField,
+                      })
+                    );
+                  } else if (newHighlighter.includes("bold")) {
+                    dispatch(
+                      boldSet({
+                        hatchNumber: hatchNumber,
+                        activeField: activeField,
+                      })
+                    );
+                  } else if (newHighlighter.includes("italic")) {
+                    dispatch(
+                      italicSet({
+                        hatchNumber: hatchNumber,
+                        activeField: activeField,
+                      })
+                    );
+                  }
+                }}
                 aria-label="text formatting"
               >
-                <ToggleButton value="bold" aria-label="bold">
-                  <FormatBoldIcon />
-                </ToggleButton>
-                <ToggleButton value="italic" aria-label="italic">
-                  <FormatItalicIcon />
-                </ToggleButton>
-                <ToggleButton value="underlined" aria-label="underlined">
-                  <FormatUnderlinedIcon />
-                </ToggleButton>
+                {children2}
               </ToggleButtonGroup>
             </ListItemButton>
           </List>

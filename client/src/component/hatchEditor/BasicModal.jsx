@@ -25,21 +25,19 @@ function convertToEmbedURL(url) {
 }
 
 export default function BasicModal({
-  hatchTextStyles,
-  hatchTitleStyles,
   hatchNumber,
   setOpen,
   src,
   open,
   videoURL,
 }) {
+  //redux
   const title = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.title : "";
   });
-  console.log("title Basic", title);
 
   const text = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
@@ -47,6 +45,22 @@ export default function BasicModal({
     );
     return hatch ? hatch.text : "";
   });
+
+  const titleStyles = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.titleStyles : null;
+  });
+  console.log("titleStyles", titleStyles);
+
+  const textStyles = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.textStyles : null;
+  });
+  console.log("textStyles", textStyles);
 
   return (
     <div>
@@ -61,7 +75,7 @@ export default function BasicModal({
             sx={{
               mb: 2,
               ...(title
-                ? hatchTextStyles
+                ? titleStyles
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-title"
@@ -103,9 +117,10 @@ export default function BasicModal({
           </Box>
           <Typography
             sx={{
-              m: 2,
+              mt: 2,
+              mb: 2,
               ...(text
-                ? hatchTextStyles
+                ? textStyles
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-description"
