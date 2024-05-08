@@ -40,10 +40,15 @@ const DateCalendar = () => {
       <List>
         {/* Date list item */}
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText
               primary={
-                <span style={{ fontWeight: "bold", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#476C92",
+                  }}>
                   Date
                 </span>
               }

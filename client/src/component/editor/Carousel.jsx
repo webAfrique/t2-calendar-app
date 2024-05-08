@@ -120,6 +120,12 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
                   color="primary"
                   onClick={() => handleToggleDefaultImage(step.imgPath)}
                   sx={{
+                    backgroundColor: "#476C92",
+                    "&:hover": {
+                      backgroundColor: "#ffffff",
+                      border: "1px solid #476C92",
+                      color: "#476C92",
+                    },
                     position: "absolute",
                     bottom: 8,
                     right: 8,
@@ -137,6 +143,7 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
         activeStep={activeStep}
         nextButton={
           <Button
+            sx={{ color: "#476C92" }}
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}>
@@ -149,7 +156,11 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          <Button
+            sx={{ color: "#476C92" }}
+            size="small"
+            onClick={handleBack}
+            disabled={activeStep === 0}>
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
