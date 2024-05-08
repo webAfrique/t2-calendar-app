@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import ContactModal from "./ContactModal";
 
 function SocialIcons() {
   return (
@@ -22,19 +23,20 @@ function SocialIcons() {
         container
         spacing={3}
         justifyContent={"center"}
-        alignItems={"center"}>
+        alignItems={"center"}
+   >
         <Grid item>
-          <Link href="#" color="inherit">
+          <Link href="#" color="#476C92">
             <FacebookIcon />
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" color="inherit">
+          <Link href="#" color="#476C92">
             <TwitterIcon />
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" color="inherit">
+          <Link href="#" color="#476C92">
             <InstagramIcon />
           </Link>
         </Grid>
@@ -45,7 +47,7 @@ function SocialIcons() {
 
 function Footer() {
   return (
-    <ThemeProvider theme={createTheme()}>
+   /*  <ThemeProvider theme={createTheme()}> */
       <Box
         component="footer"
         sx={{
@@ -60,6 +62,7 @@ function Footer() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          borderBottom: "2px solid #9AC8E8",
         }}>
         <Container
           maxWidth="false"
@@ -69,11 +72,11 @@ function Footer() {
             sx={{
               textAlignLast: "auto",
               fontWeight: "400",
-              fontSize: "14px",
+              fontSize: { xs: "12px", md: "14px" },
               lineHeight: "25px",
-              color: "#333333",
+              color: "#476C92",
             }}>
-            Copyright &copy; {new Date().getFullYear()}
+            Copyright &copy; {new Date().getFullYear()}. All rights reserved.
           </Typography>
         </Container>
         <Container
@@ -85,23 +88,14 @@ function Footer() {
           }}>
           <SocialIcons />
         </Container>
+
         <Container
           maxWidth="false"
           sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}>
-          <Typography
-            variant="body1"
-            sx={{
-              textAlignLast: "center",
-              fontWeight: "400",
-              fontSize: "14px",
-              lineHeight: "25px",
-              color: "#333333",
-            }}>
-            Contact us: +358 12 345 6789
-          </Typography>
+          <ContactModal />
         </Container>
       </Box>
-    </ThemeProvider>
+    /* </ThemeProvider> */
   );
 }
 

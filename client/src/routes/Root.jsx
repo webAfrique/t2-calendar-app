@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Footer from "../component/Footer";
+import Footer from "../component/footer/Footer";
 import Header from "../component/Header";
 import EditorHeader from "../component/editor/EditorHeader";
 
