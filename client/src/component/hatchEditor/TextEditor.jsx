@@ -189,22 +189,7 @@ function TextEditorMenu({ hatchNumber }) {
 
     exclusive: true,
   };
-  //handle highlighter for styles
-  const control2 = {
-    value:
-      activeField === "title"
-        ? [
-            titleStyles.textDecoration,
-            titleStyles.fontWeight,
-            titleStyles.fontStyle,
-          ]
-        : [
-            textStyles.textDecoration,
-            textStyles.fontWeight,
-            textStyles.fontStyle,
-          ],
-    exclusive: false,
-  };
+  //handle highlighter for styles to add
 
   const titleMenu = (
     <div>

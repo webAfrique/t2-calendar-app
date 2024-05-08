@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Hatch from "./Hatch";
 
-function Calendar({ shape, setIsClicked, setHatchNumber }) {
+function Calendar({ shape, setIsClicked, setHatchNumber, setOpen }) {
   const dates = useSelector((state) => state.calendar.dates);
 
   const isStar = shape === "Star";
@@ -24,6 +24,7 @@ function Calendar({ shape, setIsClicked, setHatchNumber }) {
           shape={shape}
           setIsClicked={setIsClicked}
           setHatchNumber={setHatchNumber}
+          setOpen={setOpen}
         />
       ))}
     </div>

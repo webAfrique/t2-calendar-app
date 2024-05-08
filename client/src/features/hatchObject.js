@@ -4,7 +4,7 @@ const hatch = {
   height: 100,
   title: "",
   titleStyles: {
-    textAlign: "",
+    textAlign: "center",
     fontFamily: "Roboto",
     color: "black",
     fontSize: 16,
@@ -14,7 +14,7 @@ const hatch = {
   },
   text: "",
   textStyles: {
-    textAlign: "",
+    textAlign: "center",
     fontFamily: "Roboto",
     color: "black",
     fontSize: 16,
