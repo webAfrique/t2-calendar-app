@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Hatch.module.css";
 import { setHatchObjects } from "../../features/hatchSlice";
 
-const Hatch = ({ date, setIsClicked, setHatchNumber }) => {
+const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const shape = useSelector((state) => state.calendar.shape);
   const isCircle = shape === "Circle";
   //const isStar = shape === "Star";
@@ -84,6 +84,7 @@ const Hatch = ({ date, setIsClicked, setHatchNumber }) => {
           if (hatches.length === 0) {
             dispatch(setHatchObjects(dates));
           }
+          setOpen(true);
         }}
         className={styles.door}
         style={widthHeight}

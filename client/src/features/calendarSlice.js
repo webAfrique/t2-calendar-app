@@ -6,7 +6,7 @@ import hatch from "./hatchObject";
 const initialState = {
   title: "",
   styles: {
-    textAlign: "",
+    textAlign: "center",
     fontFamily: "Roboto",
     color: "black",
     fontSize: 16,

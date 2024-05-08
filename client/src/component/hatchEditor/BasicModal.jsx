@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
+import Draggable from "react-draggable";
 
 const style = {
   position: "absolute",
@@ -63,8 +64,8 @@ export default function BasicModal({
   console.log("textStyles", textStyles);
 
   return (
-    <div>
-      <Modal
+    <Draggable defaultPosition={{ x: -580, y: -10 }}>
+      <Box
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
@@ -185,7 +186,7 @@ export default function BasicModal({
             Back to calendar
           </Button>
         </Box>
-      </Modal>
-    </div>
+      </Box>
+    </Draggable>
   );
 }
