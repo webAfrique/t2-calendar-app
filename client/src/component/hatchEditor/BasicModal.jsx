@@ -63,6 +63,14 @@ export default function BasicModal({
   });
   console.log("textStyles", textStyles);
 
+  const image = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.image : null;
+  });
+  console.log("image", image);
+
   return (
     <Draggable defaultPosition={{ x: -580, y: -10 }}>
       <Box
@@ -112,7 +120,7 @@ export default function BasicModal({
                 component="h2"
                 textAlign={"center"}
               >
-                Image
+                {image.filename ? image.filename : "Image"}
               </Typography>
             )}
           </Box>

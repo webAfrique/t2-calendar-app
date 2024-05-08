@@ -11,17 +11,22 @@ import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { imageSet } from "../../features/hatchSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const UploadImage = ({ setSrc }) => {
+const UploadImage = ({ hatchNumber, setSrc }) => {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
 
   let fileName = file ? file.name : "No file chosen";
 
-  const getFile = (e) => {
-    setFile(e.target.files[0]);
-    setSrc(URL.createObjectURL(e.target.files[0]));
-  };
+  const hatchImage = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.image.fileName : "";
+  });
 
   const deleteHandler = () => {
     setSrc(null);
@@ -62,7 +67,20 @@ const UploadImage = ({ setSrc }) => {
                 }}
               >
                 Upload file
-                <input type="file" hidden onChange={getFile} />
+                <input type="file" hidden onChange=
+                  {(e) => {
+                    setFile(e.target.files[0]);
+                    setSrc(URL.createObjectURL(e.target.files[0]));
+                    dispatch(
+                      imageSet({
+                        url: URL.createObjectURL(e.target.files[0]),
+                        fileName: e.target.files[0].name,
+                        hatchNumber,
+                      })
+                    );
+                  }
+                }
+                value= {hatchImage}/>
               </Button>
               <Box
                 sx={{

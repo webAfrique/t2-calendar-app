@@ -112,6 +112,14 @@ const hatchesSlice = createSlice({
         }
       });
     },
+    imageSet: (state, action) => {
+      const { value, hatchNumber } = action.payload;
+      state.hatchObjects.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.image = value;
+        }
+      });
+    },
   },
 });
 
@@ -130,4 +138,5 @@ export const {
   textDecorationSet,
   boldSet,
   italicSet,
+  imageSet,
 } = hatchesSlice.actions;
