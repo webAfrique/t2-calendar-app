@@ -85,18 +85,15 @@ function Title() {
   };
 
   const children = [
-    <ToggleButton value="left" key="left">
-      <FormatAlignLeftIcon />
+    <ToggleButton value="left" key="left" sx={{ borderColor: "#476C92" }}>
+      <FormatAlignLeftIcon sx={{ color: "#476C92" }} />
     </ToggleButton>,
-    <ToggleButton value="center" key="center">
-      <FormatAlignCenterIcon />
+    <ToggleButton value="center" key="center" sx={{ borderColor: "#476C92" }}>
+      <FormatAlignCenterIcon sx={{ color: "#476C92" }} />
     </ToggleButton>,
-    <ToggleButton value="right" key="right">
-      <FormatAlignRightIcon />
+    <ToggleButton value="right" key="right" sx={{ borderColor: "#476C92" }}>
+      <FormatAlignRightIcon sx={{ color: "#476C92" }} />
     </ToggleButton>,
-    /*  <ToggleButton value="justify" key="justify">
-      <FormatAlignJustifyIcon />
-    </ToggleButton>, */
   ];
 
   const control = {
@@ -109,10 +106,15 @@ function Title() {
     <div>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText
               primary={
-                <span style={{ fontWeight: "bold", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#476C92", //set text color
+                  }}>
                   Title
                 </span>
               }
@@ -130,27 +132,36 @@ function Title() {
                 fullWidth
                 value={title}
                 onChange={(e) => dispatch(typedTitle(e.target.value))}
+                sx={{
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set text field border color
+                  },
+                }}
               />
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Alignment" />
+              <ListItemText primary="Alignment" sx={{ color: "#476C92" }} />
               <ToggleButtonGroup
                 value={alignment}
                 size="small"
                 {...control}
-                aria-label="Small sizes"
-              >
+                aria-label="Small sizes">
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Font Family" />
+              <ListItemText primary="Font Family" sx={{ color: "#476C92" }} />
               <Select
                 value={fontFamily}
                 size="small"
                 onChange={handleFontFamilyChange}
-                sx={{ padding: 0 }}
-              >
+                sx={{
+                  color: "#476C92",
+                  padding: 0,
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set selector border color
+                  },
+                }}>
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -159,24 +170,41 @@ function Title() {
               </Select>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Color" />
+              <ListItemText primary="Color" sx={{ color: "#476C92" }} />
 
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "120px" }}
+                sx={{
+                  padding: 0,
+                  maxWidth: "120px",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    //set color selector border color
+                    borderColor: "#476C92",
+                  },
+                }}
                 format="hex"
                 value={color}
                 onChange={handleColorChange}
+                InputProps={{
+                  sx: { color: "#476C92" }, // Set text color for the color input
+                }}
               />
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Size" />
+              <ListItemText primary="Size" sx={{ color: "#476C92" }} />
               <Select
                 value={fontSize}
                 size="small"
                 onChange={handleSizeChange}
-                sx={{ minWidth: "80px", padding: 0 }}
-              >
+                sx={{
+                  minWidth: "80px",
+                  padding: 0,
+                  color: "#476C92",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    //set size selector border color
+                    borderColor: "#476C92",
+                  },
+                }}>
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -190,20 +218,28 @@ function Title() {
               </Select>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Font Style" />
+              <ListItemText primary="Font Style" sx={{ color: "#476C92" }} />
               <ToggleButtonGroup
                 size="small"
                 /*  value={highlights} */
                 aria-label="text formatting"
-                onChange={handleHighlightChange}
-              >
-                <ToggleButton value="bold" aria-label="bold">
+                onChange={handleHighlightChange}>
+                <ToggleButton
+                  value="bold"
+                  aria-label="bold"
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
                   <FormatBoldIcon />
                 </ToggleButton>
-                <ToggleButton value="italic" aria-label="italic">
+                <ToggleButton
+                  value="italic"
+                  aria-label="italic"
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
                   <FormatItalicIcon />
                 </ToggleButton>
-                <ToggleButton value="underline" aria-label="underline">
+                <ToggleButton
+                  value="underline"
+                  aria-label="underline"
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
                   <FormatUnderlinedIcon />
                 </ToggleButton>
               </ToggleButtonGroup>

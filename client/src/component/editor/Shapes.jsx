@@ -39,10 +39,15 @@ function Shapes() {
       <List sx={{ marginBottom: 10 }}>
         {/* Title list item */}
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText
               primary={
-                <span style={{ fontWeight: "bold", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#476C92",
+                  }}>
                   Shapes
                 </span>
               }
@@ -53,16 +58,28 @@ function Shapes() {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Hatch shape" />
+              <ListItemText primary="Hatch shape" sx={{ color: "#476C92" }} />
               <Select
                 value={shape}
                 size="small"
                 onChange={handleShapeChange}
-                sx={{ padding: 0, width: 150 }}
-              >
+                sx={{
+                  color: "#476C92",
+                  padding: 0,
+                  width: 150,
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set selector border color
+                  },
+                }}>
                 {shapes.map((item) => (
                   <MenuItem key={item.name} value={item.name}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                        color: "#476C92",
+                      }}>
                       {item.icon}
                       {item.name}
                     </Box>

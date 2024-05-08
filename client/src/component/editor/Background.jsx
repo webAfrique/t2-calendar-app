@@ -78,10 +78,10 @@ function Background() {
         startIcon={<CloudUploadIcon />}
         sx={{
           "&:hover": {
-            border: "1px solid #555555",
+            border: "1px solid #476C92",
           },
-          border: "1px solid #555555",
-          color: "black",
+          border: "1px solid #476C92",
+          color: "#476C92",
 
           p: 1,
         }}>
@@ -97,10 +97,15 @@ function Background() {
       <List>
         {/* Title list item */}
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText
               primary={
-                <span style={{ fontWeight: "bold", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#476C92",
+                  }}>
                   Background
                 </span>
               }
@@ -111,7 +116,10 @@ function Background() {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Background image" />
+              <ListItemText
+                primary="Background image"
+                sx={{ color: "#476C92" }}
+              />
               <FileUploadButton />
             </ListItemButton>
             <Box
@@ -130,14 +138,25 @@ function Background() {
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText
                 primary="Background color"
+                sx={{ color: "#476C92" }}
                 onClick={handleResetColor}
               />
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "138px" }}
+                sx={{
+                  color: "#476C92",
+                  padding: 0,
+                  maxWidth: "138px",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set color selector border color
+                  },
+                }}
                 format="hex"
                 value={color}
                 onChange={handleColorChange}
+                InputProps={{
+                  sx: { color: "#476C92" }, // Set text color for the color input
+                }}
               />
             </ListItemButton>
             <ListItemButton
@@ -148,7 +167,10 @@ function Background() {
                 flexDirection: "column",
                 alignItems: "flex-start",
               }}>
-              <ListItemText primary="Default images" />
+              <ListItemText
+                primary="Default images"
+                sx={{ color: "#476C92" }}
+              />
               <Carousel
                 handleToggleDefaultImage={handleToggleDefaultImage}
                 defaultImage={defaultImage}
