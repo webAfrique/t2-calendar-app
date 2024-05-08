@@ -15,7 +15,6 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import Logo from "../assets/Advent_Calendar_Logo.png";
 
 /* const pages = ["Instruction", "Pricing"]; */
 const settings = ["Register", "Log in"];
@@ -75,38 +74,51 @@ function Header() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/">
-            <Avatar
-              src={Logo}
-              alt="Logo"
-              variant="square"
-              sx={{
-                mr: 1,
-                width: 60,
-                height: 60,
-                backgroundColor: "transparent",
-              }}
-            />
-          </Link>
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
+          <Link to="/"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            textDecoration: "none",
+          }
+          }
+          >
+         <Typography
+            variant="h4"
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "#00a8cd",
+              display: "flex",
+              fontFamily: "roboto",
+              fontWeight: "bold",
+              fontSize: { xs: "30px", md: "30px" },
+              textAlign: "center",
+              justifyContent: "center",
+              color: "#476C92",
               textDecoration: "none",
+              mr: 1,
             }}
           >
-            WIME
-          </Typography>
-
+            WIME 
+            <br />
+            </Typography>
+             <Typography
+            variant="body2"
+            sx={{
+              display: "flex",
+              fontFamily: "roboto",
+              textAlign: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: { xs: "12", md: "16"},
+              color: "#476C92",
+              textDecoration: "none",
+              marginTop: "-10px",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              
+            }}
+          >
+           calendar
+            </Typography>
+          </Link>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -158,24 +170,7 @@ function Header() {
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "#00a8cd",
-              textDecoration: "none",
-            }}
-          >
-            WIME
-          </Typography>
+         
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
             <Button
               onClick={() => scrollToSection("instruction")}

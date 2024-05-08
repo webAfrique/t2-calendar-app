@@ -9,7 +9,6 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Logo from "../../assets/Advent_Calendar_Logo.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Container } from "@mui/material";
 
@@ -21,37 +20,43 @@ function EditorHeader({ calendarView, setCalendarView }) {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/user">
-            <Avatar
-              src={Logo}
-              alt="Logo"
-              variant="square"
-              sx={{
-                mr: 1,
-                width: 60,
-                height: 60,
-              }}
-            />
-          </Link>
           <Link to="/user" style={{textDecoration: "none"}}>
           <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
+            variant="h4"
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "#00a8cd",
+              display: "flex",
+              fontFamily: "roboto",
+              fontWeight: "bold",
+              fontSize: { xs: "30px", md: "30px" },
+              textAlign: "center",
+              justifyContent: "center",
+              color: "#476C92",
               textDecoration: "none",
+              mr: 1,
             }}
           >
-            
-            WIME
-          </Typography>
+            WIME 
+            <br />
+            </Typography>
+             <Typography
+            variant="body2"
+            sx={{
+              display: "flex",
+              fontFamily: "roboto",
+              textAlign: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: { xs: "12", md: "16"},
+              color: "#476C92",
+              textDecoration: "none",
+              marginTop: "-10px",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              
+            }}
+          >
+           calendar
+            </Typography>
           </Link>
           
 
