@@ -5,3 +5,10 @@ body {
 footer{
   margin: 0 !important;
 }
+
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  background-color: #476C92 !important;
+  /* Your custom color */
+}

@@ -156,28 +156,49 @@ function TextEditorMenu({ hatchNumber }) {
   };
 
   const children = [
-    <ToggleButton value="left" key="left">
+    <ToggleButton
+      value="left"
+      key="left"
+      sx={{ color: "#476C92", borderColor: "#476C92" }}>
       <FormatAlignLeftIcon />
     </ToggleButton>,
-    <ToggleButton value="center" key="center">
+    <ToggleButton
+      value="center"
+      key="center"
+      sx={{ color: "#476C92", borderColor: "#476C92" }}>
       <FormatAlignCenterIcon />
     </ToggleButton>,
-    <ToggleButton value="right" key="right">
+    <ToggleButton
+      value="right"
+      key="right"
+      sx={{ color: "#476C92", borderColor: "#476C92" }}>
       <FormatAlignRightIcon />
     </ToggleButton>,
-    <ToggleButton value="justify" key="justify">
+    <ToggleButton
+      value="justify"
+      key="justify"
+      sx={{ color: "#476C92", borderColor: "#476C92" }}>
       <FormatAlignJustifyIcon />
     </ToggleButton>,
   ];
 
   const children2 = [
-    <ToggleButton value="bold" key="bold">
+    <ToggleButton
+      value="bold"
+      key="bold"
+      sx={{ borderColor: "#476C92", color: "#476C92" }}>
       <FormatBoldIcon />
     </ToggleButton>,
-    <ToggleButton value="italic" key="italic">
+    <ToggleButton
+      value="italic"
+      key="italic"
+      sx={{ borderColor: "#476C92", color: "#476C92" }}>
       <FormatItalicIcon />
     </ToggleButton>,
-    <ToggleButton value="underline" key="underline">
+    <ToggleButton
+      value="underline"
+      key="underline"
+      sx={{ borderColor: "#476C92", color: "#476C92" }}>
       <FormatUnderlinedIcon />
     </ToggleButton>,
   ];
@@ -195,7 +216,7 @@ function TextEditorMenu({ hatchNumber }) {
     <div>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText
               primary={
                 <span
@@ -203,8 +224,8 @@ function TextEditorMenu({ hatchNumber }) {
                     fontWeight: "bold",
                     textAlign: "center",
                     marginLeft: 5,
-                  }}
-                >
+                    color: "#476C92",
+                  }}>
                   T
                 </span>
               }
@@ -221,8 +242,7 @@ function TextEditorMenu({ hatchNumber }) {
                   flexDirection: "column",
                   gap: 2,
                   width: "100%",
-                }}
-              >
+                }}>
                 <ToggleButtonGroup
                   value={activeField}
                   exclusive
@@ -233,8 +253,7 @@ function TextEditorMenu({ hatchNumber }) {
                     }
                   }}
                   fullWidth
-                  color="primary"
-                >
+                  color="primary">
                   {" "}
                   <ToggleButton value="title" aria-label="title">
                     Title
@@ -251,6 +270,12 @@ function TextEditorMenu({ hatchNumber }) {
                     variant="outlined"
                     fullWidth
                     value={title}
+                    sx={{
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "#476C92", // Set text field border color
+                        },
+                    }}
                     onChange={(e) =>
                       dispatch(
                         titleSet({
@@ -291,7 +316,7 @@ function TextEditorMenu({ hatchNumber }) {
               </Box>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Alignment" />
+              <ListItemText primary="Alignment" sx={{ color: "#476C92" }} />
               <ToggleButtonGroup
                 size="small"
                 {...control}
@@ -305,13 +330,12 @@ function TextEditorMenu({ hatchNumber }) {
                       activeField: activeField,
                     })
                   );
-                }}
-              >
+                }}>
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Font Family" />
+              <ListItemText primary="Font Family" sx={{ color: "#476C92" }} />
               <Select
                 value={
                   activeField === "title"
@@ -320,8 +344,13 @@ function TextEditorMenu({ hatchNumber }) {
                 }
                 size="small"
                 onChange={handleFontFamilyChange}
-                sx={{ padding: 0 }}
-              >
+                sx={{
+                  padding: 0,
+                  color: "#476C92",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set selector border color
+                  },
+                }}>
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -330,20 +359,30 @@ function TextEditorMenu({ hatchNumber }) {
               </Select>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Color" />
+              <ListItemText primary="Color" sx={{ color: "#476C92" }} />
 
               <MuiColorInput
                 size="small"
-                sx={{ padding: 0, maxWidth: "125px" }}
+                sx={{
+                  padding: 0,
+                  maxWidth: "125px",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    //set color selector border color
+                    borderColor: "#476C92",
+                  },
+                }}
                 format="hex"
                 value={
                   activeField === "title" ? titleStyles.color : textStyles.color
                 }
                 onChange={handleColorChange}
+                InputProps={{
+                  sx: { color: "#476C92" }, // Set text color for the color input
+                }}
               />
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Size" />
+              <ListItemText primary="Size" sx={{ color: "#476C92" }} />
               <Select
                 value={
                   activeField === "title"
@@ -352,8 +391,15 @@ function TextEditorMenu({ hatchNumber }) {
                 }
                 size="small"
                 onChange={handleSizeChange}
-                sx={{ minWidth: "80px", padding: 0 }}
-              >
+                sx={{
+                  minWidth: "80px",
+                  padding: 0,
+                  color: "#476C92",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    //set size selector border color
+                    borderColor: "#476C92",
+                  },
+                }}>
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -367,13 +413,12 @@ function TextEditorMenu({ hatchNumber }) {
               </Select>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText primary="Font Style" />
+              <ListItemText primary="Font Style" sx={{ color: "#476C92" }} />
               <ToggleButtonGroup
                 size="small"
                 /* {...control2} */
                 onChange={handleHighlightChange}
-                aria-label="text formatting"
-              >
+                aria-label="text formatting">
                 {children2}
               </ToggleButtonGroup>
             </ListItemButton>
