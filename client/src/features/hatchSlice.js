@@ -113,10 +113,20 @@ const hatchesSlice = createSlice({
       });
     },
     imageSet: (state, action) => {
-      const { value, hatchNumber } = action.payload;
+      const { hatchNumber, url, fileName } = action.payload;
       state.hatchObjects.forEach((hatch) => {
         if (hatch.number === hatchNumber) {
-          hatch.image = value;
+          hatch.image.url = url;
+          hatch.image.fileName = fileName;
+        }
+      });
+    },
+    imageDelete: (state, action) => {
+      const { hatchNumber } = action.payload;
+      state.hatchObjects.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.image.url = "";
+          hatch.image.fileName = "";
         }
       });
     },
@@ -139,4 +149,5 @@ export const {
   boldSet,
   italicSet,
   imageSet,
+  imageDelete,
 } = hatchesSlice.actions;

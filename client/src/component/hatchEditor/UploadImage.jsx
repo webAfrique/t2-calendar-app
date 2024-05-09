@@ -11,27 +11,20 @@ import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { imageSet } from "../../features/hatchSlice";
+import { imageSet, imageDelete } from "../../features/hatchSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const UploadImage = ({ hatchNumber, setSrc }) => {
+const UploadImage = ({ hatchNumber }) => {
   const [open, setOpen] = useState(false);
-  const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-
-  let fileName = file ? file.name : "No file chosen";
 
   const hatchImage = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
       (hatch) => hatch.number === hatchNumber
     );
-    return hatch ? hatch.image.fileName : "";
+    return hatch ? hatch.image : "";
   });
-
-  const deleteHandler = () => {
-    setSrc(null);
-    setFile(null);
-  };
+  let fileName = hatchImage.fileName ? hatchImage.fileName : "No file chosen";
 
   return (
     <>
@@ -39,7 +32,8 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => setOpen(!open)}
-            sx={{ color: "#476C92" }}>
+            sx={{ color: "#476C92" }}
+          >
             <ListItemText
               primary={<PhotoOutlinedIcon sx={{ color: "#476C92" }} />}
             />
@@ -54,7 +48,8 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
-              }}>
+              }}
+            >
               <Button
                 component="label"
                 role={undefined}
@@ -66,14 +61,13 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                   marginBottom: "5px",
                   color: "#476C92",
                   borderColor: "#476C92",
-                }}>
+                }}
+              >
                 Upload file
                 <input
                   type="file"
                   hidden
                   onChange={(e) => {
-                    setFile(e.target.files[0]);
-                    setSrc(URL.createObjectURL(e.target.files[0]));
                     dispatch(
                       imageSet({
                         url: URL.createObjectURL(e.target.files[0]),
@@ -82,19 +76,27 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                       })
                     );
                   }}
-                  value={hatchImage}
                 />
               </Button>
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                }}>
+                }}
+              >
                 <Typography variant="body1" sx={{ color: "#476C92" }}>
                   {fileName}
                 </Typography>
-                {file && (
-                  <IconButton onClick={deleteHandler}>
+                {hatchImage.fileName && (
+                  <IconButton
+                    onClick={() =>
+                      dispatch(
+                        imageDelete({
+                          hatchNumber,
+                        })
+                      )
+                    }
+                  >
                     <ClearIcon sx={{ color: "#476C92" }} />
                   </IconButton>
                 )}

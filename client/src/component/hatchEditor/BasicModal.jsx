@@ -25,13 +25,7 @@ function convertToEmbedURL(url) {
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 }
 
-export default function BasicModal({
-  hatchNumber,
-  setOpen,
-  src,
-  open,
-  videoURL,
-}) {
+export default function BasicModal({ hatchNumber, setOpen, open, videoURL }) {
   //redux
   const title = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
@@ -53,7 +47,6 @@ export default function BasicModal({
     );
     return hatch ? hatch.titleStyles : null;
   });
-  console.log("titleStyles", titleStyles);
 
   const textStyles = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
@@ -61,15 +54,13 @@ export default function BasicModal({
     );
     return hatch ? hatch.textStyles : null;
   });
-  console.log("textStyles", textStyles);
 
   const image = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
       (hatch) => hatch.number === hatchNumber
     );
-    return hatch ? hatch.image : null;
+    return hatch ? hatch.image : "";
   });
-  console.log("image", image);
 
   return (
     <Draggable defaultPosition={{ x: -580, y: -10 }}>
@@ -98,17 +89,17 @@ export default function BasicModal({
               p: 3,
               height: "200px",
               alignContent: "center",
-              border: !src && "1px dashed grey", // border if no image
+              border: !image.url && "1px dashed grey", // border if no image
               textAlign: "center",
             }}
             style={{
-              backgroundImage: `url(${src})`,
+              backgroundImage: `url(${image.url})`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
             }} // set the background image
           >
-            {!src && (
+            {!image && (
               <Typography
                 sx={{
                   m: 2,

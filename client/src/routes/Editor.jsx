@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { auth } from "../../../server/firebase";
 import Box from "@mui/material/Box";
@@ -44,7 +44,6 @@ function Editor({ calendarView }) {
   };
 
   //modal window related settings
-  const [src, setSrc] = useState(null);
   const [open, setOpen] = useState(false);
 
   //display calendar in preview or editor mode depending on the calendarView prop
@@ -60,7 +59,8 @@ function Editor({ calendarView }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: `calc(100vh - 110px)`,
           margin: "auto",
-        }}>
+        }}
+      >
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
@@ -85,7 +85,8 @@ function Editor({ calendarView }) {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        >
           <Drawer
             variant="permanent"
             sx={{
@@ -97,14 +98,15 @@ function Editor({ calendarView }) {
                 borderColor: "#9AC8E8",
               },
             }}
-            open>
+            open
+          >
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
                 <HatchNavigation hatchNumber={hatchNumber} />
                 <WidthHeight hatchNumber={hatchNumber} />
                 <TextEditor hatchNumber={hatchNumber} />
-                <UploadImage setSrc={setSrc} />
+                <UploadImage hatchNumber={hatchNumber} />
                 <Video onVideoAdd={handleAddVideo} />
                 <Box
                   sx={{
@@ -115,7 +117,8 @@ function Editor({ calendarView }) {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}>
+                  }}
+                >
                   {/*      <Button
                     onClick={() => setOpen(true)}
                     sx={{
@@ -136,7 +139,8 @@ function Editor({ calendarView }) {
                       textTransform: "capitalize",
                       fontSize: "1.1rem",
                       fontWeight: "bold",
-                    }}>
+                    }}
+                  >
                     <ExitToAppOutlinedIcon
                       style={{
                         transform: "scaleX(-1)",
@@ -169,7 +173,8 @@ function Editor({ calendarView }) {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: dates.length < 30 ? `calc(100vh - 110px)` : "auto", // if dates are more than 30, set height to 100vh
-          }}>
+          }}
+        >
           {/* this code will be rendered conditionally later */}
           {!calendarTitle ? (
             <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>
@@ -193,7 +198,6 @@ function Editor({ calendarView }) {
         {open && (
           <BasicModal
             setOpen={setOpen}
-            src={src}
             open={open}
             videoURL={onVideoAdd}
             onClose={() => setOpen(false)}
