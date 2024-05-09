@@ -39,7 +39,7 @@ function WidthHeight({ hatchNumber }) {
       <List>
         {/* Title list item */}
         <ListItem disablePadding>
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton onClick={handleClick} sx={{ color: "#476C92" }}>
             <ListItemText primary={<TuneOutlinedIcon />} />{" "}
             {/* Icon for menu */}
             {open ? <ExpandLess /> : <ExpandMore />}

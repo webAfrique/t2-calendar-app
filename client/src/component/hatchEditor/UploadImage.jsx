@@ -35,11 +35,14 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
 
   return (
     <>
-      <Divider />
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => setOpen(!open)}>
-            <ListItemText primary={<PhotoOutlinedIcon />} />
+          <ListItemButton
+            onClick={() => setOpen(!open)}
+            sx={{ color: "#476C92" }}>
+            <ListItemText
+              primary={<PhotoOutlinedIcon sx={{ color: "#476C92" }} />}
+            />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
         </ListItem>
@@ -51,8 +54,7 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
-              }}
-            >
+              }}>
               <Button
                 component="label"
                 role={undefined}
@@ -62,13 +64,14 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                 sx={{
                   padding: "5px 10px",
                   marginBottom: "5px",
-                  color: "black",
-                  borderColor: "black",
-                }}
-              >
+                  color: "#476C92",
+                  borderColor: "#476C92",
+                }}>
                 Upload file
-                <input type="file" hidden onChange=
-                  {(e) => {
+                <input
+                  type="file"
+                  hidden
+                  onChange={(e) => {
                     setFile(e.target.files[0]);
                     setSrc(URL.createObjectURL(e.target.files[0]));
                     dispatch(
@@ -78,20 +81,21 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
                         hatchNumber,
                       })
                     );
-                  }
-                }
-                value= {hatchImage}/>
+                  }}
+                  value={hatchImage}
+                />
               </Button>
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                }}
-              >
-                <Typography variant="body1">{fileName}</Typography>
+                }}>
+                <Typography variant="body1" sx={{ color: "#476C92" }}>
+                  {fileName}
+                </Typography>
                 {file && (
                   <IconButton onClick={deleteHandler}>
-                    <ClearIcon />
+                    <ClearIcon sx={{ color: "#476C92" }} />
                   </IconButton>
                 )}
               </Box>
@@ -99,6 +103,7 @@ const UploadImage = ({ hatchNumber, setSrc }) => {
           </List>
         </Collapse>
       </List>
+      <Divider />
     </>
   );
 };

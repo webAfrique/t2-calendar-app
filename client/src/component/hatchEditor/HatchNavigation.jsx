@@ -14,10 +14,9 @@ const HatchNavigation = ({ hatchNumber }) => {
           gap: 1,
           marginTop: 3,
           marginBottom: 3,
-        }}
-      >
+        }}>
         <IconButton>
-          <WestOutlinedIcon sx={{ stroke: "black", strokeWidth: 1 }} />
+          <WestOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
         <Box
           sx={{
@@ -27,16 +26,20 @@ const HatchNavigation = ({ hatchNumber }) => {
             fontSize: 20,
             fontWeight: "bold",
             width: "50px",
-          }}
-        >
+            color: "#476C92",
+          }}>
           {hatchNumber || (
-            <div style={{ visibility: "hidden", width: "20px" }}></div>
+            <div
+              style={{
+                visibility: "hidden",
+                width: "20px",
+              }}></div>
           )}
           <DoorSlidingOutlinedIcon />
         </Box>
 
         <IconButton>
-          <EastOutlinedIcon sx={{ stroke: "black", strokeWidth: 1 }} />
+          <EastOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
       </Box>
       <Divider />

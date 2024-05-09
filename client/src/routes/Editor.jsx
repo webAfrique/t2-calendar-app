@@ -60,8 +60,7 @@ function Editor({ calendarView }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: `calc(100vh - 110px)`,
           margin: "auto",
-        }}
-      >
+        }}>
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
@@ -86,8 +85,7 @@ function Editor({ calendarView }) {
       <Box sx={{ display: "flex" }}>
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
           <Drawer
             variant="permanent"
             sx={{
@@ -99,8 +97,7 @@ function Editor({ calendarView }) {
                 borderColor: "#9AC8E8",
               },
             }}
-            open
-          >
+            open>
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
@@ -118,8 +115,7 @@ function Editor({ calendarView }) {
                     paddingTop: 2,
                     marginTop: 2,
                     gap: 2,
-                  }}
-                >
+                  }}>
                   {/*      <Button
                     onClick={() => setOpen(true)}
                     sx={{
@@ -136,17 +132,16 @@ function Editor({ calendarView }) {
                     color="primary"
                     onClick={() => setIsClicked(false)}
                     sx={{
-                      color: "#333",
+                      color: "#476C92",
                       textTransform: "capitalize",
                       fontSize: "1.1rem",
                       fontWeight: "bold",
-                    }}
-                  >
+                    }}>
                     <ExitToAppOutlinedIcon
                       style={{
                         transform: "scaleX(-1)",
                         marginRight: "10px",
-                        color: "#333",
+                        color: "#476C92",
                       }}
                     />
                     Calendar
@@ -174,8 +169,7 @@ function Editor({ calendarView }) {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             height: dates.length < 30 ? `calc(100vh - 110px)` : "auto", // if dates are more than 30, set height to 100vh
-          }}
-        >
+          }}>
           {/* this code will be rendered conditionally later */}
           {!calendarTitle ? (
             <Typography paragraph sx={{ fontStyle: "italic", color: "grey" }}>

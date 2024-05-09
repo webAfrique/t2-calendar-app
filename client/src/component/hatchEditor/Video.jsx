@@ -9,13 +9,11 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import LinkIcon from "@mui/icons-material/Link";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 Video.propTypes = {
-    onVideoAdd: PropTypes.func.isRequired,
+  onVideoAdd: PropTypes.func.isRequired,
 };
-
 
 function Video({ onVideoAdd }) {
   const [videoURL, setVideoURL] = useState("");
@@ -27,17 +25,17 @@ function Video({ onVideoAdd }) {
   };
 
   const handleToggleInput = () => {
-    setOpen(!open); 
+    setOpen(!open);
   };
 
   return (
     <List>
       <ListItem disablePadding>
-        <ListItemButton onClick={handleToggleInput}>
+        <ListItemButton
+          onClick={handleToggleInput}
+          style={{ color: "#476C92" }}>
           <ListItemText
-            primary={
-              <PlayCircleOutlineIcon style={{ color: "black" }} />
-            }
+            primary={<PlayCircleOutlineIcon style={{ color: "#476C92" }} />}
           />
           {open ? <ExpandMoreIcon /> : <ExpandMoreIcon />}
         </ListItemButton>
@@ -50,6 +48,15 @@ function Video({ onVideoAdd }) {
               placeholder="Place your URL"
               value={videoURL}
               onChange={handleVideoChange}
+              sx={{
+                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#476C92",
+                },
+                "& .Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "#476C92", // Border color when focused
+                  },
+              }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
