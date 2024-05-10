@@ -2,12 +2,10 @@ import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { Box, Button } from "@mui/material";
 import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   backgroundDefaultImageSet,
   backgroundDefaultImageDelete,
@@ -66,9 +64,12 @@ const images = [
   },
 ];
 
-function Carousel({ handleSaveDefaultImage, defaultImage }) {
+function Carousel() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const defaultImage = useSelector(
+    (state) => state.calendar.background.defaultImage
+  );
   const maxSteps = images.length;
   const dispatch = useDispatch(); // Initialize useDispatch
 
@@ -98,7 +99,8 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
-        enableMouseEvents>
+        enableMouseEvents
+      >
         {images.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
@@ -109,7 +111,8 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                }}>
+                }}
+              >
                 <img
                   src={step.imgPath}
                   alt={step.label}
@@ -129,7 +132,8 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
                     position: "absolute",
                     bottom: 8,
                     right: 8,
-                  }}>
+                  }}
+                >
                   {defaultImage === step.imgPath ? "Remove" : "Save"}
                 </Button>
               </Box>
@@ -146,7 +150,8 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
             sx={{ color: "#476C92" }}
             size="small"
             onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}>
+            disabled={activeStep === maxSteps - 1}
+          >
             Next
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
@@ -160,7 +165,8 @@ function Carousel({ handleSaveDefaultImage, defaultImage }) {
             sx={{ color: "#476C92" }}
             size="small"
             onClick={handleBack}
-            disabled={activeStep === 0}>
+            disabled={activeStep === 0}
+          >
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
