@@ -70,10 +70,10 @@ export default function Register2() {
               flexDirection: "column",
               alignItems: "center",
             }}>
-            {/* <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
-              <LockOutlinedIcon />
-            </Avatar> */}
-            <Typography component="h1" variant="h5" sx={{ color: "#476C92" }}>
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ color: "#476C92", my: 3 }}>
               Register
             </Typography>
             <Box
