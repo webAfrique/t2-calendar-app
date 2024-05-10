@@ -19,7 +19,6 @@ import { MuiColorInput } from "mui-color-input";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,17 +33,6 @@ import {
   boldSet,
   italicSet,
 } from "../../features/hatchSlice";
-
-// For the react/prop-types rule/ validation/ typechecking/ eslint error:
-
-TextEditorMenu.propTypes = {
-  inputHatchTitle: PropTypes.string.isRequired,
-  setInputHatchTitle: PropTypes.func.isRequired,
-  inputHatchText: PropTypes.string.isRequired,
-  setInputHatchText: PropTypes.func.isRequired,
-  setHatchTitleStyles: PropTypes.func.isRequired,
-  setHatchTextStyles: PropTypes.func.isRequired,
-};
 
 const fontFamilies = [
   "Roboto",
@@ -79,14 +67,14 @@ function TextEditorMenu({ hatchNumber }) {
     const hatch = state.hatches.hatchObjects.find(
       (hatch) => hatch.number === hatchNumber
     );
-    return hatch ? hatch.titleStyles : null;
+    return hatch ? hatch.titleStyles : "";
   });
 
   const textStyles = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
       (hatch) => hatch.number === hatchNumber
     );
-    return hatch ? hatch.textStyles : null;
+    return hatch ? hatch.textStyles : "";
   });
   console.log("titleStyles", titleStyles);
   console.log("textStyles", textStyles);
@@ -159,25 +147,29 @@ function TextEditorMenu({ hatchNumber }) {
     <ToggleButton
       value="left"
       key="left"
-      sx={{ color: "#476C92", borderColor: "#476C92" }}>
+      sx={{ color: "#476C92", borderColor: "#476C92" }}
+    >
       <FormatAlignLeftIcon />
     </ToggleButton>,
     <ToggleButton
       value="center"
       key="center"
-      sx={{ color: "#476C92", borderColor: "#476C92" }}>
+      sx={{ color: "#476C92", borderColor: "#476C92" }}
+    >
       <FormatAlignCenterIcon />
     </ToggleButton>,
     <ToggleButton
       value="right"
       key="right"
-      sx={{ color: "#476C92", borderColor: "#476C92" }}>
+      sx={{ color: "#476C92", borderColor: "#476C92" }}
+    >
       <FormatAlignRightIcon />
     </ToggleButton>,
     <ToggleButton
       value="justify"
       key="justify"
-      sx={{ color: "#476C92", borderColor: "#476C92" }}>
+      sx={{ color: "#476C92", borderColor: "#476C92" }}
+    >
       <FormatAlignJustifyIcon />
     </ToggleButton>,
   ];
@@ -186,19 +178,22 @@ function TextEditorMenu({ hatchNumber }) {
     <ToggleButton
       value="bold"
       key="bold"
-      sx={{ borderColor: "#476C92", color: "#476C92" }}>
+      sx={{ borderColor: "#476C92", color: "#476C92" }}
+    >
       <FormatBoldIcon />
     </ToggleButton>,
     <ToggleButton
       value="italic"
       key="italic"
-      sx={{ borderColor: "#476C92", color: "#476C92" }}>
+      sx={{ borderColor: "#476C92", color: "#476C92" }}
+    >
       <FormatItalicIcon />
     </ToggleButton>,
     <ToggleButton
       value="underline"
       key="underline"
-      sx={{ borderColor: "#476C92", color: "#476C92" }}>
+      sx={{ borderColor: "#476C92", color: "#476C92" }}
+    >
       <FormatUnderlinedIcon />
     </ToggleButton>,
   ];
@@ -225,7 +220,8 @@ function TextEditorMenu({ hatchNumber }) {
                     textAlign: "center",
                     marginLeft: 5,
                     color: "#476C92",
-                  }}>
+                  }}
+                >
                   T
                 </span>
               }
@@ -242,7 +238,8 @@ function TextEditorMenu({ hatchNumber }) {
                   flexDirection: "column",
                   gap: 2,
                   width: "100%",
-                }}>
+                }}
+              >
                 <ToggleButtonGroup
                   value={activeField}
                   exclusive
@@ -253,7 +250,8 @@ function TextEditorMenu({ hatchNumber }) {
                     }
                   }}
                   fullWidth
-                  color="primary">
+                  color="primary"
+                >
                   {" "}
                   <ToggleButton value="title" aria-label="title">
                     Title
@@ -330,7 +328,8 @@ function TextEditorMenu({ hatchNumber }) {
                       activeField: activeField,
                     })
                   );
-                }}>
+                }}
+              >
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
@@ -350,7 +349,8 @@ function TextEditorMenu({ hatchNumber }) {
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "#476C92", // Set selector border color
                   },
-                }}>
+                }}
+              >
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -399,7 +399,8 @@ function TextEditorMenu({ hatchNumber }) {
                     //set size selector border color
                     borderColor: "#476C92",
                   },
-                }}>
+                }}
+              >
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -418,7 +419,8 @@ function TextEditorMenu({ hatchNumber }) {
                 size="small"
                 /* {...control2} */
                 onChange={handleHighlightChange}
-                aria-label="text formatting">
+                aria-label="text formatting"
+              >
                 {children2}
               </ToggleButtonGroup>
             </ListItemButton>

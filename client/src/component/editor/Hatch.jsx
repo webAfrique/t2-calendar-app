@@ -15,6 +15,7 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const dates = useSelector((state) => state.calendar.dates);
   const hatches = useSelector((state) => state.hatches.hatchObjects);
   console.log("hatches", hatches);
+  console.log("dates from hatches", dates);
 
   const hatchWidth = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(

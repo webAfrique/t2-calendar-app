@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -20,45 +19,43 @@ function EditorHeader({ calendarView, setCalendarView }) {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/user" style={{textDecoration: "none"}}>
-          <Typography
-            variant="h4"
-            sx={{
-              display: "flex",
-              fontFamily: "roboto",
-              fontWeight: "bold",
-              fontSize: { xs: "30px", md: "30px" },
-              textAlign: "center",
-              justifyContent: "center",
-              color: "#476C92",
-              textDecoration: "none",
-              mr: 1,
-            }}
-          >
-            WIME 
-            <br />
+          <Link to="/user" style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h4"
+              sx={{
+                display: "flex",
+                fontFamily: "roboto",
+                fontWeight: "bold",
+                fontSize: { xs: "30px", md: "30px" },
+                textAlign: "center",
+                justifyContent: "center",
+                color: "#476C92",
+                textDecoration: "none",
+                mr: 1,
+              }}
+            >
+              WIME
+              <br />
             </Typography>
-             <Typography
-            variant="body2"
-            sx={{
-              display: "flex",
-              fontFamily: "roboto",
-              textAlign: "center",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: { xs: "12", md: "16"},
-              color: "#476C92",
-              textDecoration: "none",
-              marginTop: "-10px",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-              
-            }}
-          >
-           calendar
+            <Typography
+              variant="body2"
+              sx={{
+                display: "flex",
+                fontFamily: "roboto",
+                textAlign: "center",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: { xs: "12", md: "16" },
+                color: "#476C92",
+                textDecoration: "none",
+                marginTop: "-10px",
+                letterSpacing: "1px",
+                textTransform: "uppercase",
+              }}
+            >
+              calendar
             </Typography>
           </Link>
-          
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ p: 0, display: { md: "flex" }, mx: 2 }}>
@@ -122,8 +119,9 @@ function EditorHeader({ calendarView, setCalendarView }) {
                       border: "1px solid",
                     },
                   }}
+                  onClick={() => auth.signOut()}
                 >
-                  <LogoutIcon onClick={() => auth.signOut()} />
+                  <LogoutIcon />
                 </IconButton>
               </Tooltip>
             </Link>
