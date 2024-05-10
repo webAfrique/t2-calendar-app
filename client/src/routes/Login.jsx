@@ -93,6 +93,10 @@ export default function Login() {
                   "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                     borderColor: "#476C92", // Set text field border color
                   },
+                  "&:hover": {
+                    // Define hover effect
+                    borderColor: "#476C92", // Change border color on hover
+                  },
                 }}
               />
               <TextField
@@ -108,6 +112,10 @@ export default function Login() {
                 sx={{
                   "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                     borderColor: "#476C92", // Set text field border color
+                  },
+                  "&:hover": {
+                    // Define hover effect
+                    borderColor: "#476C92", // Change border color on hover
                   },
                 }}
               />
