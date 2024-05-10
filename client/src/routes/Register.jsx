@@ -51,7 +51,7 @@ export default function Register2() {
           md={7}
           sx={{
             backgroundImage:
-              "url(https://source.unsplash.com/random?christams)",
+              "url(https://images.pexels.com/photos/10401501/pexels-photo-10401501.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)", //change background image
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -70,10 +70,10 @@ export default function Register2() {
               flexDirection: "column",
               alignItems: "center",
             }}>
-            <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
+            {/* <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+            </Avatar> */}
+            <Typography component="h1" variant="h5" sx={{ color: "#476C92" }}>
               Register
             </Typography>
             <Box
@@ -91,6 +91,13 @@ export default function Register2() {
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                    sx={{
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "#476C92", // Set text field border color
+                        },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -101,6 +108,13 @@ export default function Register2() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
+                    InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                    sx={{
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "#476C92", // Set text field border color
+                        },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -111,6 +125,13 @@ export default function Register2() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                    sx={{
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "#476C92", // Set text field border color
+                        },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -122,6 +143,13 @@ export default function Register2() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                    sx={{
+                      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
+                        {
+                          borderColor: "#476C92", // Set text field border color
+                        },
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -132,10 +160,13 @@ export default function Register2() {
                 sx={{
                   mt: 3,
                   mb: 2,
+                  height: "3rem", //set button higher
                   backgroundColor: "#476C92",
+                  fontWeight: "bold",
+                  textTransform: "none", // Set text transformation
                   color: "#FFFFFF",
                   "&:hover": {
-                    backgroundColor: "#9AC8E8",
+                    backgroundColor: "#79B1D7",
                     color: "#476C92",
                   },
                 }}>
@@ -143,7 +174,7 @@ export default function Register2() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/login" variant="body2" sx={{ color: "#476C92" }}>
                     Already have an account? Sign in
                   </Link>
                 </Grid>
