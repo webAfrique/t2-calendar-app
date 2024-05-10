@@ -9,15 +9,10 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import LinkIcon from "@mui/icons-material/Link";
-import PropTypes from "prop-types";
 import { videoSet, videoDelete } from "../../features/hatchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-
-Video.propTypes = {
-  onVideoAdd: PropTypes.func.isRequired,
-};
 
 function Video({ hatchNumber }) {
   const [open, setOpen] = useState(false);
