@@ -28,7 +28,6 @@ const hatch = {
   },
   video: {
     url: "",
-    fileName: "",
   },
 };
 export default hatch;

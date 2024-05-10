@@ -24,7 +24,6 @@ const drawerWidth = 350;
 
 function Editor({ calendarView }) {
   const [hatchNumber, setHatchNumber] = useState();
-  const [onVideoAdd, handleAddVideo] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
   //regarding calendar slice
@@ -107,7 +106,7 @@ function Editor({ calendarView }) {
                 <WidthHeight hatchNumber={hatchNumber} />
                 <TextEditor hatchNumber={hatchNumber} />
                 <UploadImage hatchNumber={hatchNumber} />
-                <Video onVideoAdd={handleAddVideo} />
+                <Video hatchNumber={hatchNumber} />
                 <Box
                   sx={{
                     display: "flex",
@@ -199,7 +198,6 @@ function Editor({ calendarView }) {
           <BasicModal
             setOpen={setOpen}
             open={open}
-            videoURL={onVideoAdd}
             onClose={() => setOpen(false)}
             hatchNumber={hatchNumber}
           />

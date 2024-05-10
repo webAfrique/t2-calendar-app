@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+//import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
 import Draggable from "react-draggable";
 
@@ -21,11 +21,12 @@ const style = {
 function convertToEmbedURL(url) {
   const regex = /(?:v=)(.*?)(?:&|$)/;
   const match = url.match(regex);
+  console.log("match:", match);
   const videoId = match ? match[1] : null;
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 }
 
-export default function BasicModal({ hatchNumber, setOpen, open, videoURL }) {
+export default function BasicModal({ hatchNumber, setOpen, open }) {
   //redux
   const title = useSelector((state) => {
     const hatch = state.hatches.hatchObjects.find(
@@ -60,6 +61,13 @@ export default function BasicModal({ hatchNumber, setOpen, open, videoURL }) {
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.image : "";
+  });
+
+  const video = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.video : "";
   });
 
   return (
@@ -133,13 +141,13 @@ export default function BasicModal({ hatchNumber, setOpen, open, videoURL }) {
             sx={{
               height: "200px",
               alignContent: "center",
-              border: !videoURL && "1px dashed grey",
+              border: !video.url && "1px dashed grey",
               textAlign: "center",
             }}
           >
-            {videoURL ? (
+            {video.url ? (
               <iframe
-                src={convertToEmbedURL(videoURL)}
+                src={convertToEmbedURL(video.url)}
                 title="Video"
                 width="100%"
                 height="100%"

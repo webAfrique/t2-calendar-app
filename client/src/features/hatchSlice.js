@@ -130,6 +130,22 @@ const hatchesSlice = createSlice({
         }
       });
     },
+    videoSet: (state, action) => {
+      const { hatchNumber, url } = action.payload;
+      state.hatchObjects.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.video.url = url;
+        }
+      });
+    },
+    videoDelete: (state, action) => {
+      const { hatchNumber } = action.payload;
+      state.hatchObjects.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.video.url = "";
+        }
+      });
+    },
   },
 });
 
@@ -150,4 +166,6 @@ export const {
   italicSet,
   imageSet,
   imageDelete,
+  videoSet,
+  videoDelete,
 } = hatchesSlice.actions;

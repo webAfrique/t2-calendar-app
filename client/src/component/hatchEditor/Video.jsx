@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -10,19 +10,27 @@ import InputAdornment from "@mui/material/InputAdornment";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import LinkIcon from "@mui/icons-material/Link";
 import PropTypes from "prop-types";
+import { videoSet, videoDelete } from "../../features/hatchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, IconButton } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 
 Video.propTypes = {
   onVideoAdd: PropTypes.func.isRequired,
 };
 
-function Video({ onVideoAdd }) {
-  const [videoURL, setVideoURL] = useState("");
+function Video({ hatchNumber }) {
   const [open, setOpen] = useState(false);
 
-  const handleVideoChange = (e) => {
-    setVideoURL(e.target.value);
-    onVideoAdd(e.target.value);
-  };
+  const dispatch = useDispatch();
+
+  const hatchVideo = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === hatchNumber
+    );
+    return hatch ? hatch.video : "";
+  });
+  console.log("hatchVideo", hatchVideo);
 
   const handleToggleInput = () => {
     setOpen(!open);
@@ -33,7 +41,8 @@ function Video({ onVideoAdd }) {
       <ListItem disablePadding>
         <ListItemButton
           onClick={handleToggleInput}
-          style={{ color: "#476C92" }}>
+          style={{ color: "#476C92" }}
+        >
           <ListItemText
             primary={<PlayCircleOutlineIcon style={{ color: "#476C92" }} />}
           />
@@ -46,16 +55,19 @@ function Video({ onVideoAdd }) {
             <TextField
               fullWidth
               placeholder="Place your URL"
-              value={videoURL}
-              onChange={handleVideoChange}
+              value={hatchVideo.url}
+              onChange={(e) => {
+                dispatch(
+                  videoSet({
+                    url: e.target.value,
+                    hatchNumber,
+                  })
+                );
+              }}
               sx={{
                 "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#476C92",
+                  borderColor: "#476C92", // Set text field border color
                 },
-                "& .Mui-focused .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor: "#476C92", // Border color when focused
-                  },
               }}
               InputProps={{
                 startAdornment: (
@@ -65,6 +77,26 @@ function Video({ onVideoAdd }) {
                 ),
               }}
             />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              {hatchVideo.url && (
+                <IconButton
+                  onClick={() =>
+                    dispatch(
+                      videoDelete({
+                        hatchNumber,
+                      })
+                    )
+                  }
+                >
+                  <ClearIcon sx={{ color: "#476C92" }} />
+                </IconButton>
+              )}
+            </Box>
           </ListItemButton>
         </List>
       </Collapse>
