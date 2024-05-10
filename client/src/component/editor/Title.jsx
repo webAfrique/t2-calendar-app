@@ -12,7 +12,6 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
 import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { MuiColorInput } from "mui-color-input";
@@ -114,7 +113,8 @@ function Title() {
                     fontWeight: "bold",
                     textAlign: "center",
                     color: "#476C92", //set text color
-                  }}>
+                  }}
+                >
                   Title
                 </span>
               }
@@ -145,7 +145,8 @@ function Title() {
                 value={alignment}
                 size="small"
                 {...control}
-                aria-label="Small sizes">
+                aria-label="Small sizes"
+              >
                 {children}
               </ToggleButtonGroup>
             </ListItemButton>
@@ -161,7 +162,8 @@ function Title() {
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "#476C92", // Set selector border color
                   },
-                }}>
+                }}
+              >
                 {fontFamilies.map((font) => (
                   <MenuItem key={font} value={font}>
                     {font}
@@ -204,7 +206,8 @@ function Title() {
                     //set size selector border color
                     borderColor: "#476C92",
                   },
-                }}>
+                }}
+              >
                 <MenuItem value={12}>12</MenuItem>
                 <MenuItem value={14}>14</MenuItem>
                 <MenuItem value={16}>16</MenuItem>
@@ -223,23 +226,27 @@ function Title() {
                 size="small"
                 /*  value={highlights} */
                 aria-label="text formatting"
-                onChange={handleHighlightChange}>
+                onChange={handleHighlightChange}
+              >
                 <ToggleButton
                   value="bold"
                   aria-label="bold"
-                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}
+                >
                   <FormatBoldIcon />
                 </ToggleButton>
                 <ToggleButton
                   value="italic"
                   aria-label="italic"
-                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}
+                >
                   <FormatItalicIcon />
                 </ToggleButton>
                 <ToggleButton
                   value="underline"
                   aria-label="underline"
-                  sx={{ borderColor: "#476C92", color: "#476C92" }}>
+                  sx={{ borderColor: "#476C92", color: "#476C92" }}
+                >
                   <FormatUnderlinedIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
