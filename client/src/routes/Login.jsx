@@ -49,14 +49,14 @@ export default function Login() {
           md={7}
           sx={{
             backgroundImage:
-              "url(https://source.unsplash.com/random?christams)",
+              "url(https://images.pexels.com/photos/10401501/pexels-photo-10401501.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)", //change background image
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "left",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -68,10 +68,10 @@ export default function Login() {
               flexDirection: "column",
               alignItems: "center",
             }}>
-            <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
+            {/* <Avatar sx={{ m: 1, bgcolor: "#DFBD69" }}>
               <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+            </Avatar> */}
+            <Typography component="h1" variant="h5" sx={{ color: "#476C92" }}>
               Log In
             </Typography>
             <Box
@@ -88,6 +88,12 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                sx={{
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set text field border color
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -98,6 +104,12 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                InputLabelProps={{ style: { color: "#476C92" } }} // Set label color
+                sx={{
+                  "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#476C92", // Set text field border color
+                  },
+                }}
               />
               <Button
                 type="submit"
@@ -106,10 +118,13 @@ export default function Login() {
                 sx={{
                   mt: 3,
                   mb: 2,
+                  height: "3rem", //set button higher
                   backgroundColor: "#476C92",
+                  fontWeight: "bold", //set font weight
+                  textTransform: "none", // Set text transformation to none
                   color: "#FFFFFF",
                   "&:hover": {
-                    backgroundColor: "#9AC8E8",
+                    backgroundColor: "#79B1D7",
                     color: "#476C92",
                   },
                 }}>
@@ -117,7 +132,10 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="/register" variant="body2">
+                  <Link
+                    href="/register"
+                    variant="body2"
+                    sx={{ color: "#476C92" }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
