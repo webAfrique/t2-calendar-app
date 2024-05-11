@@ -71,7 +71,7 @@ export default function Login() {
             <Typography
               component="h1"
               variant="h5"
-              sx={{ color: "#476C92", my: 3 }}>
+              sx={{ color: "#476C92", my: 3.5 }}>
               Log In
             </Typography>
             <Box

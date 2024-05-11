@@ -73,7 +73,7 @@ export default function Register2() {
             <Typography
               component="h1"
               variant="h5"
-              sx={{ color: "#476C92", my: 3 }}>
+              sx={{ color: "#476C92", my: 3.5 }}>
               Register
             </Typography>
             <Box
