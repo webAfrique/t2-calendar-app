@@ -19,6 +19,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { getDefault } from "../../../server/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setCalendarID } from "../features/calendarSlice";
 
 function User() {
   const [user, loading, error] = useAuthState(auth);
@@ -31,6 +32,7 @@ function User() {
   //navigation only happens after the data has been fetched
   const handleClick = async () => {
     await getDefault(dispatch);
+    dispatch(setCalendarID(Date.now()));
     navigateTo("/editor");
   };
 
@@ -240,7 +242,7 @@ function User() {
               }}
               onClick={handleClick}
             >
-              Create
+              Create new
             </Button>
           </Box>
         </Box>
