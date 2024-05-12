@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUser } from "../../../server/firebase";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,8 +15,8 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import ShareIcon from "@mui/icons-material/Share";
-import { getDefault } from "../../../server/utils";
+//import ShareIcon from "@mui/icons-material/Share";
+import { getDefault, getExistingCalendars } from "../../../server/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setCalendarID } from "../features/calendarSlice";
@@ -25,6 +25,8 @@ function User() {
   const [user, loading, error] = useAuthState(auth);
   const [username, setUsername] = useState("");
   const [calendars, setCalendars] = useState([]);
+  const [loadingCalendars, setLoadingCalendars] = useState(true);
+  console.log("calendars", calendars);
 
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
@@ -37,18 +39,21 @@ function User() {
   };
 
   useEffect(() => {
-    // Simulate fetching calendars
-    const fetchCalendars = async () => {
-      setCalendars([
-        { id: 1, name: "chokolokobangoshe" },
-        { id: 2, name: "na wetin dey haffen" },
-        { id: 3, name: "Senibo Dagogo Jack" },
-        { id: 4, name: "honourable nkagbara" },
-      ]);
-    };
+    if (user) {
+      const userID = user.uid;
+      getExistingCalendars(userID)
+        .then((fetchedCalendars) => {
+          setCalendars(fetchedCalendars);
+          setLoadingCalendars(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching calendars: ", error);
+          setLoadingCalendars(false);
+        });
+    }
+  }, [user]);
 
-    fetchCalendars();
-
+  useEffect(() => {
     if (user) {
       const fetchUser = async () => {
         const userData = await getUser(user.uid);
@@ -74,13 +79,27 @@ function User() {
         justifyContent: "center",
       }}
     >
-      {calendars.length > 0 ? (
+      {loadingCalendars ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+          }}
+        >
+          <CircularProgress sx={{ color: "#476C92" }} />
+          <Typography variant="h5" sx={{ color: "#476C92" }}>
+            Loading calendars...
+          </Typography>
+        </Box>
+      ) : calendars.length > 0 ? (
         <>
           <Typography
             component="h2"
             variant="h4"
             sx={{
-              fontFamily: "Inter",
               fontWeight: "bold",
               color: "#476C92",
               mt: -5,
@@ -120,7 +139,7 @@ function User() {
                             color: "#00A8CD",
                           }}
                         >
-                          {calendar.name}
+                          {calendar.title ? calendar.title : "Untitled"}
                         </Typography>
                       </TableCell>
                       <TableCell align="right" sx={{ pr: 1 }}>
@@ -156,14 +175,14 @@ function User() {
                         >
                           <FavoriteBorderOutlinedIcon />
                         </IconButton>
-                        <IconButton
+                        {/* <IconButton
                           component={Link}
                           to={`/calendars/${calendar.id}/share`}
                           aria-label="share calendar"
                           sx={{ mx: 1, color: "#00A8CD" }}
                         >
                           <ShareIcon />
-                        </IconButton>
+                        </IconButton> */}
                       </TableCell>
                     </TableRow>
                   ))}
