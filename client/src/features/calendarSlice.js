@@ -43,6 +43,9 @@ const calendarSlice = createSlice({
     setInitialState(state, action) {
       return action.payload;
     },
+    setCalendarID(state, action) {
+      state.id = action.payload;
+    },
     //action - individual state transitions
     typedTitle: (state, action) => {
       state.title = action.payload;
@@ -138,4 +141,5 @@ export const {
   backgroundDefaultImageDelete, //export carousel default img delete
   shapeSet,
   setInitialState,
+  setCalendarID,
 } = calendarSlice.actions;

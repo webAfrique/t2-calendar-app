@@ -10,8 +10,16 @@ import SaveIcon from "@mui/icons-material/Save";
 import LogoutIcon from "@mui/icons-material/Logout";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Container } from "@mui/material";
+import { useSelector } from "react-redux";
+import { saveSettings } from "../../../../server/utils";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function EditorHeader({ calendarView, setCalendarView }) {
+  const calendarSettings = useSelector((state) => state.calendar);
+  const [user] = useAuthState(auth);
+  const userID = user.uid;
+  const calendarID = useSelector((state) => state.calendar.id).toString();
+
   return (
     <AppBar
       position="static"
@@ -98,6 +106,9 @@ function EditorHeader({ calendarView, setCalendarView }) {
                     border: "1px solid",
                   },
                 }}
+                onClick={() =>
+                  saveSettings(calendarSettings, userID, calendarID)
+                }
               >
                 <SaveIcon />
               </IconButton>
