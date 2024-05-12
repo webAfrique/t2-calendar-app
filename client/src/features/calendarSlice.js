@@ -1,44 +1,48 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addDays } from "date-fns";
 import hatch from "./hatchObject";
 
+//this calendar object is used in Firebase, left here for reference
 //initial state
-const initialState = {
-  title: "",
-  styles: {
-    textAlign: "center",
-    fontFamily: "Roboto",
-    color: "black",
-    fontSize: 16,
-    textDecoration: "none",
-    fontWeight: "normal",
-    fontStyle: "normal",
-  },
-  dates: [],
-  calendarRange: [
-    {
-      startDate: new Date().toISOString(),
-      endDate: addDays(new Date(), 1).toISOString(),
-      key: "selection",
-    },
-  ],
-  background: {
-    color: "white",
-    imageURL: "",
-    fileName: "",
-    defaultImage: "",
-  },
-  shape: "Square",
-};
+// const initialState = {
+//   title: "",
+//   styles: {
+//     textAlign: "center",
+//     fontFamily: "Roboto",
+//     color: "black",
+//     fontSize: 16,
+//     textDecoration: "none",
+//     fontWeight: "normal",
+//     fontStyle: "normal",
+//   },
+//   dates: [],
+//   calendarRange: [
+//     {
+//       startDate: "",
+//       endDate: "",
+//       key: "selection",
+//     },
+//   ],
+//   background: {
+//     color: "white",
+//     imageURL: "",
+//     fileName: "",
+//     defaultImage: "",
+//   },
+//   shape: "Square",
+// };
 
 //create a slice
 //first parameter is the slice name,
 //second parameter is the initial state,
 //third parameter is an object that contains the reducers
+
 const calendarSlice = createSlice({
   name: "calendar",
-  initialState,
+  initialState: {},
   reducers: {
+    setInitialState(state, action) {
+      return action.payload;
+    },
     //action - individual state transitions
     typedTitle: (state, action) => {
       state.title = action.payload;
@@ -133,4 +137,5 @@ export const {
   backgroundDefaultImageSet, //export carousel default img set
   backgroundDefaultImageDelete, //export carousel default img delete
   shapeSet,
+  setInitialState,
 } = calendarSlice.actions;
