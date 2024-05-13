@@ -65,7 +65,7 @@ const Home = () => {
                 </Typography>
               </div>
               <Box textAlign={"center"}>
-                <Link to={!user ? "/login" : "/editor"}>
+                <Link to="/login">
                   <Button
                     variant="contained"
                     sx={{
