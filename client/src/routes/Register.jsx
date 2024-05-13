@@ -11,7 +11,6 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -65,7 +64,6 @@ export default function Register2() {
           <Box
             sx={{
               my: 8,
-              mx: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -80,7 +78,7 @@ export default function Register2() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}>
+              sx={{ mt: 3, mx: 4 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -97,6 +95,10 @@ export default function Register2() {
                         {
                           borderColor: "#476C92", // Set text field border color
                         },
+                      "&:hover": {
+                        // Define hover effect
+                        borderColor: "#476C92 !important", // Change border color on hover
+                      },
                     }}
                   />
                 </Grid>
@@ -114,6 +116,10 @@ export default function Register2() {
                         {
                           borderColor: "#476C92", // Set text field border color
                         },
+                      "&:hover": {
+                        // Define hover effect
+                        borderColor: "#476C92 !important", // Change border color on hover
+                      },
                     }}
                   />
                 </Grid>
@@ -131,6 +137,10 @@ export default function Register2() {
                         {
                           borderColor: "#476C92", // Set text field border color
                         },
+                      "&:hover": {
+                        // Define hover effect
+                        borderColor: "#476C92 !important", // Change border color on hover
+                      },
                     }}
                   />
                 </Grid>
@@ -149,6 +159,10 @@ export default function Register2() {
                         {
                           borderColor: "#476C92", // Set text field border color
                         },
+                      "&:hover": {
+                        // Define hover effect
+                        borderColor: "#476C92 !important", // Change border color on hover
+                      },
                     }}
                   />
                 </Grid>

@@ -11,7 +11,6 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -95,7 +94,7 @@ export default function Login() {
                   },
                   "&:hover": {
                     // Define hover effect
-                    borderColor: "#476C92", // Change border color on hover
+                    borderColor: "#476C92 !important", // Change border color on hover
                   },
                 }}
               />
@@ -115,7 +114,7 @@ export default function Login() {
                   },
                   "&:hover": {
                     // Define hover effect
-                    borderColor: "#476C92", // Change border color on hover
+                    borderColor: "#476C92 !important", // Change border color on hover
                   },
                 }}
               />
