@@ -175,7 +175,7 @@ function Header() {
             flexGrow: 1, 
             display: { xs: "none", md: "flex" }, 
             mx: 5,
-            gap: 3 }}>
+            gap: "30px" }}>
           <Link
                     onClick={() => scrollToSection("instruction")}
                     style={{
