@@ -4,7 +4,6 @@ import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import styles from "./Hatch.module.css";
-import { setHatchObjects } from "../../features/hatchSlice";
 
 const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const shape = useSelector((state) => state.calendar.shape);
@@ -14,26 +13,21 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   //regarding calendar slice
   const dispatch = useDispatch();
   const dates = useSelector((state) => state.calendar.dates);
-  const hatches = useSelector((state) => state.hatches.hatchObjects);
-  console.log("hatches", hatches);
+  console.log("dates from hatch", dates);
+  // const hatches = useSelector((state) => state.hatches.hatchObjects);
+  // console.log("hatches", hatches);
 
   const hatchWidth = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
-      (hatch) => hatch.number === date
-    );
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
     return hatch ? hatch.width : 100;
   });
   const hatchHeight = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
-      (hatch) => hatch.number === date
-    );
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
     return hatch ? hatch.height : 100;
   });
 
   const hatchImage = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
-      (hatch) => hatch.number === date
-    );
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
 
     return hatch ? hatch.image.url : "";
   });
@@ -78,9 +72,6 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   //         onClick={() => {
   //           setIsClicked(true);
   //           setHatchNumber(date);
-  //           if (hatches.length === 0) {
-  //             dispatch(setHatchObjects(dates));
-  //           }
   //         }}
   //       >
   //         <Star />
@@ -108,13 +99,11 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
         onClick={() => {
           setIsClicked(true);
           setHatchNumber(date);
-          if (hatches.length === 0) {
-            dispatch(setHatchObjects(dates));
-          }
           setOpen(true);
         }}
         className={styles.door}
-        style={widthHeight}>
+        style={widthHeight}
+      >
         <div className={styles.doorFront} style={style}>
           <div className={styles.doorNumber}>
             <Typography variant="h5">{date}</Typography>
@@ -128,7 +117,8 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
               ...styleOnHover,
             }}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}></div>
+            onMouseLeave={() => setIsHovered(false)}
+          ></div>
         </div>
       </div>
     </Draggable>
