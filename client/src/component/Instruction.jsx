@@ -59,7 +59,6 @@ const Instruction = () => {
                 sx={{
                   fontSize: { xs: "36px", md: "64px" },
                   fontWeight: "bold",
-                  fontSize: "1.1 rem",
                   color: "#476C92",
                   textAlign: "center",
                 }}>
@@ -119,7 +118,7 @@ const Instruction = () => {
                       variant="body2"
                       sx={{
                         color: "#476C92",
-                        fontSize: "1rem",
+                        fontSize: "1.1rem",
                       }}>
                       {description}
                     </Typography>
