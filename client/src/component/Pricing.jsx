@@ -71,39 +71,42 @@ export default function Pricing() {
         alignItems: "center",
         padding: { xs: "40px", md: "0 50px" },
         textAlign: "center",
-      }}>
+      }}
+    >
       <Container
         id="pricing"
-        sx={{ py: { xs: 8, sm: 16 }, padding: { xs: "40px", md: "0 50px" } }}>
+        sx={{ py: { xs: 8, sm: 16 }, padding: { xs: "40px", md: "0 50px" } }}
+      >
         <Box
           sx={{
             width: { sm: "100%", md: "70%" },
             textAlign: { sm: "left", md: "center" },
-          }}>
+          }}
+        >
           <Typography
             component="h2"
             variant="h4"
             sx={{
-              fontFamily: "Inter",
               fontSize: { xs: "36px", md: "60px" },
               fontWeight: "bold",
               color: "#476C92",
               textAlign: "center",
               mb: 2,
-            }}>
+            }}
+          >
             Pricing
           </Typography>
           <Typography
             variant="body1"
             gutterBottom
             sx={{
-              fontFamily: "Inter",
               fontSize: { xs: "18px", md: "24px" },
               fontWeight: "bold",
               color: "#00A8CD",
               textAlign: "center",
               mb: 2,
-            }}>
+            }}
+          >
             Choose the perfect plan for your Advent Calendar needs and delight
             your users this holiday season!
           </Typography>
@@ -112,7 +115,8 @@ export default function Pricing() {
           sx={{
             width: { sm: "100%", md: "70%" },
             textAlign: { sm: "left", md: "center" },
-          }}>
+          }}
+        >
           <Grid
             container
             sx={{
@@ -121,14 +125,16 @@ export default function Pricing() {
               gap: 1,
             }}
             alignItems="center"
-            justifyContent="center">
+            justifyContent="center"
+          >
             {tiers.map((tier) => (
               <Grid
                 item
                 key={tier.title}
                 xs={12}
                 sm={tier.title === "Enterprise" ? 12 : 6}
-                md={4}>
+                md={4}
+              >
                 <Card
                   sx={{
                     py: 2,
@@ -140,7 +146,8 @@ export default function Pricing() {
                       tier.title === "Premium" ? "primary.main" : undefined,
                     background:
                       tier.title === "Premium" ? "#E0F7FA" : undefined,
-                  }}>
+                  }}
+                >
                   <CardContent>
                     <Box
                       sx={{
@@ -149,7 +156,8 @@ export default function Pricing() {
                         justifyContent: "space-between",
                         alignItems: "center",
                         color: tier.title === "Premium" ? "#00A8CD" : "#00A8CD",
-                      }}>
+                      }}
+                    >
                       <Typography component="h3" variant="h6">
                         {tier.title}
                       </Typography>
@@ -177,7 +185,8 @@ export default function Pricing() {
                         display: "flex",
                         alignItems: "baseline",
                         color: tier.title === "Premium" ? "#476C92" : "#476C92",
-                      }}>
+                      }}
+                    >
                       <Typography component="h4" variant="h4">
                         €{tier.price}
                       </Typography>
@@ -200,7 +209,8 @@ export default function Pricing() {
                           display: "flex",
                           gap: 0.5,
                           alignItems: "center",
-                        }}>
+                        }}
+                      >
                         <CheckCircleRoundedIcon
                           sx={{
                             width: 15,
@@ -214,14 +224,16 @@ export default function Pricing() {
                           sx={{
                             color:
                               tier.title === "Premium" ? "#476C92" : undefined,
-                          }}>
+                          }}
+                        >
                           {line}
                         </Typography>
                       </Box>
                     ))}
                   </CardContent>
                   <CardActions
-                    sx={{ alignItems: "center", justifyContent: "center" }}>
+                    sx={{ alignItems: "center", justifyContent: "center" }}
+                  >
                     <Button
                       variant={tier.buttonVariant}
                       sx={{
@@ -232,6 +244,7 @@ export default function Pricing() {
                         fontWeight: "bold",
                         borderRadius: "30px",
                         textTransform: "capitalize",
+                        fontSize: "1rem",
                         "&:hover": {
                           backgroundColor: "white",
                           color: "#476C92",
@@ -239,7 +252,8 @@ export default function Pricing() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       {tier.buttonText}
                     </Button>
                   </CardActions>
