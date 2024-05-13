@@ -75,7 +75,8 @@ function Header() {
         backgroundColor: "#fff",
         boxShadow: "none",
         borderBottom: "2px solid #9AC8E8",
-      }}>
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link
@@ -84,7 +85,8 @@ function Header() {
               display: "flex",
               flexDirection: "column",
               textDecoration: "none",
-            }}>
+            }}
+          >
             <Typography
               variant="h4"
               sx={{
@@ -95,7 +97,8 @@ function Header() {
                 justifyContent: "center",
                 color: "#476C92",
                 textDecoration: "none",
-              }}>
+              }}
+            >
               WIME
               <br />
             </Typography>
@@ -111,7 +114,8 @@ function Header() {
                 textDecoration: "none",
                 marginTop: "-10px",
                 textTransform: "uppercase",
-              }}>
+              }}
+            >
               calendar
             </Typography>
           </Link>
@@ -122,7 +126,8 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="#00a8cd">
+              color="#00a8cd"
+            >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -143,7 +148,8 @@ function Header() {
                 textDecoration: "none",
                 display: { xs: "block", md: "none" },
                 color: "#476C92",
-              }}>
+              }}
+            >
               <MenuItem
                 sx={{
                   textDecoration: "none",
@@ -152,7 +158,8 @@ function Header() {
                 onClick={() => {
                   scrollToSection("instruction");
                   handleCloseNavMenu();
-                }}>
+                }}
+              >
                 <Typography textAlign="center">Instruction</Typography>
               </MenuItem>
               <MenuItem
@@ -160,7 +167,8 @@ function Header() {
                 onClick={() => {
                   scrollToSection("pricing");
                   handleCloseNavMenu();
-                }}>
+                }}
+              >
                 <Typography textAlign="center">Pricing</Typography>
               </MenuItem>
             </Menu>
@@ -173,17 +181,21 @@ function Header() {
               display: { xs: "none", md: "flex" },
               mx: 5,
               gap: "30px",
-            }}>
+            }}
+          >
             <Link
               onClick={() => scrollToSection("instruction")}
               style={{
                 textDecoration: "none",
-              }}>
+              }}
+            >
               <Typography
                 style={{
                   color: "#476C92",
                   fontWeight: "bold",
-                }}>
+                  fontSize: "1.1rem",
+                }}
+              >
                 Instruction
               </Typography>
             </Link>
@@ -191,12 +203,15 @@ function Header() {
               onClick={() => scrollToSection("pricing")}
               style={{
                 textDecoration: "none",
-              }}>
+              }}
+            >
               <Typography
                 style={{
                   color: "#476C92",
                   fontWeight: "bold",
-                }}>
+                  fontSize: "1.1rem",
+                }}
+              >
                 Pricing
               </Typography>
             </Link>
@@ -211,12 +226,15 @@ function Header() {
                     display: "flex",
                     alignItems: "center",
                     gap: "30px",
-                  }}>
+                  }}
+                >
                   <Typography
                     style={{
                       color: "#476C92",
                       fontWeight: "bold",
-                    }}>
+                      fontSize: "1.1rem",
+                    }}
+                  >
                     {username && `Welcome, ${username}!`}
                   </Typography>
 
@@ -224,12 +242,15 @@ function Header() {
                     to="/user"
                     style={{
                       textDecoration: "none",
-                    }}>
+                    }}
+                  >
                     <Typography
                       style={{
                         color: "#476C92",
                         fontWeight: "bold",
-                      }}>
+                        fontSize: "1.1rem",
+                      }}
+                    >
                       Calendars
                     </Typography>
                   </Link>
@@ -238,14 +259,15 @@ function Header() {
                   <Link to="/">
                     <Button
                       onClick={() => auth.signOut()}
-                      variant="contained"
+                      variant="text"
                       sx={{
                         width: "100px",
-                        backgroundColor: "#476C92",
-                        color: "white",
+                        color: "#476C92",
                         fontWeight: "bold",
                         borderRadius: "30px",
                         textTransform: "capitalize",
+                        fontSize: "1.1rem",
+                        border: "1px solid transparent",
                         "&:hover": {
                           backgroundColor: "white",
                           color: "#476C92",
@@ -253,7 +275,8 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Log out
                     </Button>
                   </Link>
@@ -264,23 +287,25 @@ function Header() {
                 {!user && !isLoginRoute && (
                   <Link to="/login">
                     <Button
-                      variant="contained"
+                      variant="text"
                       sx={{
                         width: "100px",
                         fontWeight: "bold",
-                        backgroundColor: "#476C92",
-                        color: "white",
+                        fontSize: "1.1rem",
+                        color: "#476C92",
                         borderRadius: "30px",
                         textTransform: "capitalize",
+                        border: "1px solid transparent",
                         mr: !user && !isRegisterRoute ? 2 : 0, // Set margin-right conditionally
                         "&:hover": {
-                          backgroundColor: "white",
+                          /* backgroundColor: "white", */
                           color: "#476C92",
                           borderColor: "#476C92",
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Log in
                     </Button>
                   </Link>
@@ -288,14 +313,15 @@ function Header() {
                 {!user && !isRegisterRoute && (
                   <Link to="/register">
                     <Button
-                      variant="contained"
+                      variant="text"
                       sx={{
                         width: "100px",
                         fontWeight: "bold",
-                        backgroundColor: "#476C92",
-                        color: "white",
+                        color: "#476C92",
                         borderRadius: "30px",
                         textTransform: "capitalize",
+                        fontSize: "1.1rem",
+                        border: "1px solid transparent",
                         "&:hover": {
                           backgroundColor: "white",
                           color: "#476C92",
@@ -303,7 +329,8 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}>
+                      }}
+                    >
                       Register
                     </Button>
                   </Link>
@@ -316,7 +343,8 @@ function Header() {
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0, display: { xs: "flex", md: "none" } }}>
+                sx={{ p: 0, display: { xs: "flex", md: "none" } }}
+              >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -334,7 +362,8 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
+              onClose={handleCloseUserMenu}
+            >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
