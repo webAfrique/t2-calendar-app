@@ -20,6 +20,7 @@ import {
   getDefault,
   getExistingCalendars,
   getSpecificCalendars,
+  deleteSpecificCalendar,
 } from "../../../server/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -73,6 +74,17 @@ function User() {
     if (calendarData) {
       dispatch(setInitialState(calendarData));
     }
+  };
+
+  const handleDeleteCalendar = async (id) => {
+    await deleteSpecificCalendar(id);
+    getExistingCalendars(user.uid)
+      .then((fetchedCalendars) => {
+        setCalendars(fetchedCalendars);
+      })
+      .catch((error) => {
+        console.error("Error fetching calendars: ", error);
+      });
   };
 
   // if user is not logged in, redirect to login page
@@ -173,10 +185,11 @@ function User() {
                           <EditOutlinedIcon />
                         </IconButton>
                         <IconButton
-                          component={Link}
-                          to={`/calendars/${calendar.id}/delete`}
+                          /*  component={Link}
+                          to={`/calendars/${calendar.id}/delete`} */
                           aria-label="delete calendar"
                           sx={{ mx: 1, color: "#00A8CD" }}
+                          onClick={() => handleDeleteCalendar(calendar.id)}
                         >
                           <DeleteOutlineOutlinedIcon />
                         </IconButton>

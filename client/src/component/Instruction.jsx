@@ -47,7 +47,8 @@ const Instruction = () => {
         alignItems: "center",
         padding: { xs: "40px", md: "0 50px" },
         textAlign: "center",
-      }}>
+      }}
+    >
       <Container id="instruction" sx={{ py: { xs: 8, sm: 16 } }}>
         <Grid container spacing={6}>
           <Grid item xs={12} md={8}>
@@ -61,7 +62,8 @@ const Instruction = () => {
                   fontWeight: "bold",
                   color: "#476C92",
                   textAlign: "center",
-                }}>
+                }}
+              >
                 Instruction
               </Typography>
               <Typography
@@ -74,7 +76,8 @@ const Instruction = () => {
                   color: "#00A8CD",
                   textAlign: "center",
                   marginBottom: "30px",
-                }}>
+                }}
+              >
                 Follow these simple steps to start your design
               </Typography>
             </div>
@@ -89,7 +92,8 @@ const Instruction = () => {
                 alignItems: "center",
                 marginLeft: "auto", // Move the Stack to the right
                 marginRight: "auto", // Move the Stack to the right
-              }}>
+              }}
+            >
               {instructions.map(({ icon, description }, index) => (
                 <Box
                   key={index}
@@ -98,19 +102,22 @@ const Instruction = () => {
                     p: 3,
                     borderRadius: "16px",
                     backgroundColor: "white",
-                  }}>
+                  }}
+                >
                   <Stack
                     direction="row"
                     alignItems="center"
                     spacing={2}
-                    sx={{ width: "100%" }}>
+                    sx={{ width: "100%" }}
+                  >
                     <Typography
                       variant="body1"
                       sx={{
                         fontWeight: "bold",
                         color: "#476C92",
                         fontSize: "2rem",
-                      }}>
+                      }}
+                    >
                       {index + 1}
                     </Typography>
                     <Box sx={{ color: "#476C92" }}>{icon}</Box>

@@ -8,6 +8,7 @@ import {
   query,
   where,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 
 // Get default settings for calendar menu from Firestore
@@ -56,4 +57,10 @@ export const getSpecificCalendars = async (calendarID) => {
     console.log("No document found with id:", calendarID);
     return null;
   }
+};
+
+//delete specific user calendar from the database
+export const deleteSpecificCalendar = async (calendarID) => {
+  const docRef = doc(db, "calendars", calendarID.toString());
+  await deleteDoc(docRef);
 };
