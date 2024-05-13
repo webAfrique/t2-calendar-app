@@ -24,7 +24,7 @@ export const getDefault = async (dispatch) => {
 };
 
 //save the first calendar settings to the database (create a document) and update the document if it already exists
-export const saveSettings = async (calendarSettings, uid, calendarIDString) => {
+export const saveSettings = async (calendarSettings, uid, calendarID) => {
   const docRef = doc(db, "calendars", calendarID);
   const payload = calendarSettings;
 
