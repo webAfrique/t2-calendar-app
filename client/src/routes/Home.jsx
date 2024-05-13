@@ -40,7 +40,7 @@ const Home = () => {
             fontFamily: "Inter",
             fontSize: { xs: "36px", md: "64px" },
             fontWeight: "bold",
-            color: "#00A8CD",
+            color: "#476C92",
             textAlign: "center",
           }}>
           Design your own
@@ -54,7 +54,7 @@ const Home = () => {
             fontFamily: "Inter",
             fontSize: { xs: "18px", md: "24px" },
             fontWeight: "bold",
-            color: "#476C92",
+            color: "#00A8CD",
             textAlign: "center",
             marginBottom: "30px",
           }}>

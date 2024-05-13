@@ -87,7 +87,7 @@ export default function Pricing() {
               fontFamily: "Inter",
               fontSize: { xs: "36px", md: "60px" },
               fontWeight: "bold",
-              color: "#00A8CD",
+              color: "#476C92",
               textAlign: "center",
               mb: 2,
             }}>
@@ -100,7 +100,7 @@ export default function Pricing() {
               fontFamily: "Inter",
               fontSize: { xs: "18px", md: "24px" },
               fontWeight: "bold",
-              color: "#476C92",
+              color: "#00A8CD",
               textAlign: "center",
               mb: 2,
             }}>
@@ -139,7 +139,7 @@ export default function Pricing() {
                     borderColor:
                       tier.title === "Premium" ? "primary.main" : undefined,
                     background:
-                      tier.title === "Premium" ? "#afd7f0" : undefined,
+                      tier.title === "Premium" ? "#E0F7FA" : undefined,
                   }}>
                   <CardContent>
                     <Box
