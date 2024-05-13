@@ -298,7 +298,6 @@ function Header() {
                         border: "1px solid transparent",
                         mr: !user && !isRegisterRoute ? 2 : 0, // Set margin-right conditionally
                         "&:hover": {
-                          /* backgroundColor: "white", */
                           color: "#476C92",
                           borderColor: "#476C92",
                           boxShadow: "none",
@@ -315,13 +314,16 @@ function Header() {
                     <Button
                       variant="text"
                       sx={{
-                        width: "100px",
+                        width: "120px",
                         fontWeight: "bold",
-                        color: "#476C92",
+                        color:
+                          location.pathname === "/login" ? "#476C92" : "white",
                         borderRadius: "30px",
                         textTransform: "capitalize",
                         fontSize: "1.1rem",
                         border: "1px solid transparent",
+                        backgroundColor:
+                          location.pathname === "/login" ? "white" : "#476C92",
                         "&:hover": {
                           backgroundColor: "white",
                           color: "#476C92",
