@@ -29,10 +29,10 @@ function Editor({ calendarView }) {
   //regarding calendar slice
   const calendarTitle = useSelector((state) => state.calendar.title);
   const calendarStyles = useSelector((state) => state.calendar.styles);
-  const { color, imageURL, defaultImage } = useSelector(
-    //add defaultImage
-    (state) => state.calendar.background
-  );
+  const background = useSelector((state) => state.calendar.background);
+  //check to ensure that state.calendar.background is defined
+  const { color = "", imageURL = "", defaultImage = "" } = background || {};
+
   const dates = useSelector((state) => state.calendar.dates);
 
   const backgoroundStyles = {

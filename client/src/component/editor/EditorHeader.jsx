@@ -17,9 +17,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 function EditorHeader({ calendarView, setCalendarView }) {
   const calendarSettings = useSelector((state) => state.calendar);
   const [user] = useAuthState(auth);
-  const userID = user.uid;
-  const calendarID = useSelector((state) => state.calendar.id).toString();
+  //check if user is defined
+  const userID = user ? user.uid : null;
+  //heck if calendarID is defined
+  const calendarID = useSelector((state) => state.calendar.id);
 
+  const calendarIDString = calendarID ? calendarID.toString() : "";
   return (
     <AppBar
       position="static"
@@ -107,7 +110,7 @@ function EditorHeader({ calendarView, setCalendarView }) {
                   },
                 }}
                 onClick={() =>
-                  saveSettings(calendarSettings, userID, calendarID)
+                  saveSettings(calendarSettings, userID, calendarIDString)
                 }
               >
                 <SaveIcon />
