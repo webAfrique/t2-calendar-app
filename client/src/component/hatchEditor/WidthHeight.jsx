@@ -10,21 +10,21 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { widthSet, heightSet } from "../../features/hatchSlice";
+import { hatchWidthSet, hatchHeightSet } from "../../features/calendarSlice";
 
 function WidthHeight({ hatchNumber }) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   const hatchWidth = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.width : 100;
   });
 
   const hatchHeight = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.height : 100;
@@ -59,7 +59,7 @@ function WidthHeight({ hatchNumber }) {
                 sx={{ width: "120px" }}
                 onChange={(e) =>
                   dispatch(
-                    widthSet({
+                    hatchWidthSet({
                       value: +e.target.value,
                       hatchNumber: hatchNumber,
                     })
@@ -81,7 +81,7 @@ function WidthHeight({ hatchNumber }) {
                 sx={{ width: "120px" }}
                 onChange={(e) =>
                   dispatch(
-                    heightSet({
+                    hatchHeightSet({
                       value: +e.target.value,
                       hatchNumber: hatchNumber,
                     })

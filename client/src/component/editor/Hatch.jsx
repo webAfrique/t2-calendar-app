@@ -1,9 +1,8 @@
 import Draggable from "react-draggable";
 import { Typography } from "@mui/material";
 //import Star from "./Star";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./Hatch.module.css";
-import { setHatchObjects } from "../../features/hatchSlice";
 
 const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const shape = useSelector((state) => state.calendar.shape);
@@ -11,22 +10,15 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   //const isStar = shape === "Star";
 
   //regarding calendar slice
-  const dispatch = useDispatch();
   const dates = useSelector((state) => state.calendar.dates);
-  const hatches = useSelector((state) => state.hatches.hatchObjects);
-  console.log("hatches", hatches);
   console.log("dates from hatches", dates);
 
   const hatchWidth = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
-      (hatch) => hatch.number === date
-    );
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
     return hatch ? hatch.width : 100;
   });
   const hatchHeight = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
-      (hatch) => hatch.number === date
-    );
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
     return hatch ? hatch.height : 100;
   });
 
@@ -52,9 +44,6 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   //         onClick={() => {
   //           setIsClicked(true);
   //           setHatchNumber(date);
-  //           if (hatches.length === 0) {
-  //             dispatch(setHatchObjects(dates));
-  //           }
   //         }}
   //       >
   //         <Star />
@@ -82,9 +71,6 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
         onClick={() => {
           setIsClicked(true);
           setHatchNumber(date);
-          if (hatches.length === 0) {
-            dispatch(setHatchObjects(dates));
-          }
           setOpen(true);
         }}
         className={styles.door}

@@ -23,16 +23,16 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  titleSet,
-  textSet,
-  alignmentSet,
-  fontFamilySet,
-  colorSet,
-  fontSizeSet,
-  textDecorationSet,
-  boldSet,
-  italicSet,
-} from "../../features/hatchSlice";
+  hatchTitleSet,
+  hatchTextSet,
+  hatchAlignmentSet,
+  hatchFontFamilySet,
+  hatchColorSet,
+  hatchFontSizeSet,
+  hatchTextDecorationSet,
+  hatchBoldSet,
+  hatchItalicSet,
+} from "../../features/calendarSlice";
 
 const fontFamilies = [
   "Roboto",
@@ -51,27 +51,27 @@ function TextEditorMenu({ hatchNumber }) {
   //redux
   const dispatch = useDispatch();
   const title = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.title : "";
   });
   const text = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.text : "";
   });
 
   const titleStyles = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.titleStyles : "";
   });
 
   const textStyles = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.textStyles : "";
@@ -85,7 +85,7 @@ function TextEditorMenu({ hatchNumber }) {
 
   const handleFontFamilyChange = (event) => {
     dispatch(
-      fontFamilySet({
+      hatchFontFamilySet({
         value: event.target.value,
         hatchNumber: hatchNumber,
         activeField: activeField,
@@ -95,7 +95,7 @@ function TextEditorMenu({ hatchNumber }) {
 
   const handleColorChange = (newColor) => {
     dispatch(
-      colorSet({
+      hatchColorSet({
         value: newColor,
         hatchNumber: hatchNumber,
         activeField: activeField,
@@ -105,7 +105,7 @@ function TextEditorMenu({ hatchNumber }) {
 
   const handleSizeChange = (event) => {
     dispatch(
-      fontSizeSet({
+      hatchFontSizeSet({
         value: event.target.value,
         hatchNumber: hatchNumber,
         activeField: activeField,
@@ -117,21 +117,21 @@ function TextEditorMenu({ hatchNumber }) {
     console.log("newStyles", newStyles);
     if (newStyles.includes("bold")) {
       dispatch(
-        boldSet({
+        hatchBoldSet({
           hatchNumber: hatchNumber,
           activeField: activeField,
         })
       );
     } else if (newStyles.includes("italic")) {
       dispatch(
-        italicSet({
+        hatchItalicSet({
           hatchNumber: hatchNumber,
           activeField: activeField,
         })
       );
     } else if (newStyles.includes("underline")) {
       dispatch(
-        textDecorationSet({
+        hatchTextDecorationSet({
           hatchNumber: hatchNumber,
           activeField: activeField,
         })
@@ -276,7 +276,7 @@ function TextEditorMenu({ hatchNumber }) {
                     }}
                     onChange={(e) =>
                       dispatch(
-                        titleSet({
+                        hatchTitleSet({
                           value: e.target.value,
                           hatchNumber: hatchNumber,
                         })
@@ -295,7 +295,7 @@ function TextEditorMenu({ hatchNumber }) {
                     value={text}
                     onChange={(e) =>
                       dispatch(
-                        textSet({
+                        hatchTextSet({
                           value: e.target.value,
                           hatchNumber: hatchNumber,
                         })
@@ -322,7 +322,7 @@ function TextEditorMenu({ hatchNumber }) {
                 onChange={(event, newAlignment) => {
                   console.log(newAlignment);
                   dispatch(
-                    alignmentSet({
+                    hatchAlignmentSet({
                       value: newAlignment,
                       hatchNumber: hatchNumber,
                       activeField: activeField,

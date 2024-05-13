@@ -29,42 +29,42 @@ function convertToEmbedURL(url) {
 export default function BasicModal({ hatchNumber, setOpen, open }) {
   //redux
   const title = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.title : "";
   });
 
   const text = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.text : "";
   });
 
   const titleStyles = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.titleStyles : null;
   });
 
   const textStyles = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.textStyles : null;
   });
 
   const image = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.image : "";
   });
 
   const video = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.video : "";
