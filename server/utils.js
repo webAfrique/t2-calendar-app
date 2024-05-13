@@ -41,3 +41,19 @@ export const getExistingCalendars = async (uid) => {
   }));
   return results;
 };
+
+//get specific user calendar from the database
+export const getSpecificCalendars = async (calendarID) => {
+  const collectionRef = collection(db, "calendars");
+  const q = query(collectionRef, where("id", "==", calendarID));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const doc = querySnapshot.docs[0];
+    console.log("resultSpecific", doc.data());
+    return doc.data();
+  } else {
+    console.log("No document found with id:", calendarID);
+    return null;
+  }
+};

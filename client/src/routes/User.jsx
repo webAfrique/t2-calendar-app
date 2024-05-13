@@ -11,21 +11,26 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+//import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+//import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 //import ShareIcon from "@mui/icons-material/Share";
-import { getDefault, getExistingCalendars } from "../../../server/utils";
+import {
+  getDefault,
+  getExistingCalendars,
+  getSpecificCalendars,
+} from "../../../server/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setCalendarID } from "../features/calendarSlice";
+import { setCalendarID, setInitialState } from "../features/calendarSlice";
 
 function User() {
   const [user, loading, error] = useAuthState(auth);
   const [username, setUsername] = useState("");
   const [calendars, setCalendars] = useState([]);
   const [loadingCalendars, setLoadingCalendars] = useState(true);
+
   console.log("calendars", calendars);
 
   const dispatch = useDispatch();
@@ -62,6 +67,13 @@ function User() {
       fetchUser();
     }
   }, [user]);
+
+  const handleEditCalendar = async (id) => {
+    const calendarData = await getSpecificCalendars(id);
+    if (calendarData) {
+      dispatch(setInitialState(calendarData));
+    }
+  };
 
   // if user is not logged in, redirect to login page
   if (user === null) {
@@ -143,19 +155,20 @@ function User() {
                         </Typography>
                       </TableCell>
                       <TableCell align="right" sx={{ pr: 1 }}>
-                        <IconButton
+                        {/* <IconButton
                           component={Link}
                           to={`/calendars/${calendar.id}/view`}
                           aria-label="view calendar"
                           sx={{ mx: 1, color: "#00A8CD" }}
                         >
                           <VisibilityOutlinedIcon />
-                        </IconButton>
+                        </IconButton> */}
                         <IconButton
                           component={Link}
-                          to={`/calendars/${calendar.id}/edit`}
+                          to={`/editor/${calendar.id}`}
                           aria-label="edit calendar"
                           sx={{ mx: 1, color: "#00A8CD" }}
+                          onClick={() => handleEditCalendar(calendar.id)}
                         >
                           <EditOutlinedIcon />
                         </IconButton>
@@ -167,14 +180,14 @@ function User() {
                         >
                           <DeleteOutlineOutlinedIcon />
                         </IconButton>
-                        <IconButton
+                        {/*   <IconButton
                           component={Link}
                           to={`/calendars/${calendar.id}/like`}
                           aria-label="like calendar"
                           sx={{ mx: 1, color: "#00A8CD" }}
                         >
                           <FavoriteBorderOutlinedIcon />
-                        </IconButton>
+                        </IconButton> */}
                         {/* <IconButton
                           component={Link}
                           to={`/calendars/${calendar.id}/share`}

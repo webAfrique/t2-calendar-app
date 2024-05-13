@@ -33,7 +33,9 @@ function Editor({ calendarView }) {
   //check to ensure that state.calendar.background is defined
   const { color = "", imageURL = "", defaultImage = "" } = background || {};
 
-  const dates = useSelector((state) => state.calendar.dates);
+  const dates = useSelector((state) =>
+    state.calendar.dates ? state.calendar.dates : []
+  );
 
   const backgoroundStyles = {
     backgroundColor: color,
