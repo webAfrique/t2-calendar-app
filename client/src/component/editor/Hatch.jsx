@@ -2,6 +2,7 @@ import Draggable from "react-draggable";
 import { Typography } from "@mui/material";
 //import Star from "./Star";
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import styles from "./Hatch.module.css";
 import { setHatchObjects } from "../../features/hatchSlice";
 
@@ -28,6 +29,32 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
     );
     return hatch ? hatch.height : 100;
   });
+
+  const hatchImage = useSelector((state) => {
+    const hatch = state.hatches.hatchObjects.find(
+      (hatch) => hatch.number === date
+    );
+
+    return hatch ? hatch.image.url : "";
+  });
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Preload hatch image to reduce hatch image delay
+  useEffect(() => {
+    const img = new Image();
+    img.src = hatchImage;
+  }, [hatchImage]);
+
+  const styleOnHover = isHovered
+    ? {
+        backgroundImage: hatchImage ? `url(${hatchImage})` : "",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "white",
+      }
+    : {};
 
   const style = {
     border: "1px dotted #666",
@@ -87,15 +114,21 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
           setOpen(true);
         }}
         className={styles.door}
-        style={widthHeight}
-      >
+        style={widthHeight}>
         <div className={styles.doorFront} style={style}>
           <div className={styles.doorNumber}>
             <Typography variant="h5">{date}</Typography>
           </div>
         </div>
-        <div className={styles.doorBack} style={widthHeight}>
-          <div className={styles.backImage} style={style}></div>
+        <div className={styles.doorBack} style={{ widthHeight }}>
+          <div
+            className={styles.backImage}
+            style={{
+              ...style,
+              ...styleOnHover,
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}></div>
         </div>
       </div>
     </Draggable>
