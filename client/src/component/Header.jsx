@@ -171,31 +171,41 @@ function Header() {
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
          
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, mx: 5 }}>
-            <Button
-              onClick={() => scrollToSection("instruction")}
-              sx={{
-                my: 2,
-                color: "#476C92",
-                display: "block",
-                textDecoration: "none",
-                fontWeight: "bold",
-              }}
-            >
-              Instruction
-            </Button>
-            <Button
-              onClick={() => scrollToSection("pricing")}
-              sx={{
-                my: 2,
-                color: "#476C92",
-                display: "block",
-                textDecoration: "none",
-                fontWeight: "bold",
-              }}
-            >
-              Pricing
-            </Button>
+          <Box sx={{ 
+            flexGrow: 1, 
+            display: { xs: "none", md: "flex" }, 
+            mx: 5,
+            gap: 3 }}>
+          <Link
+                    onClick={() => scrollToSection("instruction")}
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        color: "#476C92",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Instruction
+                    </Typography>
+                  </Link>
+                  <Link
+                    onClick={() => scrollToSection("pricing")}
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        color: "#476C92",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Pricing
+                    </Typography>
+                  </Link>
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
