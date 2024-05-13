@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { useLocation } from "react-router-dom";
 
 /* const pages = ["Instruction", "Pricing"]; */
 const settings = ["Register", "Log in"];
@@ -24,6 +25,10 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, loading, error] = useAuthState(auth);
   const [username, setUsername] = React.useState("");
+
+  const location = useLocation();
+  const isLoginRoute = location.pathname === "/login";
+  const isRegisterRoute = location.pathname === "/register";
 
   React.useEffect(() => {
     if (user) {
@@ -70,48 +75,44 @@ function Header() {
         backgroundColor: "#fff",
         boxShadow: "none",
         borderBottom: "2px solid #9AC8E8",
-      }}
-    >
+      }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            textDecoration: "none",
-          }
-          }
-          >
-         <Typography
-            variant="h4"
-            sx={{
+          <Link
+            to="/"
+            style={{
               display: "flex",
-              fontWeight: "bold",
-              fontSize: { xs: "30px", md: "30px" },
-              textAlign: "center",
-              justifyContent: "center",
-              color: "#476C92",
+              flexDirection: "column",
               textDecoration: "none",
-            }}
-          >
-            WIME 
-            <br />
+            }}>
+            <Typography
+              variant="h4"
+              sx={{
+                display: "flex",
+                fontWeight: "bold",
+                fontSize: { xs: "30px", md: "30px" },
+                textAlign: "center",
+                justifyContent: "center",
+                color: "#476C92",
+                textDecoration: "none",
+              }}>
+              WIME
+              <br />
             </Typography>
-             <Typography
-            variant="body2"
-            sx={{
-              display: "flex",
-              textAlign: "center",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: { xs: "12", md: "16"},
-              color: "#476C92",
-              textDecoration: "none",
-              marginTop: "-10px",
-              textTransform: "uppercase",
-            }}
-          >
-           calendar
+            <Typography
+              variant="body2"
+              sx={{
+                display: "flex",
+                textAlign: "center",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: { xs: "12", md: "16" },
+                color: "#476C92",
+                textDecoration: "none",
+                marginTop: "-10px",
+                textTransform: "uppercase",
+              }}>
+              calendar
             </Typography>
           </Link>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -121,8 +122,7 @@ function Header() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="#00a8cd"
-            >
+              color="#00a8cd">
               <MenuIcon />
             </IconButton>
             <Menu
@@ -143,69 +143,63 @@ function Header() {
                 textDecoration: "none",
                 display: { xs: "block", md: "none" },
                 color: "#476C92",
-              }}
-            >
+              }}>
               <MenuItem
-                sx={{ 
-                textDecoration: "none",
-                color: "#476C92"
-              }}
+                sx={{
+                  textDecoration: "none",
+                  color: "#476C92",
+                }}
                 onClick={() => {
                   scrollToSection("instruction");
                   handleCloseNavMenu();
-                }}
-              >
-                <Typography textAlign="center"
-                >Instruction</Typography>
+                }}>
+                <Typography textAlign="center">Instruction</Typography>
               </MenuItem>
               <MenuItem
                 sx={{ textDecoration: "none" }}
                 onClick={() => {
                   scrollToSection("pricing");
                   handleCloseNavMenu();
-                }}
-              >
+                }}>
                 <Typography textAlign="center">Pricing</Typography>
               </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-         
-          <Box sx={{ 
-            flexGrow: 1, 
-            display: { xs: "none", md: "flex" }, 
-            mx: 5,
-            gap: "30px" }}>
-          <Link
-                    onClick={() => scrollToSection("instruction")}
-                    style={{
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Typography
-                      style={{
-                        color: "#476C92",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Instruction
-                    </Typography>
-                  </Link>
-                  <Link
-                    onClick={() => scrollToSection("pricing")}
-                    style={{
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Typography
-                      style={{
-                        color: "#476C92",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Pricing
-                    </Typography>
-                  </Link>
+
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              mx: 5,
+              gap: "30px",
+            }}>
+            <Link
+              onClick={() => scrollToSection("instruction")}
+              style={{
+                textDecoration: "none",
+              }}>
+              <Typography
+                style={{
+                  color: "#476C92",
+                  fontWeight: "bold",
+                }}>
+                Instruction
+              </Typography>
+            </Link>
+            <Link
+              onClick={() => scrollToSection("pricing")}
+              style={{
+                textDecoration: "none",
+              }}>
+              <Typography
+                style={{
+                  color: "#476C92",
+                  fontWeight: "bold",
+                }}>
+                Pricing
+              </Typography>
+            </Link>
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
@@ -217,14 +211,12 @@ function Header() {
                     display: "flex",
                     alignItems: "center",
                     gap: "30px",
-                  }}
-                >
+                  }}>
                   <Typography
                     style={{
                       color: "#476C92",
                       fontWeight: "bold",
-                    }}
-                  >
+                    }}>
                     {username && `Welcome, ${username}!`}
                   </Typography>
 
@@ -232,14 +224,12 @@ function Header() {
                     to="/user"
                     style={{
                       textDecoration: "none",
-                    }}
-                  >
+                    }}>
                     <Typography
                       style={{
                         color: "#476C92",
                         fontWeight: "bold",
-                      }}
-                    >
+                      }}>
                       Calendars
                     </Typography>
                   </Link>
@@ -263,27 +253,26 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}
-                    >
+                      }}>
                       Log out
                     </Button>
                   </Link>
                 </Box>
               </>
             ) : (
-              <>
-                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                {!user && !isLoginRoute && (
                   <Link to="/login">
                     <Button
                       variant="contained"
                       sx={{
-                        mx: 2,
                         width: "100px",
                         fontWeight: "bold",
                         backgroundColor: "#476C92",
                         color: "white",
                         borderRadius: "30px",
                         textTransform: "capitalize",
+                        mr: !user && !isRegisterRoute ? 2 : 0, // Set margin-right conditionally
                         "&:hover": {
                           backgroundColor: "white",
                           color: "#476C92",
@@ -291,13 +280,12 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}
-                    >
+                      }}>
                       Log in
                     </Button>
                   </Link>
-                </Box>
-                <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
+                )}
+                {!user && !isRegisterRoute && (
                   <Link to="/register">
                     <Button
                       variant="contained"
@@ -315,13 +303,12 @@ function Header() {
                           boxShadow: "none",
                           border: "1px solid",
                         },
-                      }}
-                    >
+                      }}>
                       Register
                     </Button>
                   </Link>
-                </Box>
-              </>
+                )}
+              </Box>
             )}
           </Box>
 
@@ -329,8 +316,7 @@ function Header() {
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ p: 0, display: { xs: "flex", md: "none" } }}
-              >
+                sx={{ p: 0, display: { xs: "flex", md: "none" } }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -348,8 +334,7 @@ function Header() {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

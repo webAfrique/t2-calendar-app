@@ -125,9 +125,8 @@ const Instruction = () => {
                       variant="body2"
                       sx={{
                         color: "#476C92",
-                        fontSize: "1rem",
-                      }}
-                    >
+                        fontSize: "1.1rem",
+                      }}>
                       {description}
                     </Typography>
                   </Stack>
