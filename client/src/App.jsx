@@ -33,7 +33,10 @@ function App() {
             path="editor"
             element={<Editor calendarView={calendarView} />}
           />
-          <Route path="/editor/:single" element={<Editor />} />
+          <Route
+            path="/editor/:single"
+            element={<Editor calendarView={calendarView} />}
+          />
           <Route path="adminpanel" element={<AdminPanel />} />
         </Route>
       </Routes>

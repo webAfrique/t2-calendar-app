@@ -7,14 +7,17 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
-import LogoutIcon from "@mui/icons-material/Logout";
+//import LogoutIcon from "@mui/icons-material/Logout";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { useSelector } from "react-redux";
 import { saveSettings } from "../../../../server/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useState } from "react";
 
 function EditorHeader({ calendarView, setCalendarView }) {
+  const [previewClicked, setPreviewClicked] = useState(false);
   const calendarSettings = useSelector((state) => state.calendar);
   const [user] = useAuthState(auth);
   //check if user is defined
@@ -36,14 +39,12 @@ function EditorHeader({ calendarView, setCalendarView }) {
               variant="h4"
               sx={{
                 display: "flex",
-                fontFamily: "roboto",
                 fontWeight: "bold",
                 fontSize: { xs: "30px", md: "30px" },
                 textAlign: "center",
                 justifyContent: "center",
                 color: "#476C92",
                 textDecoration: "none",
-                mr: 1,
               }}
             >
               WIME
@@ -53,7 +54,6 @@ function EditorHeader({ calendarView, setCalendarView }) {
               variant="body2"
               sx={{
                 display: "flex",
-                fontFamily: "roboto",
                 textAlign: "center",
                 alignItems: "center",
                 justifyContent: "center",
@@ -61,7 +61,6 @@ function EditorHeader({ calendarView, setCalendarView }) {
                 color: "#476C92",
                 textDecoration: "none",
                 marginTop: "-10px",
-                letterSpacing: "1px",
                 textTransform: "uppercase",
               }}
             >
@@ -70,18 +69,34 @@ function EditorHeader({ calendarView, setCalendarView }) {
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ p: 0, display: { md: "flex" }, mx: 2 }}>
-            <Tooltip title="Preview">
+          <Box sx={{ p: 0, display: { md: "flex" }, mx: 1 }}>
+            {/*       <Button
+              style={{
+                color: "#476C92",
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+              }}
+              sx={{
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: "white",
+                },
+              }}
+              onClick={() =>
+                setCalendarView(
+                  calendarView === "editor" ? "preview" : "editor"
+                )
+              }
+            >
+              Preview
+            </Button> */}
+            <Tooltip title={!previewClicked ? "Preview" : "Edit"}>
               <IconButton
-                onClick={() =>
-                  setCalendarView(
-                    calendarView === "editor" ? "preview" : "editor"
-                  )
-                }
                 sx={{
                   backgroundColor: "#476C92",
                   color: "white",
                   textTransform: "capitalize",
+                  border: "1px solid transparent",
                   "&:hover": {
                     backgroundColor: "white",
                     color: "#476C92",
@@ -90,18 +105,48 @@ function EditorHeader({ calendarView, setCalendarView }) {
                     border: "1px solid",
                   },
                 }}
+                onClick={() => {
+                  setCalendarView(
+                    calendarView === "editor" ? "preview" : "editor"
+                  );
+                  setPreviewClicked(!previewClicked);
+                }}
               >
-                <VisibilityIcon />
+                {!previewClicked ? <VisibilityIcon /> : <EditOutlinedIcon />}
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ p: 0, display: { md: "flex" }, mx: 4 }}>
+          <Box
+            sx={{
+              p: 0,
+              display: { md: "flex" },
+              mx: 2,
+              marginRight: "70px",
+            }}
+          >
+            {/*  <Button
+              style={{
+                color: "#476C92",
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+              }}
+              sx={{
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: "white",
+                },
+              }}
+              onClick={() => saveSettings(calendarSettings, userID, calendarID)}
+            >
+              Save
+            </Button> */}
             <Tooltip title="Save">
               <IconButton
                 sx={{
                   backgroundColor: "#476C92",
                   color: "white",
                   textTransform: "capitalize",
+                  border: "1px solid transparent",
                   "&:hover": {
                     backgroundColor: "white",
                     color: "#476C92",
@@ -118,8 +163,33 @@ function EditorHeader({ calendarView, setCalendarView }) {
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ p: 0, display: { md: "flex" }, mx: 2 }}>
+          <Box sx={{ p: 0, display: { md: "flex" } }}>
             <Link to="/">
+              <Button
+                onClick={() => auth.signOut()}
+                variant="text"
+                sx={{
+                  width: "100px",
+                  color: "#476C92",
+                  fontWeight: "bold",
+                  borderRadius: "30px",
+                  textTransform: "capitalize",
+                  fontSize: "1.1rem",
+                  border: "1px solid transparent",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "#476C92",
+                    borderColor: "#476C92",
+                    boxShadow: "none",
+                    border: "1px solid",
+                  },
+                }}
+              >
+                Log out
+              </Button>
+            </Link>
+
+            {/* <Link to="/">
               <Tooltip title="Logout">
                 <IconButton
                   sx={{
@@ -139,7 +209,7 @@ function EditorHeader({ calendarView, setCalendarView }) {
                   <LogoutIcon />
                 </IconButton>
               </Tooltip>
-            </Link>
+            </Link> */}
           </Box>
         </Toolbar>
       </Container>
