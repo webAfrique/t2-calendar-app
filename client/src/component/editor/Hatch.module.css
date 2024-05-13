@@ -22,19 +22,20 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: transparent;
 }
+
 .door:hover .doorFront {
   transform: rotateY(-160deg);
   background-color: rgb(136, 136, 136, 0.9);
 }
 
-.door:hover .backImage {
-  background-image: url("../../assets/Advent_Calendar_Logo.png");
-  background-size: contain;
+/* .door:hover .backImage {
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-color: white;
-}
+} */
 .door:hover .doorNumber {
   color: transparent;
 }
