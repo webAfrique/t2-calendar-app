@@ -225,9 +225,33 @@ function Header() {
                     mx: 2,
                     display: "flex",
                     alignItems: "center",
-                    gap: "30px",
+                    gap: "40px",
                   }}
                 >
+                  <Box
+                    sx={{
+                      width: "80px",
+                    }}
+                  >
+                    {location.pathname !== "/user" && (
+                      <Link
+                        to="/user"
+                        style={{
+                          textDecoration: "none",
+                        }}
+                      >
+                        <Typography
+                          style={{
+                            color: "#476C92",
+                            fontWeight: "bold",
+                            fontSize: "1.1rem",
+                          }}
+                        >
+                          Calendars
+                        </Typography>
+                      </Link>
+                    )}
+                  </Box>
                   <Typography
                     style={{
                       color: "#476C92",
@@ -237,23 +261,6 @@ function Header() {
                   >
                     {username && `Welcome, ${username}!`}
                   </Typography>
-
-                  <Link
-                    to="/user"
-                    style={{
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Typography
-                      style={{
-                        color: "#476C92",
-                        fontWeight: "bold",
-                        fontSize: "1.1rem",
-                      }}
-                    >
-                      Calendars
-                    </Typography>
-                  </Link>
                 </Box>
                 <Box sx={{ p: 0, display: { xs: "none", md: "flex" }, mx: 1 }}>
                   <Link to="/">
