@@ -59,7 +59,8 @@ const Instruction = () => {
                 sx={{
                   fontSize: { xs: "36px", md: "64px" },
                   fontWeight: "bold",
-                  color: "#00A8CD",
+                  fontSize: "1.1 rem",
+                  color: "#476C92",
                   textAlign: "center",
                 }}>
                 Instruction
@@ -71,7 +72,7 @@ const Instruction = () => {
                 sx={{
                   fontSize: { xs: "18px", md: "24px" },
                   fontWeight: "bold",
-                  color: "#476C92",
+                  color: "#00A8CD",
                   textAlign: "center",
                   marginBottom: "30px",
                 }}>

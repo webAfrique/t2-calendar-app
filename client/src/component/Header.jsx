@@ -86,14 +86,12 @@ function Header() {
             variant="h4"
             sx={{
               display: "flex",
-              fontFamily: "roboto",
               fontWeight: "bold",
               fontSize: { xs: "30px", md: "30px" },
               textAlign: "center",
               justifyContent: "center",
               color: "#476C92",
               textDecoration: "none",
-              mr: 1,
             }}
           >
             WIME 
@@ -103,7 +101,6 @@ function Header() {
             variant="body2"
             sx={{
               display: "flex",
-              fontFamily: "roboto",
               textAlign: "center",
               alignItems: "center",
               justifyContent: "center",
@@ -111,9 +108,7 @@ function Header() {
               color: "#476C92",
               textDecoration: "none",
               marginTop: "-10px",
-              letterSpacing: "1px",
               textTransform: "uppercase",
-              
             }}
           >
            calendar
@@ -147,16 +142,21 @@ function Header() {
               sx={{
                 textDecoration: "none",
                 display: { xs: "block", md: "none" },
+                color: "#476C92",
               }}
             >
               <MenuItem
-                sx={{ textDecoration: "none" }}
+                sx={{ 
+                textDecoration: "none",
+                color: "#476C92"
+              }}
                 onClick={() => {
                   scrollToSection("instruction");
                   handleCloseNavMenu();
                 }}
               >
-                <Typography textAlign="center">Instruction</Typography>
+                <Typography textAlign="center"
+                >Instruction</Typography>
               </MenuItem>
               <MenuItem
                 sx={{ textDecoration: "none" }}
@@ -176,9 +176,10 @@ function Header() {
               onClick={() => scrollToSection("instruction")}
               sx={{
                 my: 2,
-                color: "#00a8cd",
+                color: "#476C92",
                 display: "block",
                 textDecoration: "none",
+                fontWeight: "bold",
               }}
             >
               Instruction
@@ -187,9 +188,10 @@ function Header() {
               onClick={() => scrollToSection("pricing")}
               sx={{
                 my: 2,
-                color: "#00a8cd",
+                color: "#476C92",
                 display: "block",
                 textDecoration: "none",
+                fontWeight: "bold",
               }}
             >
               Pricing
