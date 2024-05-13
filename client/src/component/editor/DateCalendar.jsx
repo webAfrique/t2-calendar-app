@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -12,11 +12,36 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import { useDispatch, useSelector } from "react-redux";
 import { datesSet } from "../../features/calendarSlice";
+import { addDays } from "date-fns";
 
 const DateCalendar = () => {
   const dispatch = useDispatch();
-  const range = useSelector((state) => state.calendar.calendarRange);
-  console.log("range", range);
+
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 0),
+      key: "selection",
+    },
+  ]);
+
+  const start = new Date(
+    useSelector((state) => state.calendar.calendarRange[0].startDate)
+  );
+  const end = new Date(
+    useSelector((state) => state.calendar.calendarRange[0].endDate)
+  );
+  // Check if start is a valid date
+  const isValidStart = !isNaN(start.getTime());
+
+  const objectSelection = [
+    {
+      startDate: start,
+      endDate: addDays(end, 0),
+      key: "selection",
+    },
+  ];
+
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -24,11 +49,12 @@ const DateCalendar = () => {
   };
 
   const handleSelect = (ranges) => {
+    setRange([ranges.selection]);
     dispatch(
       datesSet({
         selection: {
-          startDate: ranges.selection.startDate,
-          endDate: ranges.selection.endDate,
+          startDate: ranges.selection.startDate.toISOString(),
+          endDate: ranges.selection.endDate.toISOString(),
         },
       })
     );
@@ -48,7 +74,8 @@ const DateCalendar = () => {
                     fontWeight: "bold",
                     textAlign: "center",
                     color: "#476C92",
-                  }}>
+                  }}
+                >
                   Date
                 </span>
               }
@@ -62,7 +89,7 @@ const DateCalendar = () => {
               editableDateInputs={true}
               onChange={handleSelect}
               moveRangeOnFirstSelection={false}
-              ranges={range}
+              ranges={isValidStart ? objectSelection : range}
             />
           </div>
         </Collapse>

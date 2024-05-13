@@ -18,8 +18,6 @@ import {
   backgroundFileNameSet,
   backgroundFileNameDelete,
   backgroundImageDelete,
-  backgroundDefaultImageSet, //import background default image set action
-  backgroundDefaultImageDelete, //import background default image delete action
 } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
@@ -28,9 +26,7 @@ function Background() {
   const [open, setOpen] = React.useState(false);
   const color = useSelector((state) => state.calendar.background.color);
   const fileName = useSelector((state) => state.calendar.background.fileName);
-  const defaultImage = useSelector(
-    (state) => state.calendar.background.defaultImage
-  );
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -47,14 +43,6 @@ function Background() {
   const deleteHandler = () => {
     dispatch(backgroundFileNameDelete());
     dispatch(backgroundImageDelete());
-  };
-
-  const handleToggleDefaultImage = (imgPath) => {
-    if (defaultImage === imgPath) {
-      dispatch(backgroundDefaultImageDelete()); // Dispatch action to remove default image
-    } else {
-      dispatch(backgroundDefaultImageSet(imgPath)); // Dispatch action to set default image
-    }
   };
 
   function FileUploadButton() {
@@ -84,7 +72,8 @@ function Background() {
           color: "#476C92",
 
           p: 1,
-        }}>
+        }}
+      >
         Upload File
         <input type="file" hidden onChange={handleUpload} />
       </Button>
@@ -105,7 +94,8 @@ function Background() {
                     fontWeight: "bold",
                     textAlign: "center",
                     color: "#476C92",
-                  }}>
+                  }}
+                >
                   Background
                 </span>
               }
@@ -127,7 +117,8 @@ function Background() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}>
+              }}
+            >
               <Typography variant="body1">{fileName}</Typography>
               {fileName && (
                 <IconButton onClick={deleteHandler}>
@@ -166,19 +157,13 @@ function Background() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
-              }}>
+              }}
+            >
               <ListItemText
                 primary="Default images"
                 sx={{ color: "#476C92" }}
               />
-              <Carousel
-                handleToggleDefaultImage={handleToggleDefaultImage}
-                defaultImage={defaultImage}
-              />
-              {/* Pass defaultImage to Calendar component */}
-              {/* {defaultImage && (
-                <img src={defaultImage} alt="Default Background" />
-              )} */}
+              <Carousel />
             </ListItemButton>
           </List>
         </Collapse>
