@@ -20,9 +20,10 @@ function EditorHeader({ calendarView, setCalendarView }) {
   //check if user is defined
   const userID = user ? user.uid : null;
   //heck if calendarID is defined
-  const calendarID = useSelector((state) => state.calendar.id);
+  const calendarID = useSelector((state) =>
+    state.calendar.id ? state.calendar.id.toString() : ""
+  );
 
-  const calendarIDString = calendarID ? calendarID.toString() : "";
   return (
     <AppBar
       position="static"
@@ -110,7 +111,7 @@ function EditorHeader({ calendarView, setCalendarView }) {
                   },
                 }}
                 onClick={() =>
-                  saveSettings(calendarSettings, userID, calendarIDString)
+                  saveSettings(calendarSettings, userID, calendarID)
                 }
               >
                 <SaveIcon />
