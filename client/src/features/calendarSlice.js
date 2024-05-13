@@ -46,7 +46,6 @@ const calendarSlice = createSlice({
     setCalendarID(state, action) {
       state.id = action.payload;
     },
-    //action - individual state transitions
     typedTitle: (state, action) => {
       state.title = action.payload;
     },
@@ -116,6 +115,142 @@ const calendarSlice = createSlice({
     shapeSet: (state, action) => {
       state.shape = action.payload;
     },
+    //actions regarding the hatch objects
+    hatchWidthSet: (state, action) => {
+      const { value, hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.width = value;
+        }
+      });
+    },
+    hatchHeightSet: (state, action) => {
+      const { value, hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.height = value;
+        }
+      });
+    },
+
+    hatchTitleSet: (state, action) => {
+      const { value, hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.title = value;
+        }
+      });
+    },
+    hatchTextSet: (state, action) => {
+      const { value, hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.text = value;
+        }
+      });
+    },
+
+    //styles for hatch text and title are set in the same actions
+    hatchAlignmentSet: (state, action) => {
+      const { value, hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].textAlign = value;
+        }
+      });
+    },
+    hatchFontFamilySet: (state, action) => {
+      const { value, hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].fontFamily = value;
+        }
+      });
+    },
+    hatchColorSet: (state, action) => {
+      const { value, hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].color = value;
+        }
+      });
+    },
+    hatchFontSizeSet: (state, action) => {
+      const { value, hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].fontSize = value;
+        }
+      });
+    },
+    hatchTextDecorationSet: (state, action) => {
+      const { hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].textDecoration =
+            hatch[field].textDecoration === "underline" ? "none" : "underline";
+        }
+      });
+    },
+    hatchBoldSet: (state, action) => {
+      const { hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].fontWeight =
+            hatch[field].fontWeight === "bold" ? "normal" : "bold";
+        }
+      });
+    },
+    hatchItalicSet: (state, action) => {
+      const { hatchNumber, activeField } = action.payload;
+      const field = activeField === "title" ? "titleStyles" : "textStyles";
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch[field].fontStyle =
+            hatch[field].fontStyle === "italic" ? "normal" : "italic";
+        }
+      });
+    },
+    hatchImageSet: (state, action) => {
+      const { hatchNumber, url, fileName } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.image.url = url;
+          hatch.image.fileName = fileName;
+        }
+      });
+    },
+    hatchImageDelete: (state, action) => {
+      const { hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.image.url = "";
+          hatch.image.fileName = "";
+        }
+      });
+    },
+    hatchVideoSet: (state, action) => {
+      const { hatchNumber, url } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.video.url = url;
+        }
+      });
+    },
+    hatchVideoDelete: (state, action) => {
+      const { hatchNumber } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.video.url = "";
+        }
+      });
+    },
   },
 });
 
@@ -142,4 +277,19 @@ export const {
   shapeSet,
   setInitialState,
   setCalendarID,
+  hatchAlignmentSet, //below hatch related actions
+  hatchFontFamilySet,
+  hatchColorSet,
+  hatchFontSizeSet,
+  hatchTextDecorationSet,
+  hatchBoldSet,
+  hatchItalicSet,
+  hatchImageSet,
+  hatchImageDelete,
+  hatchVideoSet,
+  hatchVideoDelete,
+  hatchWidthSet,
+  hatchHeightSet,
+  hatchTitleSet,
+  hatchTextSet,
 } = calendarSlice.actions;

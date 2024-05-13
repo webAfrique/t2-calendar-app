@@ -11,7 +11,7 @@ import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { imageSet, imageDelete } from "../../features/hatchSlice";
+import { hatchImageSet, hatchImageDelete } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const UploadImage = ({ hatchNumber }) => {
@@ -19,7 +19,7 @@ const UploadImage = ({ hatchNumber }) => {
   const dispatch = useDispatch();
 
   const hatchImage = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.image : "";
@@ -69,7 +69,7 @@ const UploadImage = ({ hatchNumber }) => {
                   hidden
                   onChange={(e) => {
                     dispatch(
-                      imageSet({
+                      hatchImageSet({
                         url: URL.createObjectURL(e.target.files[0]),
                         fileName: e.target.files[0].name,
                         hatchNumber,
@@ -91,7 +91,7 @@ const UploadImage = ({ hatchNumber }) => {
                   <IconButton
                     onClick={() =>
                       dispatch(
-                        imageDelete({
+                        hatchImageDelete({
                           hatchNumber,
                         })
                       )

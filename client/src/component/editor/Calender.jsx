@@ -3,6 +3,7 @@ import Hatch from "./Hatch";
 
 function Calendar({ shape, setIsClicked, setHatchNumber, setOpen }) {
   const dates = useSelector((state) => state.calendar.dates);
+  console.log("dates from calendar", dates);
 
   const isStar = shape === "Star";
 

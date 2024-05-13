@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import LinkIcon from "@mui/icons-material/Link";
-import { videoSet, videoDelete } from "../../features/hatchSlice";
+import { hatchVideoSet, hatchVideoDelete } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -20,7 +20,7 @@ function Video({ hatchNumber }) {
   const dispatch = useDispatch();
 
   const hatchVideo = useSelector((state) => {
-    const hatch = state.hatches.hatchObjects.find(
+    const hatch = state.calendar.dates.find(
       (hatch) => hatch.number === hatchNumber
     );
     return hatch ? hatch.video : "";
@@ -53,7 +53,7 @@ function Video({ hatchNumber }) {
               value={hatchVideo.url}
               onChange={(e) => {
                 dispatch(
-                  videoSet({
+                  hatchVideoSet({
                     url: e.target.value,
                     hatchNumber,
                   })
@@ -82,7 +82,7 @@ function Video({ hatchNumber }) {
                 <IconButton
                   onClick={() =>
                     dispatch(
-                      videoDelete({
+                      hatchVideoDelete({
                         hatchNumber,
                       })
                     )
