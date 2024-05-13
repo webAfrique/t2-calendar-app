@@ -22,7 +22,8 @@ function App() {
               calendarView={calendarView}
               setCalendarView={setCalendarView}
             />
-          }>
+          }
+        >
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
@@ -32,6 +33,7 @@ function App() {
             path="editor"
             element={<Editor calendarView={calendarView} />}
           />
+          <Route path="/editor/:single" element={<Editor />} />
           <Route path="adminpanel" element={<AdminPanel />} />
         </Route>
       </Routes>
