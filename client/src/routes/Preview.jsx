@@ -1,8 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import Calendar from "../component/editor/Calender";
 import { useSelector } from "react-redux";
+import PreviewModal from "../component/editor/PreviewModal";
+import React, { useState } from "react";
 
-const Preview = ({ setIsClicked, setHatchNumber }) => {
+const Preview = () => {
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [hatchNumber, setHatchNumber] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
+
   const drawerWidth = 350;
   const dates = useSelector((state) =>
     state.calendar.dates ? state.calendar.dates : []
@@ -31,8 +37,7 @@ const Preview = ({ setIsClicked, setHatchNumber }) => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: dates.length < 26 ? `calc(100vh)` : "auto", // if dates are more than 25, set height to 100vh
           margin: "auto",
-        }}
-      >
+        }}>
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
@@ -40,8 +45,17 @@ const Preview = ({ setIsClicked, setHatchNumber }) => {
           <Calendar
             setIsClicked={setIsClicked}
             setHatchNumber={setHatchNumber}
+            setOpen={setPreviewOpen}
           />
         </Box>
+        {previewOpen && (
+          <PreviewModal
+            setOpen={setPreviewOpen}
+            open={previewOpen}
+            onClose={() => setPreviewOpen(false)}
+            hatchNumber={hatchNumber}
+          />
+        )}
       </Box>
     </>
   );
