@@ -7,17 +7,14 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import SaveIcon from "@mui/icons-material/Save";
-//import LogoutIcon from "@mui/icons-material/Logout";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Button, Container } from "@mui/material";
 import { useSelector } from "react-redux";
 import { saveSettings } from "../../../../server/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { useState } from "react";
 
-function EditorHeader({ calendarView, setCalendarView }) {
-  const [previewClicked, setPreviewClicked] = useState(false);
+function EditorHeader({ setPreviewClicked, previewClicked }) {
   const calendarSettings = useSelector((state) => state.calendar);
   const [user] = useAuthState(auth);
   //check if user is defined
@@ -26,6 +23,7 @@ function EditorHeader({ calendarView, setCalendarView }) {
   const calendarID = useSelector((state) =>
     state.calendar.id ? state.calendar.id.toString() : ""
   );
+  console.log("calendarID", calendarID);
 
   return (
     <AppBar
@@ -70,28 +68,14 @@ function EditorHeader({ calendarView, setCalendarView }) {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ p: 0, display: { md: "flex" }, mx: 1 }}>
-            {/*       <Button
-              style={{
-                color: "#476C92",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-              }}
-              sx={{
-                textTransform: "capitalize",
-                "&:hover": {
-                  backgroundColor: "white",
-                },
-              }}
-              onClick={() =>
-                setCalendarView(
-                  calendarView === "editor" ? "preview" : "editor"
-                )
-              }
-            >
-              Preview
-            </Button> */}
             <Tooltip title={!previewClicked ? "Preview" : "Edit"}>
               <IconButton
+                component={Link}
+                to={
+                  !previewClicked
+                    ? `/editor/${calendarID}/view`
+                    : `/editor/${calendarID}`
+                }
                 sx={{
                   backgroundColor: "#476C92",
                   color: "white",
@@ -106,9 +90,6 @@ function EditorHeader({ calendarView, setCalendarView }) {
                   },
                 }}
                 onClick={() => {
-                  setCalendarView(
-                    calendarView === "editor" ? "preview" : "editor"
-                  );
                   setPreviewClicked(!previewClicked);
                 }}
               >
@@ -124,22 +105,6 @@ function EditorHeader({ calendarView, setCalendarView }) {
               marginRight: "70px",
             }}
           >
-            {/*  <Button
-              style={{
-                color: "#476C92",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-              }}
-              sx={{
-                textTransform: "capitalize",
-                "&:hover": {
-                  backgroundColor: "white",
-                },
-              }}
-              onClick={() => saveSettings(calendarSettings, userID, calendarID)}
-            >
-              Save
-            </Button> */}
             <Tooltip title="Save">
               <IconButton
                 sx={{
@@ -188,28 +153,6 @@ function EditorHeader({ calendarView, setCalendarView }) {
                 Log out
               </Button>
             </Link>
-
-            {/* <Link to="/">
-              <Tooltip title="Logout">
-                <IconButton
-                  sx={{
-                    backgroundColor: "#476C92",
-                    color: "white",
-                    textTransform: "capitalize",
-                    "&:hover": {
-                      backgroundColor: "white",
-                      color: "#476C92",
-                      borderColor: "#476C92",
-                      boxShadow: "none",
-                      border: "1px solid",
-                    },
-                  }}
-                  onClick={() => auth.signOut()}
-                >
-                  <LogoutIcon />
-                </IconButton>
-              </Tooltip>
-            </Link> */}
           </Box>
         </Toolbar>
       </Container>
