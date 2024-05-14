@@ -67,6 +67,9 @@ function Header() {
       });
     }
   };
+  // Not showing tabs for Instruction and Pricing on user route
+
+  const showTabs = location.pathname !== "/user";
 
   return (
     <AppBar
@@ -150,6 +153,7 @@ function Header() {
                 color: "#476C92",
               }}
             >
+              {showTabs && (
               <MenuItem
                 sx={{
                   textDecoration: "none",
@@ -162,6 +166,8 @@ function Header() {
               >
                 <Typography textAlign="center">Instruction</Typography>
               </MenuItem>
+              )}
+              {showTabs && (
               <MenuItem
                 sx={{ textDecoration: "none" }}
                 onClick={() => {
@@ -171,6 +177,7 @@ function Header() {
               >
                 <Typography textAlign="center">Pricing</Typography>
               </MenuItem>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -183,6 +190,7 @@ function Header() {
               gap: "30px",
             }}
           >
+            {showTabs && (
             <Link
               onClick={() => scrollToSection("instruction")}
               style={{
@@ -199,6 +207,8 @@ function Header() {
                 Instruction
               </Typography>
             </Link>
+            )}
+            {showTabs && (
             <Link
               onClick={() => scrollToSection("pricing")}
               style={{
@@ -215,6 +225,7 @@ function Header() {
                 Pricing
               </Typography>
             </Link>
+            )}
           </Box>
           <Box sx={{ p: 0, display: { xs: "none", md: "flex" } }}>
             {user ? (
