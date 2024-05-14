@@ -3,7 +3,7 @@ import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 
-const HatchNavigation = ({ hatchNumber }) => {
+const HatchNavigation = ({ hatchNumber, nextHatch, previousHatch }) => {
   return (
     <div>
       <Box
@@ -15,7 +15,7 @@ const HatchNavigation = ({ hatchNumber }) => {
           marginTop: 3,
           marginBottom: 3,
         }}>
-        <IconButton>
+        <IconButton onClick={previousHatch}>
           <WestOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
         <Box
@@ -38,7 +38,7 @@ const HatchNavigation = ({ hatchNumber }) => {
           <DoorSlidingOutlinedIcon />
         </Box>
 
-        <IconButton>
+        <IconButton onClick={nextHatch}>
           <EastOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
       </Box>
