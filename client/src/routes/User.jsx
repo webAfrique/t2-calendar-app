@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, getUser } from "../../../server/firebase";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,11 +17,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
-//import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-//import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-//import ShareIcon from "@mui/icons-material/Share";
+
 import {
   getDefault,
   getExistingCalendars,
@@ -26,7 +30,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setCalendarID, setInitialState } from "../features/calendarSlice";
 
-function User() {
+function User({ setPreviewClicked, previewClicked }) {
   const [user, loading, error] = useAuthState(auth);
   const [username, setUsername] = useState("");
   const [calendars, setCalendars] = useState([]);
@@ -153,63 +157,46 @@ function User() {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                          <Typography
-                            component={Link}
-                            to={`/calendars/${calendar.id}/view`}
-                            variant="h6"
-                            sx={{
-                              mx: 1,
-                              fontWeight: "bold",
-                              textDecoration: "none",
-                              color: "#00A8CD",
-                            }}
-                          >
-                            {calendar.title ? calendar.title : "Untitled"}
-                          </Typography>
+                          <Tooltip title="Preview">
+                            <Typography
+                              component={Link}
+                              to={`/editor/${calendar.id}/view`}
+                              variant="h6"
+                              sx={{
+                                mx: 1,
+                                fontWeight: "bold",
+                                textDecoration: "none",
+                                color: "#00A8CD",
+                              }}
+                              onClick={() => setPreviewClicked(!previewClicked)}
+                            >
+                              {calendar.title ? calendar.title : "Untitled"}
+                            </Typography>
+                          </Tooltip>
                         </TableCell>
+
                         <TableCell align="right" sx={{ pr: 1 }}>
-                          {/* <IconButton
-                          component={Link}
-                          to={`/calendars/${calendar.id}/view`}
-                          aria-label="view calendar"
-                          sx={{ mx: 1, color: "#00A8CD" }}
-                        >
-                          <VisibilityOutlinedIcon />
-                        </IconButton> */}
-                          <IconButton
-                            component={Link}
-                            to={`/editor/${calendar.id}`}
-                            aria-label="edit calendar"
-                            sx={{ mx: 1, color: "#00A8CD" }}
-                            onClick={() => handleEditCalendar(calendar.id)}
-                          >
-                            <EditOutlinedIcon />
-                          </IconButton>
-                          <IconButton
-                            /*  component={Link}
-                          to={`/calendars/${calendar.id}/delete`} */
-                            aria-label="delete calendar"
-                            sx={{ mx: 1, color: "#00A8CD" }}
-                            onClick={() => handleDeleteCalendar(calendar.id)}
-                          >
-                            <DeleteOutlineOutlinedIcon />
-                          </IconButton>
-                          {/*   <IconButton
-                          component={Link}
-                          to={`/calendars/${calendar.id}/like`}
-                          aria-label="like calendar"
-                          sx={{ mx: 1, color: "#00A8CD" }}
-                        >
-                          <FavoriteBorderOutlinedIcon />
-                        </IconButton> */}
-                          {/* <IconButton
-                          component={Link}
-                          to={`/calendars/${calendar.id}/share`}
-                          aria-label="share calendar"
-                          sx={{ mx: 1, color: "#00A8CD" }}
-                        >
-                          <ShareIcon />
-                        </IconButton> */}
+                          <Tooltip title="Edit">
+                            <IconButton
+                              component={Link}
+                              to={`/editor/${calendar.id}`}
+                              aria-label="edit calendar"
+                              sx={{ mx: 1, color: "#00A8CD" }}
+                              onClick={() => handleEditCalendar(calendar.id)}
+                            >
+                              <EditOutlinedIcon />
+                            </IconButton>
+                          </Tooltip>
+
+                          <Tooltip title="Delete">
+                            <IconButton
+                              aria-label="delete calendar"
+                              sx={{ mx: 1, color: "#00A8CD" }}
+                              onClick={() => handleDeleteCalendar(calendar.id)}
+                            >
+                              <DeleteOutlineOutlinedIcon />
+                            </IconButton>
+                          </Tooltip>
                         </TableCell>
                       </TableRow>
                     ))}

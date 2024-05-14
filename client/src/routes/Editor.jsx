@@ -22,8 +22,10 @@ import { useSelector } from "react-redux";
 
 const drawerWidth = 350;
 
+
 function Editor({ calendarView }) {
   const [hatchNumber, setHatchNumber] = useState(0);
+
   const [isClicked, setIsClicked] = useState(false);
 
   //regarding calendar slice
@@ -46,34 +48,6 @@ function Editor({ calendarView }) {
 
   //modal window related settings
   const [open, setOpen] = useState(false);
-
-  //display calendar in preview or editor mode depending on the calendarView prop
-
-  if (calendarView === "preview") {
-    return (
-      <Box
-        style={backgoroundStyles}
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          height: `calc(100vh - 110px)`,
-          margin: "auto",
-        }}
-      >
-        <Typography paragraph style={calendarStyles}>
-          {calendarTitle}
-        </Typography>
-        <Box>
-          <Calendar
-            setIsClicked={setIsClicked}
-            setHatchNumber={setHatchNumber}
-          />
-        </Box>
-      </Box>
-    );
-  }
 
   // if user is not logged in, redirect to login page
   if (!auth.currentUser) {
@@ -135,18 +109,6 @@ function Editor({ calendarView }) {
                     gap: 2,
                   }}
                 >
-                  {/*      <Button
-                    onClick={() => setOpen(true)}
-                    sx={{
-                      fontWeight: "bold",
-                      textTransform: "capitalize",
-                      color: "#333",
-                      fontSize: "1.1rem",
-                    }}
-                  >
-                    Preview {hatchNumber}
-                  </Button> */}
-
                   <Button
                     color="primary"
                     onClick={() => setIsClicked(false)}
@@ -188,7 +150,7 @@ function Editor({ calendarView }) {
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
-            height: dates.length < 30 ? `calc(100vh - 110px)` : "auto", // if dates are more than 30, set height to 100vh
+            height: dates.length < 26 ? `calc(100vh - 110px)` : "auto", // if dates are more than 30, set height to 100vh
           }}
         >
           {/* this code will be rendered conditionally later */}
