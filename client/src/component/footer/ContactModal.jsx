@@ -19,7 +19,15 @@ const ContactModal = () => {
       style={{color: '#476C92', textTransform: 'capitalize', fontWeight: 'bold'}}>Contact Us</Button>
      
       <Modal open={open} onClose={handleClose}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'white', padding: '2rem' }}>
+        <div style={{ 
+          position: 'absolute', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          backgroundColor: 'white', 
+          borderRadius: '10px',
+          width: '65%',
+          }}>
           <ContactForm onClose={handleClose} />
         </div>
       </Modal>
