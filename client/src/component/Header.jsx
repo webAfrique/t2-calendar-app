@@ -123,6 +123,7 @@ function Header() {
             </Typography>
           </Link>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            {location.pathname !== "/user" && (
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -133,6 +134,7 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
+            )}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
