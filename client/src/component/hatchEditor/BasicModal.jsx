@@ -12,7 +12,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "5px solid #00A8CD",
+  border: "5px solid #476C92",
   borderRadius: "16px",
   boxShadow: 24,
   p: 4,
@@ -76,8 +76,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+        aria-describedby="modal-modal-description">
         <Box sx={style}>
           <Typography
             sx={{
@@ -87,8 +86,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-title"
-            component="h2"
-          >
+            component="h2">
             {title ? title : "Title"}
           </Typography>
           <Box
@@ -117,8 +115,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 }}
                 id="modal-modal-title"
                 component="h2"
-                textAlign={"center"}
-              >
+                textAlign={"center"}>
                 {image.filename ? image.filename : "Image"}
               </Typography>
             )}
@@ -132,8 +129,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-description"
-            component="h2"
-          >
+            component="h2">
             {text ? text : "Text"}
           </Typography>
           <Box
@@ -143,8 +139,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
               alignContent: "center",
               border: !video.url && "1px dashed grey",
               textAlign: "center",
-            }}
-          >
+            }}>
             {video.url ? (
               <iframe
                 src={convertToEmbedURL(video.url)}
@@ -162,8 +157,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                   fontStyle: "italic",
                 }}
                 id="modal-modal-title"
-                component="h2"
-              >
+                component="h2">
                 Video
               </Typography>
             )}
