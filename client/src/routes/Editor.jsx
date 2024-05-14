@@ -22,8 +22,10 @@ import { useSelector } from "react-redux";
 
 const drawerWidth = 350;
 
-function Editor() {
-  const [hatchNumber, setHatchNumber] = useState();
+
+function Editor({ calendarView }) {
+  const [hatchNumber, setHatchNumber] = useState(0);
+
   const [isClicked, setIsClicked] = useState(false);
 
   //regarding calendar slice
@@ -52,6 +54,17 @@ function Editor() {
     return <Navigate to="/login" />;
   }
 
+  // To move to the next hatch
+  const nextHatch = () => {
+    setHatchNumber(hatchNumber + 1);
+  };
+
+  // To move to the previous hatch
+  const previousHatch = () => {
+    setHatchNumber(hatchNumber - 1);
+  };
+
+
   return (
     <>
       <Divider sx={{ borderColor: "#9AC8E8" }} />
@@ -76,7 +89,11 @@ function Editor() {
             {/* please place your single hatch menu components below */}
             {isClicked && (
               <>
-                <HatchNavigation hatchNumber={hatchNumber} />
+                <HatchNavigation 
+                hatchNumber={hatchNumber}
+                nextHatch={nextHatch}
+                previousHatch={previousHatch} 
+                />
                 <WidthHeight hatchNumber={hatchNumber} />
                 <TextEditor hatchNumber={hatchNumber} />
                 <UploadImage hatchNumber={hatchNumber} />
