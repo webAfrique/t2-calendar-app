@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../../server/firebase";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,8 +13,31 @@ import { useSelector } from "react-redux";
 import { saveSettings } from "../../../../server/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import Popup from "../../component/Popup";
+import { useState } from "react";
 
 function EditorHeader({ setPreviewClicked, previewClicked }) {
+  const [open, setOpen] = useState(false);
+  const [saveClicked, setSaveClicked] = useState(false);
+  console.log("saveClicked", saveClicked);
+  const navigate = useNavigate();
+  const handleClickOpen = (e) => {
+    e.preventDefault(); // prevent the default action
+    if (!saveClicked) {
+      // if save button was not clicked, show the popup
+      setOpen(true);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleConfirm = () => {
+    setSaveClicked(false);
+    setOpen(false);
+    navigate("/user"); // navigate to /user when the user confirms
+  };
+
   const calendarSettings = useSelector((state) => state.calendar);
   const [user] = useAuthState(auth);
   //check if user is defined
@@ -32,7 +55,10 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to="/user" style={{ textDecoration: "none" }}>
+          <Box
+            sx={{ "&:hover": { cursor: "pointer" } }}
+            onClick={!saveClicked ? handleClickOpen : handleConfirm}
+          >
             <Typography
               variant="h4"
               sx={{
@@ -64,8 +90,13 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
             >
               calendar
             </Typography>
-          </Link>
+          </Box>
 
+          <Popup
+            open={open}
+            handleClose={handleClose}
+            handleConfirm={handleConfirm}
+          />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ p: 0, display: { md: "flex" }, mx: 1 }}>
             <Tooltip title={!previewClicked ? "Preview" : "Edit"}>
@@ -120,9 +151,10 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                     border: "1px solid",
                   },
                 }}
-                onClick={() =>
-                  saveSettings(calendarSettings, userID, calendarID)
-                }
+                onClick={() => {
+                  setSaveClicked(true);
+                  saveSettings(calendarSettings, userID, calendarID);
+                }}
               >
                 <SaveIcon />
               </IconButton>
