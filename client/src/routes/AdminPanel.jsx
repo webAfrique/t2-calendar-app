@@ -15,12 +15,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
-import {
-  auth,
-  getUser,
-  getUserCount,
-  getAllUsers,
-} from "../../../server/firebase";
+import { auth, getUser, getUserCount } from "../../../server/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const defaultTheme = createTheme();
@@ -174,7 +169,7 @@ const AdminPanel = () => {
                   <Chart />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              {/* User amount */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
