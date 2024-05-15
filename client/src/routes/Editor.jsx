@@ -19,13 +19,15 @@ import Video from "../component/hatchEditor/Video";
 import UploadImage from "../component/hatchEditor/UploadImage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const drawerWidth = 350;
 
 
 function Editor({ calendarView }) {
-  const [hatchNumber, setHatchNumber] = useState(0);
-
+  const [hatchNumber, setHatchNumber] = useState(1);
+  const [maxHatchNumber, setMaxHatchNumber] = useState(31); 
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [isClicked, setIsClicked] = useState(false);
 
   //regarding calendar slice
@@ -54,16 +56,34 @@ function Editor({ calendarView }) {
     return <Navigate to="/login" />;
   }
 
+  // Update max hatch number based on the number of days in the current month
+  useEffect(() => {
+    const currentDate = new Date();
+    const daysInMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    ).getDate();
+    setMaxHatchNumber(daysInMonth);
+  }, [selectedDate]);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   // To move to the next hatch
   const nextHatch = () => {
-    setHatchNumber(hatchNumber + 1);
+    if (hatchNumber < maxHatchNumber) {
+      setHatchNumber(prev => prev + 1);
+    }
   };
 
   // To move to the previous hatch
   const previousHatch = () => {
-    setHatchNumber(hatchNumber - 1);
+    if (hatchNumber > 1) {
+      setHatchNumber(prev => prev - 1);
+    }
   };
-
 
   return (
     <>
@@ -91,6 +111,7 @@ function Editor({ calendarView }) {
               <>
                 <HatchNavigation 
                 hatchNumber={hatchNumber}
+                maxHatchNumber={maxHatchNumber}
                 nextHatch={nextHatch}
                 previousHatch={previousHatch} 
                 />
@@ -135,7 +156,7 @@ function Editor({ calendarView }) {
             {!isClicked && (
               <>
                 <Title />
-                <DateCalendar />
+                <DateCalendar onSelectDate={handleDateChange} />
                 <Background />
                 <Shapes />
               </>
