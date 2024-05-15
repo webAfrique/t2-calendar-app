@@ -33,47 +33,54 @@ function ErrorPage() {
         variant="h2"
         gutterBottom
         sx={{
-          fontFamily: "Inter",
-          fontSize: "64px",
+          fontSize: { xs: "36px", md: "64px" },
+          fontWeight: "bold",
+          color: "#476C92",
+          textAlign: "center",
+        }}>
+        Oops! Page not found.
+      </Typography>
+      <Typography
+        component="h2"
+        variant="h4"
+        gutterBottom
+        sx={{
+          fontSize: { xs: "18px", md: "24px" },
           fontWeight: "bold",
           color: "#00A8CD",
           textAlign: "center",
         }}>
-        Oops! Page not found.
+        The page you are looking for doesn't exist.
       </Typography>
       <Box
         ref={animationContainer}
         sx={{
           width: 300,
           height: 300,
-          mb: 2,
         }}></Box>
-      <Typography>
-        The page you are looking for doesn't exist. <br />
-        <Button
-          component={Link}
-          to="/"
-          variant="contained"
-          sx={{
-            mt: 3,
-            width: "150px",
-            height: "45px",
-            backgroundColor: "#476C92",
-            color: "white",
-            fontWeight: "bold",
-            borderRadius: "30px",
-            textTransform: "capitalize",
-            "&:hover": {
-              backgroundColor: "white",
-              color: "#476C92",
-              borderColor: "#476C92",
-              boxShadow: "none",
-              border: "1px solid",
-            },
-          }}>
-          Go Home
-        </Button>
-      </Typography>
+      <Button
+        component={Link}
+        to="/"
+        variant="contained"
+        sx={{
+          mt: 3,
+          width: "150px",
+          height: "45px",
+          backgroundColor: "#476C92",
+          color: "white",
+          fontWeight: "bold",
+          borderRadius: "30px",
+          textTransform: "capitalize",
+          "&:hover": {
+            backgroundColor: "white",
+            color: "#476C92",
+            borderColor: "#476C92",
+            boxShadow: "none",
+            border: "1px solid",
+          },
+        }}>
+        Go Home
+      </Button>
     </Box>
   );
 }
