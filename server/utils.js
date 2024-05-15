@@ -44,7 +44,7 @@ export const getExistingCalendars = async (uid) => {
 };
 
 //get specific user calendar from the database
-export const getSpecificCalendars = async (calendarID) => {
+export const getSpecificCalendar = async (calendarID) => {
   const collectionRef = collection(db, "calendars");
   const q = query(collectionRef, where("id", "==", calendarID));
   const querySnapshot = await getDocs(q);
