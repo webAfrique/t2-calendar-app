@@ -9,22 +9,51 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import PhotoOutlinedIcon from "@mui/icons-material/PhotoOutlined";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Box, Button, IconButton } from "@mui/material";
 import { hatchImageSet, hatchImageDelete } from "../../features/calendarSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { storage } from "../../../../server/firebase";
+import { v4 } from "uuid";
 
 const UploadImage = ({ hatchNumber }) => {
   const [open, setOpen] = useState(false);
+  const [imageRef, setImageRef] = useState(null);
   const dispatch = useDispatch();
 
-  const hatchImage = useSelector((state) => {
-    const hatch = state.calendar.dates.find(
-      (hatch) => hatch.number === hatchNumber
+  const deleteHandler = async () => {
+    dispatch(
+      hatchImageDelete({
+        hatchNumber,
+      })
     );
-    return hatch ? hatch.image : "";
-  });
-  let fileName = hatchImage.fileName ? hatchImage.fileName : "No file chosen";
+    if (imageRef) {
+      await deleteObject(imageRef);
+    }
+  };
+
+  // Function to handle file upload to Firebase storage
+  const handleUpload = async (e) => {
+    const newImageRef = ref(storage, `images/${v4()}`);
+    const snapshot = await uploadBytes(newImageRef, e.target.files[0]);
+    const url = await getDownloadURL(snapshot.ref);
+    setImageRef(newImageRef);
+    console.log("url", url);
+    if (url) {
+      dispatch(
+        hatchImageSet({
+          url: url,
+          hatchNumber,
+        })
+      );
+    }
+  };
 
   return (
     <>
@@ -46,7 +75,8 @@ const UploadImage = ({ hatchNumber }) => {
               sx={{
                 pr: 0,
                 display: "flex",
-                flexDirection: "column",
+                alighItems: "center",
+                justifyContent: "center",
                 gap: "10px",
               }}
             >
@@ -58,48 +88,23 @@ const UploadImage = ({ hatchNumber }) => {
                 startIcon={<CloudUploadIcon />}
                 sx={{
                   padding: "5px 10px",
-                  marginBottom: "5px",
                   color: "#476C92",
                   borderColor: "#476C92",
                 }}
               >
                 Upload file
-                <input
-                  type="file"
-                  hidden
-                  onChange={(e) => {
-                    dispatch(
-                      hatchImageSet({
-                        url: URL.createObjectURL(e.target.files[0]),
-                        fileName: e.target.files[0].name,
-                        hatchNumber,
-                      })
-                    );
-                  }}
-                />
+                <input type="file" hidden onChange={handleUpload} />
               </Button>
+
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                 }}
               >
-                <Typography variant="body1" sx={{ color: "#476C92" }}>
-                  {fileName}
-                </Typography>
-                {hatchImage.fileName && (
-                  <IconButton
-                    onClick={() =>
-                      dispatch(
-                        hatchImageDelete({
-                          hatchNumber,
-                        })
-                      )
-                    }
-                  >
-                    <ClearIcon sx={{ color: "#476C92" }} />
-                  </IconButton>
-                )}
+                <IconButton onClick={deleteHandler}>
+                  <DeleteForeverOutlinedIcon sx={{ color: "#476C92" }} />
+                </IconButton>
               </Box>
             </ListItemButton>
           </List>
