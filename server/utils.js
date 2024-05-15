@@ -64,3 +64,15 @@ export const deleteSpecificCalendar = async (calendarID) => {
   const docRef = doc(db, "calendars", calendarID.toString());
   await deleteDoc(docRef);
 };
+
+// Count user's calendars
+export const countUserCalendars = async (uid) => {
+  try {
+    const userCalendars = await getExistingCalendars(uid);
+    const calendarCount = userCalendars.length;
+    return calendarCount;
+  } catch (error) {
+    console.error("Error counting user's calendars:", error);
+    throw error;
+  }
+};

@@ -8,14 +8,19 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Chart from "../component/adminPanel/Chart";
-import Orders from "../component/adminPanel/Orders";
+import GetAllUsers from "../component/adminPanel/GetAllUsers";
 import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 
-import { auth, getUser, getUserCount } from "../../../server/firebase";
+import {
+  auth,
+  getUser,
+  getUserCount,
+  getAllUsers,
+} from "../../../server/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const defaultTheme = createTheme();
@@ -163,10 +168,10 @@ const AdminPanel = () => {
                 <Deposits />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Recent Users */}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
+                <GetAllUsers />
               </Paper>
             </Grid>
           </Grid>
