@@ -12,7 +12,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, IconButton } from "@mui/material";
 import { hatchImageSet, hatchImageDelete } from "../../features/calendarSlice";
 import { useDispatch } from "react-redux";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import {
   ref,
   uploadBytes,
@@ -103,7 +103,7 @@ const UploadImage = ({ hatchNumber }) => {
                 }}
               >
                 <IconButton onClick={deleteHandler}>
-                  <DeleteForeverOutlinedIcon sx={{ color: "#476C92" }} />
+                  <DeleteOutlineOutlinedIcon sx={{ color: "#476C92" }} />
                 </IconButton>
               </Box>
             </ListItemButton>
