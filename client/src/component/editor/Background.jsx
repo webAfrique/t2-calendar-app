@@ -10,22 +10,26 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import { MuiColorInput } from "mui-color-input";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Box, IconButton, Typography } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
 import {
   backgroundImageSet,
   backgroundColorSet,
-  backgroundFileNameSet,
-  backgroundFileNameDelete,
   backgroundImageDelete,
 } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { storage } from "../../../../server/firebase";
+import { v4 } from "uuid";
 
 function Background() {
   const [open, setOpen] = React.useState(false);
   const color = useSelector((state) => state.calendar.background.color);
-  const fileName = useSelector((state) => state.calendar.background.fileName);
+  const [imageRef, setImageRef] = React.useState(null);
 
   const dispatch = useDispatch();
 
@@ -40,21 +44,24 @@ function Background() {
   const handleColorChange = (newColor) => {
     dispatch(backgroundColorSet(newColor));
   };
-  const deleteHandler = () => {
-    dispatch(backgroundFileNameDelete());
+  const deleteHandler = async () => {
     dispatch(backgroundImageDelete());
+    if (imageRef) {
+      await deleteObject(imageRef);
+    }
   };
 
   function FileUploadButton() {
-    const handleUpload = (event) => {
-      const file = event.target.files[0];
-      dispatch(backgroundFileNameSet(file.name));
-
-      console.log("file", file);
-
-      // You can now use the file object for further processing
-      const url = URL.createObjectURL(file);
-      dispatch(backgroundImageSet(url));
+    // Function to handle file upload to Firebase storage
+    const handleUpload = async (e) => {
+      const newImageRef = ref(storage, `images/${v4()}`);
+      const snapshot = await uploadBytes(newImageRef, e.target.files[0]);
+      const url = await getDownloadURL(snapshot.ref);
+      setImageRef(newImageRef);
+      console.log("url", url);
+      if (url) {
+        dispatch(backgroundImageSet(url));
+      }
     };
 
     return (
@@ -109,23 +116,10 @@ function Background() {
               <ListItemText
                 primary="Background image"
                 sx={{ color: "#476C92" }}
+                onClick={deleteHandler}
               />
               <FileUploadButton />
             </ListItemButton>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography variant="body1">{fileName}</Typography>
-              {fileName && (
-                <IconButton onClick={deleteHandler}>
-                  <ClearIcon />
-                </IconButton>
-              )}
-            </Box>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
               <ListItemText
                 primary="Background color"
