@@ -23,12 +23,13 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import {
   getDefault,
   getExistingCalendars,
-  getSpecificCalendars,
+  getSpecificCalendar,
   deleteSpecificCalendar,
 } from "../../../server/utils";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setCalendarID, setInitialState } from "../features/calendarSlice";
+import { set } from "date-fns";
 
 function User({ setPreviewClicked, previewClicked }) {
   const [user, loading, error] = useAuthState(auth);
@@ -46,6 +47,7 @@ function User({ setPreviewClicked, previewClicked }) {
     await getDefault(dispatch);
     dispatch(setCalendarID(Date.now()));
     navigateTo("/editor");
+    setPreviewClicked(false);
   };
 
   useEffect(() => {
@@ -73,8 +75,8 @@ function User({ setPreviewClicked, previewClicked }) {
     }
   }, [user]);
 
-  const handleEditCalendar = async (id) => {
-    const calendarData = await getSpecificCalendars(id);
+  const handlePreviewEditClick = async (id) => {
+    const calendarData = await getSpecificCalendar(id);
     if (calendarData) {
       dispatch(setInitialState(calendarData));
     }
@@ -168,7 +170,10 @@ function User({ setPreviewClicked, previewClicked }) {
                                 textDecoration: "none",
                                 color: "#00A8CD",
                               }}
-                              onClick={() => setPreviewClicked(!previewClicked)}
+                              onClick={() => {
+                                handlePreviewEditClick(calendar.id);
+                                setPreviewClicked(true);
+                              }}
                             >
                               {calendar.title ? calendar.title : "Untitled"}
                             </Typography>
@@ -182,7 +187,10 @@ function User({ setPreviewClicked, previewClicked }) {
                               to={`/editor/${calendar.id}`}
                               aria-label="edit calendar"
                               sx={{ mx: 1, color: "#00A8CD" }}
-                              onClick={() => handleEditCalendar(calendar.id)}
+                              onClick={() => {
+                                handlePreviewEditClick(calendar.id);
+                                setPreviewClicked(true);
+                              }}
                             >
                               <EditOutlinedIcon />
                             </IconButton>

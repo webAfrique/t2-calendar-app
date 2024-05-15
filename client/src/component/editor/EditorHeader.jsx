@@ -15,10 +15,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Popup from "../../component/Popup";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function EditorHeader({ setPreviewClicked, previewClicked }) {
   const [open, setOpen] = useState(false);
   const [saveClicked, setSaveClicked] = useState(false);
+  const location = useLocation();
   console.log("saveClicked", saveClicked);
   const navigate = useNavigate();
   const handleClickOpen = (e) => {
@@ -57,7 +59,11 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
         <Toolbar disableGutters>
           <Box
             sx={{ "&:hover": { cursor: "pointer" } }}
-            onClick={!saveClicked ? handleClickOpen : handleConfirm}
+            onClick={
+              saveClicked || location.pathname.endsWith("/view")
+                ? handleConfirm
+                : handleClickOpen
+            }
           >
             <Typography
               variant="h4"
