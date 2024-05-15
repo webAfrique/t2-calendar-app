@@ -31,20 +31,26 @@ export default function GetAllUsers() {
   const [users, setUsers] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  // Fetch all users' data
+  // Fetch all users' data with calendar count
   React.useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsersAndCounts = async () => {
       try {
         const usersData = await getAllUsers();
-        setUsers(usersData);
+        const usersWithCounts = await Promise.all(
+          usersData.map(async (user) => {
+            const calendarCount = await countUserCalendars(user.uid);
+            return { ...user, calendarCount };
+          })
+        );
+        setUsers(usersWithCounts);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching users and calendar counts:", error);
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchUsersAndCounts();
   }, []);
 
   if (loading) {
@@ -54,31 +60,35 @@ export default function GetAllUsers() {
   return (
     <React.Fragment>
       <Title>Recent Users</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Uid</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Admin</TableCell>
-            <TableCell align="right">Calendar Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow key={user.uid}>
-              <TableCell>{user.uid}</TableCell>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.isAdmin ? "Yes" : "No"}</TableCell>
-              <TableCell align="right">{countUserCalendars}</TableCell>
+      <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+        <Table size="small">
+          <TableHead
+            style={{
+              position: "sticky",
+              top: 0,
+              backgroundColor: "#9AC8E8",
+            }}>
+            <TableRow>
+              <TableCell>UserID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Admin</TableCell>
+              <TableCell align="right">Calendar Amount</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more users
-      </Link>
+          </TableHead>
+          <TableBody>
+            {users.map((user) => (
+              <TableRow key={user.uid}>
+                <TableCell>{user.uid}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.isAdmin ? "Yes" : "No"}</TableCell>
+                <TableCell align="right">{user.calendarCount}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </React.Fragment>
   );
 }

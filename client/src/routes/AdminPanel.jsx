@@ -100,7 +100,7 @@ const AdminPanel = () => {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 66px - 44px)",
+          minHeight: "calc(100vh - 64px - 56.5px)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -122,7 +122,7 @@ const AdminPanel = () => {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 66px - 44px)",
+          minHeight: "calc(100vh - 64px - 56.5px)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -133,49 +133,74 @@ const AdminPanel = () => {
         </Alert>
       </Box>
     );
-  } else if (!userData) {
-    // User logged in but data not fetched yet
-    return <CircularProgress />;
-  } else if (!userData.isAdmin) {
-    // User logged in but not an admin
-    return <Navigate to="/user" />;
+  } else if (!userData || !userData.isAdmin) {
+    // User logged in but data not fetched yet or not an admin
+    return (
+      <Box
+        sx={{
+          minHeight: "calc(100vh - 64px - 56.5px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <Alert severity="warning">
+          <AlertTitle>Reminder</AlertTitle>
+          You are not authorized to access the Admin Panel.
+        </Alert>
+      </Box>
+    );
   } else {
     return (
       <ThemeProvider theme={defaultTheme}>
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}>
-                <Chart />
-              </Paper>
+        <Box
+          sx={{
+            minHeight: "calc(100vh - 64px - 56.5px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            my: 2,
+          }}>
+          <Container maxWidth="md">
+            <Grid container spacing={3}>
+              {/* Chart */}
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}>
+                  <Chart />
+                </Paper>
+              </Grid>
+              {/* Recent Deposits */}
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}>
+                  <Deposits />
+                </Paper>
+              </Grid>
+              {/* Recent Users */}
+              <Grid item xs={12}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    mb: 4,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}>
+                  <GetAllUsers />
+                </Paper>
+              </Grid>
             </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Users */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <GetAllUsers />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+          </Container>
+        </Box>
       </ThemeProvider>
     );
   }
