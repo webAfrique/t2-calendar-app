@@ -24,7 +24,6 @@ const hatch = {
   },
   image: {
     url: "",
-    fileName: "",
   },
   video: {
     url: "",

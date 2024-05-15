@@ -12,7 +12,7 @@ import LinkIcon from "@mui/icons-material/Link";
 import { hatchVideoSet, hatchVideoDelete } from "../../features/calendarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, IconButton } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 function Video({ hatchNumber }) {
   const [open, setOpen] = useState(false);
@@ -88,7 +88,7 @@ function Video({ hatchNumber }) {
                     )
                   }
                 >
-                  <ClearIcon sx={{ color: "#476C92" }} />
+                  <DeleteForeverOutlinedIcon sx={{ color: "#476C92" }} />
                 </IconButton>
               )}
             </Box>

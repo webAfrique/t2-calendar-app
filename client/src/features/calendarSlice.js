@@ -213,11 +213,10 @@ const calendarSlice = createSlice({
       });
     },
     hatchImageSet: (state, action) => {
-      const { hatchNumber, url, fileName } = action.payload;
+      const { hatchNumber, url } = action.payload;
       state.dates.forEach((hatch) => {
         if (hatch.number === hatchNumber) {
           hatch.image.url = url;
-          hatch.image.fileName = fileName;
         }
       });
     },
@@ -226,7 +225,6 @@ const calendarSlice = createSlice({
       state.dates.forEach((hatch) => {
         if (hatch.number === hatchNumber) {
           hatch.image.url = "";
-          hatch.image.fileName = "";
         }
       });
     },
