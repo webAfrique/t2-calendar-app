@@ -16,6 +16,7 @@ const previewModalStyle = {
   boxShadow: 24,
   p: 2,
   overflowY: "auto", // Added overflowY style
+  zIndex: 101, //ensure preview modal is above
 };
 
 function convertToEmbedURL(url) {

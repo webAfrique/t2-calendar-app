@@ -26,6 +26,16 @@ const Preview = () => {
     backgroundSize: "cover",
   };
 
+  const backdropStyle = {
+    position: "fixed",
+    inset: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black
+    zIndex: 100, // Lower z-index than the modal
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return (
     <>
       <Box
@@ -38,8 +48,7 @@ const Preview = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: dates.length < 26 ? `calc(100vh)` : "auto", // if dates are more than 25, set height to 100vh
           margin: "auto",
-        }}
-      >
+        }}>
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
@@ -50,15 +59,18 @@ const Preview = () => {
             setOpen={setPreviewOpen}
           />
         </Box>
-        {previewOpen && (
+      </Box>
+      {previewOpen && (
+        <>
+          <div style={backdropStyle} />
           <PreviewModal
             setOpen={setPreviewOpen}
             open={previewOpen}
             onClose={() => setPreviewOpen(false)}
             hatchNumber={hatchNumber}
           />
-        )}
-      </Box>
+        </>
+      )}
     </>
   );
 };
