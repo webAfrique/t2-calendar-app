@@ -29,7 +29,7 @@ const Preview = () => {
   const backdropStyle = {
     position: "fixed",
     inset: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black
+    backgroundColor: "rgb(0 0 0 / .66)", // Semi-transparent black
     zIndex: 100, // Lower z-index than the modal
     display: "flex",
     alignItems: "center",

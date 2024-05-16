@@ -16,10 +16,13 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Popup from "../../component/Popup";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 function EditorHeader({ setPreviewClicked, previewClicked }) {
   const [open, setOpen] = useState(false);
   const [saveClicked, setSaveClicked] = useState(false);
+  const [showAlert, setShowAlert] = useState(false); // State to control the visibility of the alert
+
   const location = useLocation();
   console.log("saveClicked", saveClicked);
   const navigate = useNavigate();
@@ -40,6 +43,20 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
     navigate("/user"); // navigate to /user when the user confirms
   };
 
+  const handleSave = () => {
+    console.log("Save button clicked!");
+    setSaveClicked(true);
+    saveSettings(calendarSettings, userID, calendarID);
+    setShowAlert(true); // Show the alert when the user clicks the save button
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
+  };
+
+  setTimeout(() => {
+    setShowAlert(false);
+  }, 2000);
+
   const calendarSettings = useSelector((state) => state.calendar);
   const [user] = useAuthState(auth);
   //check if user is defined
@@ -48,13 +65,12 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
   const calendarID = useSelector((state) =>
     state.calendar.id ? state.calendar.id.toString() : ""
   );
-  console.log("calendarID", calendarID);
+  // console.log("calendarID", calendarID);
 
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "#fff", boxShadow: "none" }}
-    >
+      sx={{ backgroundColor: "#fff", boxShadow: "none" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
@@ -63,8 +79,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
               saveClicked || location.pathname.endsWith("/view")
                 ? handleConfirm
                 : handleClickOpen
-            }
-          >
+            }>
             <Typography
               variant="h4"
               sx={{
@@ -75,8 +90,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                 justifyContent: "center",
                 color: "#476C92",
                 textDecoration: "none",
-              }}
-            >
+              }}>
               WIME
               <br />
             </Typography>
@@ -92,8 +106,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                 textDecoration: "none",
                 marginTop: "-10px",
                 textTransform: "uppercase",
-              }}
-            >
+              }}>
               calendar
             </Typography>
           </Box>
@@ -104,6 +117,11 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
             handleConfirm={handleConfirm}
           />
           <Box sx={{ flexGrow: 1 }} />
+          {showAlert && (
+            <Alert sx={{ mx: 5 }} severity="success">
+              Changes saved successfully!
+            </Alert>
+          )}
           <Box sx={{ p: 0, display: { md: "flex" }, mx: 1 }}>
             <Tooltip title={!previewClicked ? "Preview" : "Edit"}>
               <IconButton
@@ -128,8 +146,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                 }}
                 onClick={() => {
                   setPreviewClicked(!previewClicked);
-                }}
-              >
+                }}>
                 {!previewClicked ? <VisibilityIcon /> : <EditOutlinedIcon />}
               </IconButton>
             </Tooltip>
@@ -140,8 +157,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
               display: { md: "flex" },
               mx: 2,
               marginRight: "70px",
-            }}
-          >
+            }}>
             <Tooltip title="Save">
               <IconButton
                 sx={{
@@ -160,8 +176,8 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                 onClick={() => {
                   setSaveClicked(true);
                   saveSettings(calendarSettings, userID, calendarID);
-                }}
-              >
+                  handleSave();
+                }}>
                 <SaveIcon />
               </IconButton>
             </Tooltip>
@@ -186,8 +202,7 @@ function EditorHeader({ setPreviewClicked, previewClicked }) {
                     boxShadow: "none",
                     border: "1px solid",
                   },
-                }}
-              >
+                }}>
                 Log out
               </Button>
             </Link>
