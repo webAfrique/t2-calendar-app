@@ -65,7 +65,7 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
     : {};
 
   const style = {
-    border: "1px dotted #666",
+    border: "1px dotted #333",
     borderRadius: isCircle ? "50%" : "0",
   }; // default style
 

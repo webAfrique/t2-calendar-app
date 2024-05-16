@@ -15,7 +15,8 @@ const style = {
   border: "5px solid #476C92",
   borderRadius: "16px",
   boxShadow: 24,
-  p: 4,
+  py: 1,
+  px: 2,
 };
 
 function convertToEmbedURL(url) {
@@ -76,8 +77,27 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+        aria-describedby="modal-modal-description"
+      >
         <Box sx={style}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              fontSize: 20,
+              fontWeight: "bold",
+              width: "100%",
+              color: "#476C92",
+            }}
+          >
+            {/*   <DoorSlidingOutlinedIcon /> */}
+            {
+              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                #{hatchNumber}
+              </Typography>
+            }
+          </Box>
           <Typography
             sx={{
               mb: 2,
@@ -86,7 +106,8 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-title"
-            component="h2">
+            component="h2"
+          >
             {title ? title : "Title"}
           </Typography>
           <Box
@@ -115,7 +136,8 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 }}
                 id="modal-modal-title"
                 component="h2"
-                textAlign={"center"}>
+                textAlign={"center"}
+              >
                 {image.filename ? image.filename : "Image"}
               </Typography>
             )}
@@ -129,7 +151,8 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                 : { textAlign: "center", color: "#666", fontStyle: "italic" }),
             }}
             id="modal-modal-description"
-            component="h2">
+            component="h2"
+          >
             {text ? text : "Text"}
           </Typography>
           <Box
@@ -139,7 +162,8 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
               alignContent: "center",
               border: !video.url && "1px dashed grey",
               textAlign: "center",
-            }}>
+            }}
+          >
             {video.url ? (
               <iframe
                 src={convertToEmbedURL(video.url)}
@@ -157,7 +181,8 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
                   fontStyle: "italic",
                 }}
                 id="modal-modal-title"
-                component="h2">
+                component="h2"
+              >
                 Video
               </Typography>
             )}
@@ -174,6 +199,7 @@ export default function BasicModal({ hatchNumber, setOpen, open }) {
               borderRadius: "30px",
               textTransform: "capitalize",
               fontWeight: "bold",
+              border: "1px solid transparent",
               "&:hover": {
                 backgroundColor: "white",
                 color: "#476C92",
