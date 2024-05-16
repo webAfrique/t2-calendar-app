@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import styles from "./Hatch.module.css";
+import { updatePositions } from "../../features/calendarSlice";
 
 const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const shape = useSelector((state) => state.calendar.shape);
@@ -31,6 +32,14 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
 
     return hatch ? hatch.image.url : "";
   });
+
+  //read hatch positions from redux store
+  const hatchPosition = useSelector((state) => {
+    const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
+
+    return hatch ? hatch.positions : { x: 0, y: 0 };
+  });
+  console.log("hatchPosition", hatchPosition);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -93,8 +102,17 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   //   );
   // }
 
+  const handleStop = (date, data) => {
+    dispatch(
+      updatePositions({ hatchNumber: date, position: { x: data.x, y: data.y } })
+    );
+  };
+
   return (
-    <Draggable>
+    <Draggable
+      defaultPosition={hatchPosition}
+      onStop={(e, data) => handleStop(date, data)}
+    >
       <div
         onClick={() => {
           setIsClicked(true);

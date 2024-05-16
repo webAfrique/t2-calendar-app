@@ -22,6 +22,10 @@ const hatch = {
     fontWeight: "normal",
     fontStyle: "normal",
   },
+  positions: {
+    x: 0,
+    y: 0,
+  },
   image: {
     url: "",
   },

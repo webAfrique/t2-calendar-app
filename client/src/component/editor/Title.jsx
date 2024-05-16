@@ -46,11 +46,21 @@ function Title() {
 
   //regarding slice below
   const dispatch = useDispatch();
-  const title = useSelector((state) => state.calendar.title);
-  const alignment = useSelector((state) => state.calendar.styles.textAlign);
-  const fontFamily = useSelector((state) => state.calendar.styles.fontFamily);
-  const color = useSelector((state) => state.calendar.styles.color);
-  const fontSize = useSelector((state) => state.calendar.styles.fontSize);
+  const title = useSelector((state) =>
+    state.calendar.title ? state.calendar.title : ""
+  );
+  const alignment = useSelector((state) =>
+    state.calendar.styles.textAlign ? state.calendar.styles.textAlign : ""
+  );
+  const fontFamily = useSelector((state) =>
+    state.calendar.styles.fontFamily ? state.calendar.styles.fontFamily : ""
+  );
+  const color = useSelector((state) =>
+    state.calendar.styles.color ? state.calendar.styles.color : ""
+  );
+  const fontSize = useSelector((state) =>
+    state.calendar.styles.fontSize ? state.calendar.styles.fontSize : null
+  );
   console.log("alignment", alignment);
 
   const handleHighlightChange = (event, newStyles) => {
