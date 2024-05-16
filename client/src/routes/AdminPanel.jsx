@@ -7,16 +7,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Chart from "../component/adminPanel/Chart";
 import GetAllUsers from "../component/adminPanel/GetAllUsers";
 import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-
 import { auth, getUser, getUserCount } from "../../../server/firebase";
+import { countAllCalendars } from "../../../server/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
+import UserAmount from "../component/adminPanel/UserAmount";
+import CalendarAmount from "../component/adminPanel/CalendarAmount";
 
 const defaultTheme = createTheme();
 
@@ -24,6 +25,7 @@ const AdminPanel = () => {
   const [user, loading, error] = useAuthState(auth);
   const [userData, setUserDate] = React.useState(null);
   const [userCount, setUserCount] = useState(null);
+  const [calendarCount, setCalendarCount] = useState(null);
 
   React.useEffect(() => {
     if (user) {
@@ -37,6 +39,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     fetchUserCount();
+    fetchCalendarCount();
   }, [user]);
 
   const fetchUserCount = async () => {
@@ -51,45 +54,18 @@ const AdminPanel = () => {
     }
   };
 
+  const fetchCalendarCount = async () => {
+    try {
+      const totalCount = await countAllCalendars();
+      setCalendarCount(totalCount);
+    } catch (error) {
+      console.error("Error fetching calendar count:", error);
+    }
+  };
+
   function preventDefault(event) {
     event.preventDefault();
   }
-
-  function Title(props) {
-    return (
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        {props.children}
-      </Typography>
-    );
-  }
-
-  Title.propTypes = {
-    children: PropTypes.node,
-  };
-
-  const options = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "Europe/Helsinki", // Specify the Europe/Helsinki timezone for Finland
-  };
-
-  const date = new Date().toLocaleDateString("en-US", options);
-
-  const Deposits = () => {
-    return (
-      <React.Fragment>
-        <Title>Total Users</Title>
-        <Typography component="p" variant="h4">
-          {userCount}
-        </Typography>
-        <Typography color="text.secondary" sx={{ flex: 1 }}>
-          {date}
-        </Typography>
-      </React.Fragment>
-    );
-  };
 
   if (loading) {
     return (
@@ -156,32 +132,34 @@ const AdminPanel = () => {
             my: 2,
           }}>
           <Container maxWidth="md">
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+            <Grid container spacing={3} justifyContent="center">
+              {/* Calendar Amount */}
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    height: 140,
+                    margin: "auto",
                   }}>
-                  <Chart />
+                  <CalendarAmount calendarCount={calendarCount} />
                 </Paper>
               </Grid>
-              {/* User amount */}
-              <Grid item xs={12} md={4} lg={3}>
+              {/* User Amount */}
+              <Grid item xs={12} md={4} lg={4}>
                 <Paper
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+                    height: 140,
+                    margin: "auto",
                   }}>
-                  <Deposits />
+                  <UserAmount userCount={userCount} />
                 </Paper>
               </Grid>
-              {/* Recent Users */}
+              {/* Get All Users */}
               <Grid item xs={12}>
                 <Paper
                   sx={{
