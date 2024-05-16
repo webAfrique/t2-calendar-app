@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { datesSet } from "../../features/calendarSlice";
 import { addDays } from "date-fns";
 
-const DateCalendar = ({onSelectDate}) => {
+const DateCalendar = () => {
   const dispatch = useDispatch();
 
   const [range, setRange] = useState([
@@ -58,7 +58,6 @@ const DateCalendar = ({onSelectDate}) => {
         },
       })
     );
-    onSelectDate(ranges.selection.startDate, ranges.selection.endDate);
   };
 
   const DateMenu = (

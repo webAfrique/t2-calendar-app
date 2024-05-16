@@ -2,8 +2,30 @@ import { Box, Divider, IconButton, Typography } from "@mui/material";
 import DoorSlidingOutlinedIcon from "@mui/icons-material/DoorSlidingOutlined";
 import WestOutlinedIcon from "@mui/icons-material/WestOutlined";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
+import { useSelector } from "react-redux";
 
-const HatchNavigation = ({ hatchNumber, nextHatch, previousHatch }) => {
+const HatchNavigation = ({ hatchNumber, setHatchNumber }) => {
+  const dates = useSelector((state) =>
+    state.calendar.dates ? state.calendar.dates : []
+  );
+  console.log("dates from nav", dates);
+
+  const firstHatch = dates[0].number;
+  const lastHatch = dates[dates.length - 1].number;
+
+  const handleNextHatch = () => {
+    if (hatchNumber < lastHatch) {
+      setHatchNumber((prev) => prev + 1);
+    }
+  };
+
+  // To move to the previous hatch
+  const handlePreviousHatch = () => {
+    if (hatchNumber > firstHatch) {
+      setHatchNumber((prev) => prev - 1);
+    }
+  };
+
   return (
     <div>
       <Box
@@ -16,7 +38,7 @@ const HatchNavigation = ({ hatchNumber, nextHatch, previousHatch }) => {
           marginBottom: 3,
         }}
       >
-        <IconButton onClick={previousHatch}>
+        <IconButton onClick={handlePreviousHatch}>
           <WestOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
         <Box
@@ -39,7 +61,7 @@ const HatchNavigation = ({ hatchNumber, nextHatch, previousHatch }) => {
           <DoorSlidingOutlinedIcon />
         </Box>
 
-        <IconButton onClick={nextHatch}>
+        <IconButton onClick={handleNextHatch}>
           <EastOutlinedIcon sx={{ stroke: "#476C92", strokeWidth: 1 }} />
         </IconButton>
       </Box>
