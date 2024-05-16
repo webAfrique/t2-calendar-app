@@ -76,3 +76,15 @@ export const countUserCalendars = async (uid) => {
     throw error;
   }
 };
+
+// Count calendar amount for all users
+export const countAllCalendars = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "calendars"));
+    const totalCount = querySnapshot.size;
+    return totalCount;
+  } catch (error) {
+    console.log("Error fetching calendar count:", error);
+    throw error;
+  }
+};
