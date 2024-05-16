@@ -1,6 +1,6 @@
 import Draggable from "react-draggable";
-import { Typography } from "@mui/material";
-//import Star from "./Star";
+import { Box, Typography } from "@mui/material";
+import Star from "./Star";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import styles from "./Hatch.module.css";
@@ -9,14 +9,12 @@ import { updatePositions } from "../../features/calendarSlice";
 const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
   const shape = useSelector((state) => state.calendar.shape);
   const isCircle = shape === "Circle";
-  //const isStar = shape === "Star";
+  const isStar = shape === "Star";
 
   //regarding calendar slice
   const dispatch = useDispatch();
   const dates = useSelector((state) => state.calendar.dates);
   console.log("dates from hatch", dates);
-  // const hatches = useSelector((state) => state.hatches.hatchObjects);
-  // console.log("hatches", hatches);
 
   const hatchWidth = useSelector((state) => {
     const hatch = state.calendar.dates.find((hatch) => hatch.number === date);
@@ -74,38 +72,38 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
     height: `${hatchHeight}px`,
   };
 
-  // if (isStar) {
-  //   return (
-  //     <Draggable>
-  //       <Box
-  //         style={{
-  //           position: "relative",
-  //           width: "120px",
-  //           height: "120px",
-  //         }}
-  //         onClick={() => {
-  //           setIsClicked(true);
-  //           setHatchNumber(date);
-  //         }}
-  //       >
-  //         <Star />
-  //         <Typography
-  //           variant="h5"
-  //           style={{
-  //             position: "absolute",
-  //             top: "50%",
-  //             left: "50%",
-  //             transform: "translate(-50%, -50%)",
-  //             textAlign: "center",
-  //             color: "white",
-  //           }}
-  //         >
-  //           {date}
-  //         </Typography>
-  //       </Box>
-  //     </Draggable>
-  //   );
-  // }
+  if (isStar) {
+    return (
+      <Draggable>
+        <Box
+          style={{
+            position: "relative",
+            width: "120px",
+            height: "120px",
+          }}
+          onClick={() => {
+            setIsClicked(true);
+            setHatchNumber(date);
+          }}
+        >
+          <Star />
+          <Typography
+            variant="h5"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "center",
+              color: "white",
+            }}
+          >
+            {date}
+          </Typography>
+        </Box>
+      </Draggable>
+    );
+  }
 
   const handleStop = (date, data) => {
     dispatch(
