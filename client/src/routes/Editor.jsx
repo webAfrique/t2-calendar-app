@@ -56,15 +56,15 @@ function Editor({ calendarView }) {
   }
 
   // Update max hatch number based on the number of days in the current month
-  // useEffect(() => {
-  //   const currentDate = new Date();
-  //   const daysInMonth = new Date(
-  //     currentDate.getFullYear(),
-  //     currentDate.getMonth() + 1,
-  //     0
-  //   ).getDate();
-  //   setMaxHatchNumber(daysInMonth);
-  // }, [selectedDate]);
+  useEffect(() => {
+    const currentDate = new Date();
+    const daysInMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    ).getDate();
+    setMaxHatchNumber(daysInMonth);
+  }, [selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -167,7 +167,6 @@ function Editor({ calendarView }) {
           style={backgoroundStyles}
           component="main"
           sx={{
-            position: "relative",
             flexGrow: 1,
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },

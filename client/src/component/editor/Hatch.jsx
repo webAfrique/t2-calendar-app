@@ -49,13 +49,18 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
     img.src = hatchImage;
   }, [hatchImage]);
 
-  const styleOnHover = isHovered
+  const styleOnHoverBackImage = isHovered
     ? {
         backgroundImage: hatchImage ? `url(${hatchImage})` : "",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundColor: "white",
+      }
+    : {};
+  const styleOnHoverFrontDoor = isHovered
+    ? {
+        backgroundColor: "grey",
       }
     : {};
 
@@ -114,7 +119,7 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
       onStop={(e, data) => handleStop(date, data)}
     >
       <div
-        onClick={() => {
+        onDoubleClick={() => {
           setIsClicked(true);
           setHatchNumber(date);
           setOpen(true);
@@ -122,7 +127,15 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
         className={styles.door}
         style={widthHeight}
       >
-        <div className={styles.doorFront} style={style}>
+        <div
+          className={styles.doorFront}
+          style={{
+            ...style,
+            ...styleOnHoverFrontDoor,
+          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <div className={styles.doorNumber}>
             <Typography variant="h5">{date}</Typography>
           </div>
@@ -132,7 +145,7 @@ const Hatch = ({ date, setIsClicked, setHatchNumber, setOpen }) => {
             className={styles.backImage}
             style={{
               ...style,
-              ...styleOnHover,
+              ...styleOnHoverBackImage,
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
