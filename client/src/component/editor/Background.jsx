@@ -10,6 +10,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import { MuiColorInput } from "mui-color-input";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import {
   backgroundImageSet,
   backgroundColorSet,
@@ -25,6 +26,7 @@ import {
 } from "firebase/storage";
 import { storage } from "../../../../server/firebase";
 import { v4 } from "uuid";
+import { IconButton } from "@mui/material";
 
 function Background() {
   const [open, setOpen] = React.useState(false);
@@ -113,19 +115,15 @@ function Background() {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText
-                primary="Background image"
-                sx={{ color: "#476C92" }}
-                onClick={deleteHandler}
-              />
+              <ListItemText primary="Image" sx={{ color: "#476C92" }} />
+
               <FileUploadButton />
+              <IconButton onClick={deleteHandler}>
+                <DeleteOutlineOutlinedIcon sx={{ color: "#476C92" }} />
+              </IconButton>
             </ListItemButton>
             <ListItemButton sx={{ pt: 1, pb: 1 }}>
-              <ListItemText
-                primary="Background color"
-                sx={{ color: "#476C92" }}
-                onClick={handleResetColor}
-              />
+              <ListItemText primary="Color" sx={{ color: "#476C92" }} />
               <MuiColorInput
                 size="small"
                 sx={{
@@ -143,7 +141,11 @@ function Background() {
                   sx: { color: "#476C92" }, // Set text color for the color input
                 }}
               />
+              <IconButton onClick={handleResetColor}>
+                <DeleteOutlineOutlinedIcon sx={{ color: "#476C92" }} />
+              </IconButton>
             </ListItemButton>
+
             <ListItemButton
               sx={{
                 pt: 1,
@@ -153,10 +155,6 @@ function Background() {
                 alignItems: "flex-start",
               }}
             >
-              <ListItemText
-                primary="Default images"
-                sx={{ color: "#476C92" }}
-              />
               <Carousel />
             </ListItemButton>
           </List>
