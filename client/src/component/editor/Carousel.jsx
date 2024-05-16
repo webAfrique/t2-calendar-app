@@ -1,9 +1,10 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import MobileStepper from "@mui/material/MobileStepper";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import SwipeableViews from "react-swipeable-views";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -94,89 +95,97 @@ function Carousel() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-      <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                sx={{
-                  position: "relative",
-                  height: 245,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src={step.imgPath}
-                  alt={step.label}
-                  style={{ maxWidth: "100%", maxHeight: "100%" }}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleToggleDefaultImage(step.imgPath)}
+    <>
+      <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+          {images.map((step, index) => (
+            <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <Box
                   sx={{
-                    backgroundColor: "#476C92",
-                    "&:hover": {
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #476C92",
-                      color: "#476C92",
-                    },
-                    position: "absolute",
-                    bottom: 8,
-                    right: 8,
+                    marginTop: 1,
+                    padding: 1.5,
+                    position: "relative",
+                    height: 245,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  {defaultImage === step.imgPath ? "Remove" : "Save"}
-                </Button>
-              </Box>
-            ) : null}
-          </div>
-        ))}
-      </SwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            sx={{ color: "#476C92" }}
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button
-            sx={{ color: "#476C92" }}
-            size="small"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-          >
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
-    </Box>
+                  <img
+                    src={step.imgPath}
+                    alt={step.label}
+                    style={{ maxWidth: "100%", maxHeight: "100%" }}
+                    onClick={() => handleToggleDefaultImage(step.imgPath)}
+                  />
+
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: -5,
+                      right: 0,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <Typography sx={{ color: "#476C92" }}>
+                      Default images
+                    </Typography>
+
+                    <IconButton
+                      onClick={() => handleToggleDefaultImage(step.imgPath)}
+                    >
+                      <DeleteOutlineOutlinedIcon sx={{ color: "#476C92" }} />
+                    </IconButton>
+                  </Box>
+                </Box>
+              ) : null}
+            </div>
+          ))}
+        </SwipeableViews>
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              sx={{ color: "#476C92" }}
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+            >
+              Next
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              sx={{ color: "#476C92" }}
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Back
+            </Button>
+          }
+        />
+      </Box>
+    </>
   );
 }
 
