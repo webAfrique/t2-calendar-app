@@ -244,6 +244,14 @@ const calendarSlice = createSlice({
         }
       });
     },
+    updatePositions(state, action) {
+      const { hatchNumber, position } = action.payload;
+      state.dates.forEach((hatch) => {
+        if (hatch.number === hatchNumber) {
+          hatch.positions = position;
+        }
+      });
+    },
   },
 });
 
@@ -283,4 +291,5 @@ export const {
   hatchHeightSet,
   hatchTitleSet,
   hatchTextSet,
+  updatePositions,
 } = calendarSlice.actions;

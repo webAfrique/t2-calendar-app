@@ -32,12 +32,14 @@ const Preview = () => {
         style={backgoroundStyles}
         component="main"
         sx={{
+          position: "relative",
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           height: dates.length < 26 ? `calc(100vh)` : "auto", // if dates are more than 25, set height to 100vh
           margin: "auto",
-        }}>
+        }}
+      >
         <Typography paragraph style={calendarStyles}>
           {calendarTitle}
         </Typography>
