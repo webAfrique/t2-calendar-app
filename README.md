@@ -38,4 +38,4 @@ To run the app locally, follow these steps:
 [Wen Yan] - GitHub (https://github.com/SelinYan)
 [Inna Kozhina] - GitHub (https://github.com/Kozhinna)
 [Emmanuel Monle Nyode] - GitHub (https://github.com/webAfrique)
-[Md Mohsin] - GitHub (https://github.com/mohsinrony)
+![Md Mohsin] (https://github.com/mohsinrony)
