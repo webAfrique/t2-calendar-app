@@ -35,7 +35,10 @@ To run the app locally, follow these steps:
 
 ## Authors and acknowledgment
 
-[Wen Yan] - GitHub (https://github.com/SelinYan)
-[Inna Kozhina] - GitHub (https://github.com/Kozhinna)
-[Emmanuel Monle Nyode] - GitHub (https://github.com/webAfrique)
-![Md Mohsin] (https://github.com/mohsinrony)
+´´´
+
+- [Wen Yan](https://github.com/SelinYan)
+- [Inna Kozhina](https://github.com/Kozhinna)
+- [Emmanuel Monle Nyode](https://github.com/webAfrique)
+- [Md Mohsin](https://github.com/mohsinrony)
+  ´´´
