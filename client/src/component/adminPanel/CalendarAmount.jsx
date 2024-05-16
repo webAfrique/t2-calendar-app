@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const options = {
   weekday: "short",
@@ -19,9 +18,6 @@ function CalendarAmount({ calendarCount }) {
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Total Calendars
       </Typography>
-      <div>
-        <CalendarMonthIcon />
-      </div>
       <Typography component="p" variant="h4">
         {calendarCount}
       </Typography>
