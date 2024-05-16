@@ -7,16 +7,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Chart from "../component/adminPanel/Chart";
-import Orders from "../component/adminPanel/Orders";
+import GetAllUsers from "../component/adminPanel/GetAllUsers";
 import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-
 import { auth, getUser, getUserCount } from "../../../server/firebase";
+import { countAllCalendars } from "../../../server/utils";
 import { useAuthState } from "react-firebase-hooks/auth";
+import UserAmount from "../component/adminPanel/UserAmount";
+import CalendarAmount from "../component/adminPanel/CalendarAmount";
 
 const defaultTheme = createTheme();
 
@@ -24,6 +25,7 @@ const AdminPanel = () => {
   const [user, loading, error] = useAuthState(auth);
   const [userData, setUserDate] = React.useState(null);
   const [userCount, setUserCount] = useState(null);
+  const [calendarCount, setCalendarCount] = useState(null);
 
   React.useEffect(() => {
     if (user) {
@@ -37,6 +39,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     fetchUserCount();
+    fetchCalendarCount();
   }, [user]);
 
   const fetchUserCount = async () => {
@@ -51,51 +54,24 @@ const AdminPanel = () => {
     }
   };
 
+  const fetchCalendarCount = async () => {
+    try {
+      const totalCount = await countAllCalendars();
+      setCalendarCount(totalCount);
+    } catch (error) {
+      console.error("Error fetching calendar count:", error);
+    }
+  };
+
   function preventDefault(event) {
     event.preventDefault();
   }
-
-  function Title(props) {
-    return (
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        {props.children}
-      </Typography>
-    );
-  }
-
-  Title.propTypes = {
-    children: PropTypes.node,
-  };
-
-  const options = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "Europe/Helsinki", // Specify the Europe/Helsinki timezone for Finland
-  };
-
-  const date = new Date().toLocaleDateString("en-US", options);
-
-  const Deposits = () => {
-    return (
-      <React.Fragment>
-        <Title>Total Users</Title>
-        <Typography component="p" variant="h4">
-          {userCount}
-        </Typography>
-        <Typography color="text.secondary" sx={{ flex: 1 }}>
-          {date}
-        </Typography>
-      </React.Fragment>
-    );
-  };
 
   if (loading) {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 66px - 44px)",
+          minHeight: "calc(100vh - 64px - 56.5px)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -117,7 +93,7 @@ const AdminPanel = () => {
     return (
       <Box
         sx={{
-          height: "calc(100vh - 66px - 44px)",
+          minHeight: "calc(100vh - 64px - 56.5px)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -128,49 +104,76 @@ const AdminPanel = () => {
         </Alert>
       </Box>
     );
-  } else if (!userData) {
-    // User logged in but data not fetched yet
-    return <CircularProgress />;
-  } else if (!userData.isAdmin) {
-    // User logged in but not an admin
-    return <Navigate to="/user" />;
+  } else if (!userData || !userData.isAdmin) {
+    // User logged in but data not fetched yet or not an admin
+    return (
+      <Box
+        sx={{
+          minHeight: "calc(100vh - 64px - 56.5px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <Alert severity="warning">
+          <AlertTitle>Reminder</AlertTitle>
+          You are not authorized to access the Admin Panel.
+        </Alert>
+      </Box>
+    );
   } else {
     return (
       <ThemeProvider theme={defaultTheme}>
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}>
-                <Chart />
-              </Paper>
+        <Box
+          sx={{
+            minHeight: "calc(100vh - 64px - 56.5px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            my: 2,
+          }}>
+          <Container maxWidth="md">
+            <Grid container spacing={3} justifyContent="center">
+              {/* Calendar Amount */}
+              <Grid item xs={12} md={4} lg={4}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 140,
+                    margin: "auto",
+                  }}>
+                  <CalendarAmount calendarCount={calendarCount} />
+                </Paper>
+              </Grid>
+              {/* User Amount */}
+              <Grid item xs={12} md={4} lg={4}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 140,
+                    margin: "auto",
+                  }}>
+                  <UserAmount userCount={userCount} />
+                </Paper>
+              </Grid>
+              {/* Get All Users */}
+              <Grid item xs={12}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    mb: 4,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}>
+                  <GetAllUsers />
+                </Paper>
+              </Grid>
             </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+          </Container>
+        </Box>
       </ThemeProvider>
     );
   }

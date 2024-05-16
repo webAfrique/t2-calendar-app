@@ -108,8 +108,7 @@ function User({ setPreviewClicked, previewClicked }) {
           alignItems: "center",
           minHeight: "calc(100vh - 68.5px - 46px)",
           justifyContent: "center",
-        }}
-      >
+        }}>
         {loadingCalendars ? (
           <Box
             sx={{
@@ -118,8 +117,7 @@ function User({ setPreviewClicked, previewClicked }) {
               alignItems: "center",
               justifyContent: "center",
               gap: 2,
-            }}
-          >
+            }}>
             <CircularProgress sx={{ color: "#476C92" }} />
             <Typography variant="h5" sx={{ color: "#476C92" }}>
               Loading calendars...
@@ -135,8 +133,7 @@ function User({ setPreviewClicked, previewClicked }) {
                 color: "#476C92",
                 mt: -5,
                 mb: 5,
-              }}
-            >
+              }}>
               Your calendars
             </Typography>
 
@@ -146,8 +143,7 @@ function User({ setPreviewClicked, previewClicked }) {
                 flexDirection: "column",
                 alignItems: "center",
                 height: "60vh",
-              }}
-            >
+              }}>
               <TableContainer component={Paper} sx={{ my: 2 }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableBody>
@@ -156,8 +152,7 @@ function User({ setPreviewClicked, previewClicked }) {
                         key={calendar.id}
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
+                        }}>
                         <TableCell component="th" scope="row">
                           <Tooltip title="Preview">
                             <Typography
@@ -173,8 +168,7 @@ function User({ setPreviewClicked, previewClicked }) {
                               onClick={() => {
                                 handlePreviewEditClick(calendar.id);
                                 setPreviewClicked(true);
-                              }}
-                            >
+                              }}>
                               {calendar.title ? calendar.title : "Untitled"}
                             </Typography>
                           </Tooltip>
@@ -190,8 +184,7 @@ function User({ setPreviewClicked, previewClicked }) {
                               onClick={() => {
                                 handlePreviewEditClick(calendar.id);
                                 setPreviewClicked(true);
-                              }}
-                            >
+                              }}>
                               <EditOutlinedIcon />
                             </IconButton>
                           </Tooltip>
@@ -200,8 +193,7 @@ function User({ setPreviewClicked, previewClicked }) {
                             <IconButton
                               aria-label="delete calendar"
                               sx={{ mx: 1, color: "#00A8CD" }}
-                              onClick={() => handleDeleteCalendar(calendar.id)}
-                            >
+                              onClick={() => handleDeleteCalendar(calendar.id)}>
                               <DeleteOutlineOutlinedIcon />
                             </IconButton>
                           </Tooltip>
@@ -232,8 +224,7 @@ function User({ setPreviewClicked, previewClicked }) {
                       border: "1px solid",
                     },
                   }}
-                  onClick={handleClick}
-                >
+                  onClick={handleClick}>
                   Create New
                 </Button>
               </Box>
@@ -248,19 +239,16 @@ function User({ setPreviewClicked, previewClicked }) {
               alignItems: "center",
               minHeight: "50vh",
               justifyContent: "center",
-            }}
-          >
+            }}>
             <Typography
               component="h2"
               variant="h4"
               sx={{
-                fontFamily: "Inter",
                 fontWeight: "bold",
                 color: "#476C92",
                 mt: -5,
                 mb: 5,
-              }}
-            >
+              }}>
               You have no calendars
             </Typography>
             <Box>
@@ -282,8 +270,7 @@ function User({ setPreviewClicked, previewClicked }) {
                     border: "1px solid",
                   },
                 }}
-                onClick={handleClick}
-              >
+                onClick={handleClick}>
                 Create new
               </Button>
             </Box>

@@ -87,13 +87,13 @@ export const getUserCount = async () => {
   }
 };
 
-// export const getAllUsers = async () => {
-//   try {
-//     const querySnapshot = await getDocs(collection(db, "users"));
-//     const users = querySnapshot.docs.map((doc) => doc.data());
-//     return users;
-//   } catch (error) {
-//     console.log("Error fetching users:", error);
-//     throw error;
-//   }
-// };
+export const getAllUsers = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const users = querySnapshot.docs.map((doc) => doc.data());
+    return users;
+  } catch (error) {
+    console.log("Error fetching users:", error);
+    throw error;
+  }
+};
